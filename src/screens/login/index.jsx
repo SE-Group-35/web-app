@@ -187,7 +187,7 @@ const Login = () => {
                             </Grid>
 
                     
-                            <Grid className = {classes.forgotPasswordText}><Link to = '/forgot-password'>Forgot Password?</Link></Grid>
+                            <Grid ><Link to = '/forgot-password' className={classes.forgotPasswordText}>Forgot Password?</Link></Grid>
                             </Grid>
                             <button 
                                 type = 'submit' 
@@ -204,7 +204,7 @@ const Login = () => {
                         className = {classes.rowContainer}
                     >
                         <Grid>Don't have an account?</Grid>
-                        <Grid className = {classes.registerText}><Link to = '/register'>Register</Link></Grid>
+                        <Grid ><Link to = '/register' className = {classes.registerText}>Register</Link></Grid>
                     </Grid>
                 </Grid>
                 

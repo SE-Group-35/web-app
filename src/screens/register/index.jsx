@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
         border: 0,
         marginTop: '3rem'
     },
-    text: {
+    text: {        
         fontSize: '2rem',
         display: 'block',
     },
@@ -61,6 +61,12 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1rem',
         color: PRIMARY   
     },
+    logo: {
+        margin: theme.spacing(0, -4) 
+    },
+    character: {
+        fontWeight: 'bold',
+    }
     
   }));
 
@@ -116,11 +122,11 @@ const Register = () => {
         
         <Grid container component="main" className={classes.root}>
         <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />            
-        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={false} sm={4} md={8} className={classes.image} />            
+        <Grid item xs={12} sm={8} md={4} component={Paper} elevation={6} square>
             <div className={classes.paper}>
-                <Grid align="center">
-                    <img src = {logo.default} alt = 'Logo'/>
+                <Grid className={classes.logo}>
+                    <img src = {logo.default} alt = 'Logo' />
                 </Grid >
                 <Typography  align="left" className={classes.text}  gutterBottom>
                     Register
@@ -137,8 +143,7 @@ const Register = () => {
                                 id="firstName"
                                 placeholder="Enter your first name"
                                 name="firstName"
-                                autoComplete="firstName"
-                                autoFocus
+                                autoComplete="firstName"                                
                                 fullWidth
                                 value = {formik.values.firstName}
                                 onChange = {formik.handleChange}
@@ -224,7 +229,7 @@ const Register = () => {
                     <Box mt={2}></Box>                    
                     <Grid container>
                         <Grid item xs>
-                            <Typography  variant="body2">
+                            <Typography  variant="body2" className={classes.character}>
                                 Already have an account?
                             </Typography>
                         </Grid>
