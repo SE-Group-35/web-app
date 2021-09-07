@@ -10,7 +10,7 @@ import {
 } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-// import { auth } from '../../firebase';
+import { auth } from '../../firebase';
 import GreenCheckbox from '../../components/common/GreenCheckBox';
 import InputTextBox from '../../components/common/InputTextBox';
 import Spinner from '../../components/common/Spinner';
@@ -113,11 +113,9 @@ const Login = () => {
             console.log("email", email);
             console.log('password', password);
               try{
+                  auth.signOut();
                   setLogginIn(true);
-                //   const response = await auth.signInWithEmailAndPassword(email, password);
-                //   console.log(response);
-                //   const user = await auth.signInWithEmailAndPassword(email, password);
-
+                  await auth.signInWithEmailAndPassword(email, password);
                   setLogginIn(false);
               }catch(error){
                   setLogginIn(false);
