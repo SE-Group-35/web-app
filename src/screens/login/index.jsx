@@ -5,15 +5,16 @@ import {
     FormControlLabel,
     FormGroup,
     FormLabel,
-    Grid
+    Grid,
+    makeStyles
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+// import { auth } from '../../firebase';
 import GreenCheckbox from '../../components/common/GreenCheckBox';
 import InputTextBox from '../../components/common/InputTextBox';
-import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from '../../colors';
 import Spinner from '../../components/common/Spinner';
+import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from '../../colors';
 
 const image = require('../../assets/images/login.jpg');
 const logo = require('../../assets/images/logo.svg');
@@ -113,8 +114,11 @@ const Login = () => {
             console.log('password', password);
               try{
                   setLogginIn(true);
-                //   await auth.signInWithEmailAndPassword(email, password);
-                //   setLogginIn(false);
+                //   const response = await auth.signInWithEmailAndPassword(email, password);
+                //   console.log(response);
+                //   const user = await auth.signInWithEmailAndPassword(email, password);
+
+                  setLogginIn(false);
               }catch(error){
                   setLogginIn(false);
                   console.log(error);
