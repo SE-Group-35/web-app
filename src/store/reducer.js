@@ -1,10 +1,13 @@
 import { combineReducers } from 'redux';
-import { entitiesReducer } from './entities/entities';
+import { firebaseReducer } from 'react-redux-firebase';
+import { firestoreReducer } from 'redux-firestore';
 import authReducer from './auth';
 import systemReducer from './system';
 
+//The Root Reducer
 export const reducer = combineReducers({
-    entities: entitiesReducer,
     auth: authReducer,
+    firebase: firebaseReducer,
+    firestore: firestoreReducer,
     system: systemReducer
 });

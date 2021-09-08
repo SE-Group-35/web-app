@@ -6,7 +6,7 @@ import 'firebase/compat/firestore';
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-const firebaseConfig = {
+export const firebaseConfig = {
     apiKey: "AIzaSyAmtcxwa4fcX_e05jdNGweqx7_kj4izPHk",
     authDomain: "smart-travel-sri-lanka.firebaseapp.com",
     projectId: "smart-travel-sri-lanka",
@@ -16,6 +16,12 @@ const firebaseConfig = {
     measurementId: "G-4S90CEYG8Y"
 };
 
+// react-redux-firebase config
+export const rrfConfig = {
+    userProfile: 'users',
+    useFirestoreForProfile: true
+}
+
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
@@ -24,5 +30,4 @@ export const database = firebase.firestore();
 export const FieldValue = firebase.firestore.FieldValue;
 export default firebase;
 
-//Collections
-export const usersCollection = database.collection('users');
+export { default as collections } from './collections';

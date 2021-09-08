@@ -1,7 +1,9 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { reducer } from './reducer';
-// import { loadState } from './localStorage';
+import { getFirebase } from "react-redux-firebase";
+import { getFirestore } from "redux-firestore";
 import toastGenerator from "./middleware/toast";
+// import { loadState } from './localStorage';
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function () {
@@ -9,7 +11,8 @@ export default function () {
         reducer,
         middleware: [
             ...getDefaultMiddleware({
-                serializableCheck: false
+                serializableCheck: false,
+                thunk: { extraArgument: { getFirestore, getFirebase } }
             }),
             toastGenerator
         ],

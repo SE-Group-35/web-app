@@ -10,11 +10,13 @@ import {
 } from '@material-ui/core';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import { auth } from '../../firebase';
 import GreenCheckbox from '../../components/common/GreenCheckBox';
 import InputTextBox from '../../components/common/InputTextBox';
 import Spinner from '../../components/common/Spinner';
 import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from '../../colors';
+import { getUserLoggingInStatus, signIn } from '../../store/auth';
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 const image = require('../../assets/images/login.jpg');
 const logo = require('../../assets/images/logo.svg');
@@ -93,7 +95,8 @@ const useStyles = makeStyles({
 
 const Login = () => {
     const classes = useStyles();
-    const [ logginIn, setLogginIn ] = useState(false);
+    const dispatch = useDispatch();
+    const loggingIn = useSelector(getUserLoggingInStatus);
 
     const formik = useFormik({
         initialValues: {
@@ -109,18 +112,8 @@ const Login = () => {
                 .matches(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/, "Password must contain minimum six characters, at least one letter, one number and one special character")
                 .required("Required field"),
             }),
-        onSubmit: async({ email, password}) => {
-            console.log("email", email);
-            console.log('password', password);
-              try{
-                  auth.signOut();
-                  setLogginIn(true);
-                  await auth.signInWithEmailAndPassword(email, password);
-                  setLogginIn(false);
-              }catch(error){
-                  setLogginIn(false);
-                  console.log(error);
-              }
+        onSubmit:({ email, password}) => {
+            dispatch(signIn(email, password));  
         },
     });
 
@@ -196,7 +189,7 @@ const Login = () => {
                                 className = {classes.button}
                         
                             >
-                                {logginIn ? <Spinner/> :'Login'}
+                                {loggingIn ? <Spinner/> :'Login'}
                             </button>
                     </form>
                     <Grid 

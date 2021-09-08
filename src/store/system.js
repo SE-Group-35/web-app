@@ -1,7 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
 // import { createSelector } from 'reselect';
 
-//Strategies Slice
+/*
+    Slice to use if some states are needed 
+    when implementing the UIs
+*/
+
 const slice = createSlice({
     name: "System",
     initialState: {

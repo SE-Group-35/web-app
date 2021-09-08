@@ -2,10 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { createFirestoreInstance } from 'redux-firestore';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import createStore from './store/configureStore';
+import firebase, { rrfConfig } from './firebase';
 // import { saveState } from './store/localStorage';
 
 require('./firebase');
@@ -17,12 +20,21 @@ const store = createStore();
 //   })
 // });
 
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch,
+  createFirestoreInstance
+}
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <ReactReduxFirebaseProvider {...rrfProps}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
