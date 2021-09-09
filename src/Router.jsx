@@ -1,3 +1,4 @@
+
 import React, { useEffect } from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 
@@ -24,6 +25,9 @@ export default function Router() {
     auth.onAuthStateChanged((user) => {
       if (user) dispatch(userLoggedIn(user));
       else dispatch(userLoggedOut());
+
+
+
     });
   });
 

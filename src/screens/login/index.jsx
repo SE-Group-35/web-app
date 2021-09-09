@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -15,6 +16,10 @@ import GreenCheckbox from "../../components/common/GreenCheckBox";
 import InputTextBox from "../../components/common/InputTextBox";
 import Spinner from "../../components/common/Spinner";
 import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from "../../colors";
+
+
+
+
 
 const image = require("../../assets/images/login.jpg");
 const logo = require("../../assets/images/logo.svg");
@@ -86,6 +91,7 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
+
   const classes = useStyles();
   const [logginIn, setLogginIn] = useState(false);
 
@@ -120,6 +126,8 @@ const Login = () => {
       }
     },
   });
+
+    
 
   return (
     <Grid container>
@@ -183,6 +191,7 @@ const Login = () => {
                 />
               </Grid>
 
+
               <Grid>
                 <Link
                   to="/forgot-password"
@@ -207,6 +216,10 @@ const Login = () => {
               <Link to="/register" className={classes.registerText}>
                 Register
               </Link>
+
+                    
+                         
+
             </Grid>
           </Grid>
         </Grid>
