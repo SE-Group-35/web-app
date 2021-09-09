@@ -15,14 +15,14 @@ import { auth } from "./firebase";
 import { userLoggedIn, userLoggedOut } from "./store/auth";
 
 export default function Router() {
-  //const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  /* useEffect(() => {
+  useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (user) dispatch(userLoggedIn(user));
       else dispatch(userLoggedOut());
     });
-  });*/
+  });
 
   return useRoutes([
     { path: "/", element: <Home /> },
