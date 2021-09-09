@@ -1,11 +1,19 @@
-import './App.css';
-import Router from './Router';
+import "./App.css";
+import Router from "./Router";
+import ThemeConfig from "./theme";
+import { HelmetProvider } from "react-helmet-async";
+
+// components
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   return (
-    <div>
-      <Router />
-    </div>
+    <HelmetProvider>
+      <ThemeConfig>
+        <ScrollToTop />
+        <Router />
+      </ThemeConfig>
+    </HelmetProvider>
   );
 }
 
