@@ -36,12 +36,13 @@ import USERLIST from "../../_mocks_/user";
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
-  { id: "name", label: "Name", alignRight: false },
-  { id: "company", label: "Company", alignRight: false },
+  { id: "First Name", label: "First Name", alignRight: false },
+  { id: "Last Name", label: "Last Name", alignRight: false },
   { id: "role", label: "Role", alignRight: false },
-  { id: "isVerified", label: "Verified", alignRight: false },
+  { id: "isEnabled", label: "Enabled", alignRight: false },
   { id: "status", label: "Status", alignRight: false },
-  { id: "" },
+  { id: "telephone", label: "Telephone", alignRight: false },
+  { id: "button", label: "", alignRight: false },
 ];
 
 // ----------------------------------------------------------------------
@@ -144,7 +145,7 @@ export default function User() {
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="User | Admin">
       <Container>
         <Stack
           direction="row"
@@ -158,7 +159,7 @@ export default function User() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="#"
+            to="/dashboard/addUser"
             startIcon={<Icon icon={plusFill} />}
           >
             New User

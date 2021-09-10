@@ -29,19 +29,19 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: "#C8FACD",
-  light: "#5BE584",
+  lighter: "#66E1DE",
+  light: "#33D7D3",
   main: "#00CEC9",
-  dark: "#007B55",
-  darker: "#005249",
+  dark: "#00B9B4",
+  darker: "#00A4A0",
   contrastText: "#fff",
 };
 const SECONDARY = {
-  lighter: "#D6E4FF",
-  light: "#84A9FF",
-  main: "#3366FF",
-  dark: "#1939B7",
-  darker: "#091A7A",
+  lighter: "#FFFFFF",
+  light: "#FFFFFF",
+  main: "#FFF",
+  dark: "#E5E5E5",
+  darker: "#CCCCCC",
   contrastText: "#fff",
 };
 const INFO = {

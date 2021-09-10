@@ -23,9 +23,9 @@ const SORT_OPTIONS = [
 
 // ----------------------------------------------------------------------
 
-export default function Blog() {
+export default function Event() {
   return (
-    <Page title="Dashboard: Blog | Minimal-UI">
+    <Page title="Dashboard: Event | Admin">
       <Container>
         <Stack
           direction="row"
@@ -34,7 +34,7 @@ export default function Blog() {
           mb={5}
         >
           <Typography variant="h4" gutterBottom>
-            Blog
+            Event
           </Typography>
           <Button
             variant="contained"
@@ -42,7 +42,7 @@ export default function Blog() {
             to="#"
             startIcon={<Icon icon={plusFill} />}
           >
-            New Post
+            New Event
           </Button>
         </Stack>
 
@@ -52,7 +52,7 @@ export default function Blog() {
           alignItems="center"
           justifyContent="space-between"
         >
-          <BlogPostsSearch posts={POSTS} title="post" />
+          <BlogPostsSearch posts={POSTS} title="event" />
           <BlogPostsSort options={SORT_OPTIONS} />
         </Stack>
 

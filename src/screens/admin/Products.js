@@ -47,7 +47,7 @@ export default function Products() {
   };
 
   return (
-    <Page title="Dashboard: Products | Minimal-UI">
+    <Page title="Dashboard: Products | Admin">
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
           Products
@@ -73,7 +73,6 @@ export default function Products() {
         </Stack>
 
         <ProductList products={PRODUCTS} />
-        <ProductCartWidget />
       </Container>
     </Page>
   );
