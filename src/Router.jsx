@@ -1,8 +1,6 @@
-
 import React, { useEffect } from "react";
-import { Navigate, useRoutes } from "react-router-dom";
+import { Navigate, useRoutes, useNavigate } from "react-router-dom";
 
-import { useDispatch } from "react-redux";
 import Home from "./screens/home";
 import Login from "./screens/login";
 import Register from "./screens/register";
@@ -16,20 +14,16 @@ import Blog from "./screens/admin/Blog";
 import Destination from "./screens/admin/Destination";
 import Page404 from "./screens/admin/Page404";
 import { auth } from "./firebase";
-import { userLoggedIn, userLoggedOut } from "./store/auth";
 
 export default function Router() {
-  const dispatch = useDispatch();
+  /*const navigate = useNavigate();
 
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
-      if (user) dispatch(userLoggedIn(user));
-      else dispatch(userLoggedOut());
-
-
-
+      if (user) navigate("/");
+      else navigate("/login");
     });
-  });
+  });*/
 
   return useRoutes([
     { path: "/", element: <Home /> },
