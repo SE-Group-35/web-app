@@ -10,9 +10,10 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Hidden from '@material-ui/core/Hidden';
 import { PRIMARY } from '../../colors';
 
+
 const useStyles = makeStyles({
   card: {
-    display: 'flex',
+    display: 'flex',    
   },
   cardDetails: {
     flex: 1,
@@ -23,7 +24,8 @@ const useStyles = makeStyles({
   text: {
     color: PRIMARY,
     padding:'1%'
-  }
+  }, 
+  
 });
 
 export default function ImageCard(props) {
@@ -31,7 +33,7 @@ export default function ImageCard(props) {
   const { post } = props;
 
   return (
-    <Grid item xs={12} md={6}>
+    <Grid item xs={12} md={6}>     
       <CardActionArea component="a" href="#">
         <Card className={classes.card}>
           <div className={classes.cardDetails}>

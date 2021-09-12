@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Upperbar from './Upperbar';
 
+
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: 'relative',    
@@ -46,8 +47,7 @@ export default function MainFeaturedPost(props) {
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
       <Grid container>
-        <Grid item md={6}>
-          <Upperbar></Upperbar>
+        <Grid item md={6}>                 
           <div className={classes.mainFeaturedPostContent}>
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
               {post.title}
@@ -57,7 +57,7 @@ export default function MainFeaturedPost(props) {
             </Typography>            
           </div>
         </Grid>
-      </Grid>
+      </Grid>      
     </Paper>
   );
 }

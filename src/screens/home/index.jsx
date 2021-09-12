@@ -11,7 +11,8 @@ import ImageCard from './../../components/home/Card';
 import Upperbar from './../../components/home/Upperbar';
 import { useState } from 'react';
 import MainFeaturedPost from './../../components/home/MainFeaturedPost';
-
+import Mockdata from './Mockdata.json';
+import UpperNavbar from '../../components/home/UpperNavbar';
 
 
 const postimage1 = require('../../assets/images/sigiriya.jpg');
@@ -22,26 +23,24 @@ const useStyles = makeStyles((theme) => ({
     root: {
         height: '100vh',
       },
-      image: {          
-          backgroundRepeat: 'no-repeat',      
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          height: '100vh',
-          
+    image: {          
+        backgroundRepeat: 'no-repeat',      
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '100vh',          
       },
-      paper: {
-          margin: theme.spacing(8, 4),
-          display: 'flex',
-          flexDirection: 'column',
-      },
-      text: {
-        color: 'white',
-        fontFamily: 'Roboto',
-        margin: '40vh',
-      },
-      logo: {         
-        margin: theme.spacing(-6,0) 
-
+    paper: {
+        margin: theme.spacing(8, 4),
+        display: 'flex',
+        flexDirection: 'column',
+    },
+    text: {
+      color: 'white',
+      fontFamily: 'Roboto',
+      margin: '40vh',
+    },
+    logo: {         
+      margin: theme.spacing(-6,0) 
     },
     button: {
         width: '100%',
@@ -58,18 +57,18 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(6, 0),
         border: '1px solid',
         borderColor: 'PRIMARY',
-        lineHeight: 1.5,
-        
+        lineHeight: 1.5,        
     },
     search: {
-        margin: theme.spacing(4, 10),
-        justifyContent: 'center'
+        margin: theme.spacing(6, 20),
+        justifyContent: 'left'
     },
     card: {
-        margin: theme.spacing(0, 5),
+        margin: theme.spacing(-5, 0),
     },
     justify: {
-      justifyContent: 'center'
+      justifyContent: 'center',
+      margin: theme.spacing(3, 0),
     },
     styledText: {
       margin: theme.spacing(6, 0),
@@ -78,6 +77,10 @@ const useStyles = makeStyles((theme) => ({
       fontSize: '1.3rem',
       fontStyle: 'italic',
       fontWeight: 'bold'
+    },
+    upperbar: {
+      margin: theme.spacing(0,0),
+      width: '100%'
     }
   
 }));
@@ -109,57 +112,43 @@ const mainFeaturedPost = {
     },
   ];
  
-const searchHandler = () => {
 
-};
-const sections = [
-  { title: 'About Us', url: '#' },
-  { title: 'Services', url: '#' },
-  { title: 'Register', url: '#' },
-  { title: 'Login', url: '#' },
-  
-];
+
 
 
 const Home = (props) => {
     const classes = useStyles();
-    const [ search, setSearch ] = useState(false);
+    
 
     return ( 
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
-        <Grid container  className={classes.image} >          
-          <MainFeaturedPost post={mainFeaturedPost} > 
-            <Upperbar/>
-          </MainFeaturedPost>    
-          <div className={classes.paper}>
-            <Grid container spacing={3} className={classes.justify}>
+        <Grid className={classes.upperbar}>
+          <UpperNavbar ></UpperNavbar>
+        </Grid> 
+        <Grid container  className={classes.image} >                         
+          <MainFeaturedPost post={mainFeaturedPost} />             
+          <div className={classes.paper}>          
+            <Grid container spacing={3} className={classes.justify}>            
               <Grid className={classes.logo}>
                 <img src = {logo.default} alt = 'Logo' />
-              </Grid >
-              <Grid container spacing={3}>
+              </Grid >                           
                 <Grid container spacing={3} className={classes.search}>
                   <Grid item xs={12} sm={3} >
-                    <Typography className={classes.styledText}>Discover the most enchanting places...</Typography>
+                    <Typography className={classes.styledText}>Discover the most enchanting place...</Typography>
                   </Grid>
-                  <Grid item xs={12} sm={4} >
-                    <Searchbar></Searchbar>
-                  </Grid>
-                  <Grid item sm={2}>
-                    <Button variant="contained" type = 'submit' className = {classes.button} onClick = {searchHandler}>             
-                      Search
-                    </Button>
-                  </Grid>
-                </Grid>
-              </Grid>
-            </Grid>
-            <Grid container spacing={4}>
+                  <Grid item xs={12} sm={7}>
+                    <Searchbar data={Mockdata}></Searchbar>
+                  </Grid>                  
+                </Grid>  
+                <Grid container spacing={4} className={classes.card}>
               {newCard.map((post) => (
                 <ImageCard key={post.title} post={post} />
               ))}
-            </Grid>
+            </Grid>            
+            </Grid>            
           </div>
-        </Grid> 
+        </Grid>                       
       </Grid>
      );
 }
