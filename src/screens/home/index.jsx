@@ -12,7 +12,6 @@ import Upperbar from './../../components/home/Upperbar';
 import { useState } from 'react';
 import MainFeaturedPost from './../../components/home/MainFeaturedPost';
 import Mockdata from './Mockdata.json';
-import UpperNavbar from '../../components/home/UpperNavbar';
 
 
 const postimage1 = require('../../assets/images/sigiriya.jpg');
@@ -40,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
       margin: '40vh',
     },
     logo: {         
-      margin: theme.spacing(-6,0) 
+      margin: theme.spacing(-8,0) 
     },
     button: {
         width: '100%',
@@ -102,6 +101,7 @@ const mainFeaturedPost = {
         "The value of Sinharaja as a natural World Heritage site continues to be recognized by the discovery of several endemic species of plants and animals with a huge diversity since the declaration of this forest as a World Heritage in 1988.",
       image: `${postimage2.default}`,
       imageText: 'Image Text',
+      imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves"
     },
     {
       title: 'Sigiriya',      
@@ -109,6 +109,7 @@ const mainFeaturedPost = {
         "The capital and the royal palace were abandoned after the king's death. It was used as a Buddhist monastery until the 14th century. Sigiriya today is a UNESCO listed World Heritage Site. It is one of the best preserved examples of ancient urban planning.",
       image: `${postimage1.default}`,
       imageText: 'Image Text',
+      imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves"
     },
   ];
  
@@ -124,7 +125,7 @@ const Home = (props) => {
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid className={classes.upperbar}>
-          <UpperNavbar ></UpperNavbar>
+          
         </Grid> 
         <Grid container  className={classes.image} >                         
           <MainFeaturedPost post={mainFeaturedPost} />             

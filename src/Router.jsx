@@ -7,6 +7,7 @@ import Register from './screens/register';
 import { auth } from './firebase';
 import { userLoggedIn, userLoggedOut } from './store/auth';
 
+
 const Router = () => {
     const dispatch = useDispatch();
 
@@ -21,7 +22,7 @@ const Router = () => {
         <Switch>
             <Route path = '/login' render = {(props) => <Login {...props}/>}/>
             <Route path = '/register' render = {(props) => <Register {...props}/>}/>
-            <Route path = '/home' render = {(props) => <Home {...props}/>}/>
+            <Route path = '/home' render = {(props) => <Home {...props}/>}/>            
             <Redirect from = '/' to = '/home'/>
         </Switch>     
 );}

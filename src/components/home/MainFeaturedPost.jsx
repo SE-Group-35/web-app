@@ -10,7 +10,7 @@ import Upperbar from './Upperbar';
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
     position: 'relative',    
-    color: theme.palette.common.white,
+    color: theme.palette.common.white,    
     marginBottom: theme.spacing(4),    
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
@@ -26,12 +26,12 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'rgba(0,0,0,.1)',
   },
   mainFeaturedPostContent: {
-    position: 'relative',
+    position: 'relative',    
     padding: theme.spacing(3),
     [theme.breakpoints.up('md')]: {
       padding: theme.spacing(10),
-      paddingRight: 0,
-    },
+      paddingRight: 0,     
+    },    
   },
   
   
@@ -47,8 +47,9 @@ export default function MainFeaturedPost(props) {
       {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
       <div className={classes.overlay} />
       <Grid container>
-        <Grid item md={6}>                 
+        <Grid item md={6}>                         
           <div className={classes.mainFeaturedPostContent}>
+            <Upperbar></Upperbar>
             <Typography component="h1" variant="h3" color="inherit" gutterBottom>
               {post.title}
             </Typography>
