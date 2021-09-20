@@ -45,7 +45,7 @@ export default function ImageCard(props) {
                 {post.description}
               </Typography>
               <Typography variant="subtitle1" color="primary" className={classes.text}>
-                Continue reading...
+               {post.imageText}
               </Typography>
             </CardContent>
           </div>

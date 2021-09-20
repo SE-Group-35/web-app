@@ -6,6 +6,7 @@ import Login from './screens/login';
 import Register from './screens/register';
 import { auth } from './firebase';
 import { userLoggedIn, userLoggedOut } from './store/auth';
+import UserServices from './screens/userServices';
 
 
 const Router = () => {
@@ -22,7 +23,8 @@ const Router = () => {
         <Switch>
             <Route path = '/login' render = {(props) => <Login {...props}/>}/>
             <Route path = '/register' render = {(props) => <Register {...props}/>}/>
-            <Route path = '/home' render = {(props) => <Home {...props}/>}/>            
+            <Route path = '/home' render = {(props) => <Home {...props}/>}/>
+            <Route path = '/services' render = {(props) => <UserServices {...props}/>}/>            
             <Redirect from = '/' to = '/home'/>
         </Switch>     
 );}
