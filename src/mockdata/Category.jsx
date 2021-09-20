@@ -1,0 +1,11 @@
+import coverImage from './mockImages/religious.jpg';
+
+const categoryData = {
+    title: "Religious",
+    description:
+      "Many countries in the world celebrate the new year in 1st of January. Yet there are several calendars around the world that celebrates different days to welcome New Year. In Sri Lanka, new year celebrations start on 13th of April and end in 14th of the month. Sinhala and Tamil New Year. The biggest celebration in Sri Lanka that features a load of rituals and customs is one of the must things to experience in your holiday on the island. Based on the sun’s movement from the Meena Rashiya (House of Pieces) to the Mesha Rashiya (House of Aries) Sri Lankan welcomes the new year in April with a lot of firecrackers, fireworks and gourmet of traditional sweets.You cannot speak about Sinhala and Tamil new year without having to talk about food. Which is why tasting new year sweets is a must thing to do during your April holiday in Sri Lanka. Below are some of the sweets you should try during the new year season. Konda Kewum- Made with coconut trickle and rice Konda Keum is a deep fried fluffy cake. Kokis A deep-fried, crispy sweet made from rice flour and coconut milk Asmi A crunchy traditional sweet topped with a traditional caramel syrup Mon kewum -A diamond-shaped sweet that comes with a crunchy crust with a sweet paste of sweetened green grams inside.Avurudu Music and games Sinhala and Tamil new year is a season it’s all about family-focused celebrations. During this season people work in cities return to their hometown or village and celebrates the new year with their extended family. Fun games and activities also play an important part in new year celebrations.Playing the Rabana Rabana is a large drum people sit around and play during happy occasions. This is mainly played by elderly females and sometimes involves dancing as well.Traditional board games Olinda Keliya and Pancha Demima are two board games mostly Sri Lankan ladies play during this season which involves two or more players. All the items used in such games are natural. For an example, boards of the games are made of wood and use plant seeds and seashells to play.",
+    coverImage: `${coverImage}`,
+    
+    
+  };
+  export default categoryData;

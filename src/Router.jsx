@@ -1,5 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect } from 'react';
 import { Navigate, useRoutes, useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+
 
 import Home from "./screens/home";
 import Login from "./screens/login";
@@ -12,8 +14,11 @@ import Event from "./screens/admin/Event";
 import Products from "./screens/admin/Products";
 import Blog from "./screens/admin/Blog";
 import Destination from "./screens/admin/Destination";
+import UserServices from './screens/userServices';
+import * as EventTraveller from './screens/event';
+import Category from './screens/category';
 import Page404 from "./screens/admin/Page404";
-import { auth } from "./firebase";
+// import { auth } from "./firebase";
 
 export default function Router() {
   /*const navigate = useNavigate();
@@ -23,6 +28,7 @@ export default function Router() {
       if (user) navigate("/");
       else navigate("/login");
     });
+<<<<<<< HEAD
   });*/
 
   return useRoutes([
@@ -30,6 +36,9 @@ export default function Router() {
     { path: "/home", element: <Home /> },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
+    { path: "/services", element: <UserServices /> },
+    { path: "/event", element: <EventTraveller /> },
+    { path: "/category", element: <Category /> },
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
     {
@@ -48,3 +57,6 @@ export default function Router() {
     },
   ]);
 }
+
+export default Router;
+
