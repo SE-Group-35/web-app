@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Upperbar from "./Upperbar";
+import Navbar from "./navbar";
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
   },
   overlay: {
-    position: "absolute",
+    position: "relative",
     top: 0,
     bottom: 0,
     right: 0,
@@ -32,10 +32,15 @@ const useStyles = makeStyles((theme) => ({
       paddingRight: 0,
     },    
   },
+  navbar: {
+    position: "relative",
+    
+    margin:theme.spacing(1,10)  
+  },
   
 }));
 
-export default function MainFeaturedPost(props) {
+export default function CoverPost(props) {
   const classes = useStyles();
   const { post } = props;
 
@@ -43,8 +48,7 @@ export default function MainFeaturedPost(props) {
     <Paper
       className={classes.mainFeaturedPost}
       style={{ backgroundImage: `url(${post.image})` }}
-    >
-      {/* Increase the priority of the hero background image */}
+    >      
       {
         <img
           style={{ display: "none" }}
@@ -53,10 +57,12 @@ export default function MainFeaturedPost(props) {
         />
       }
       <div className={classes.overlay} />
-      <Grid container>
-        <Grid item md={6}>
-          <div className={classes.mainFeaturedPostContent}>            
-            <Upperbar ></Upperbar>            
+      <Grid className={classes.navbar} item xs={12}>
+        <Navbar/>
+      </Grid>
+      <Grid container>      
+        <Grid item md={6}>          
+          <div className={classes.mainFeaturedPostContent}>          
             <Typography
               component="h1"
               variant="h3"
@@ -75,6 +81,6 @@ export default function MainFeaturedPost(props) {
   );
 }
 
-MainFeaturedPost.propTypes = {
+CoverPost.propTypes = {
   post: PropTypes.object,
 };

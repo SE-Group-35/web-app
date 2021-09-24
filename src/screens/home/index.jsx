@@ -12,6 +12,7 @@ import Upperbar from "./../../components/home/Upperbar";
 import { useState } from "react";
 import MainFeaturedPost from "./../../components/home/MainFeaturedPost";
 import Mockdata from "./Mockdata.json";
+import { Box } from "@material-ui/core";
 
 const postimage1 = require("../../assets/images/sigiriya.jpg");
 const postimage2 = require("../../assets/images/sinharaja.jpg");
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "left",
   },
   card: {
-    margin: theme.spacing(-5, 0),
+    margin: theme.spacing(-7, 0),
   },
   justify: {
     justifyContent: "center",
@@ -79,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 0),
     width: "100%",
   },
+  space:{
+    margin:theme.spacing(4,0)
+  }
 }));
 
 const mainFeaturedPost = {
@@ -138,9 +142,11 @@ const Home = (props) => {
                 <ImageCard key={post.title} post={post} />
               ))}
             </Grid>
-          </Grid>
+          </Grid> 
+          <Box className={classes.space}><Box/>
+            </Box>        
         </div>
-      </Grid>
+      </Grid>      
     </Grid>
   );
 };

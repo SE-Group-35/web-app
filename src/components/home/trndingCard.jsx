@@ -18,15 +18,16 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   cardMedia: {
-    width: 300,
+    width: 100,
   },
   text: {
     color: PRIMARY,
     padding: "1%",
+    fontSize:'1rem'
   },
 }));
 
-export default function CategoryCard(props) {
+export default function TrendingCard(props) {
   const classes = useStyles();
   const { post } = props;
 
@@ -46,21 +47,14 @@ export default function CategoryCard(props) {
               <Typography component="h2" variant="h5" className={classes.text}>
                 {post.title}
               </Typography>
-              <Typography variant="subtitle1" paragraph>
-                {post.description}
-              </Typography>
+              
               <Typography
                 variant="subtitle1"                
-                className={classes.text}
+                
               >
                 Rating : {post.rating}
               </Typography>
-              <Typography
-                variant="subtitle1"                
-                className={classes.text}
-              >
-                Continue reading...
-              </Typography>
+             
             </CardContent>
           </div>
         </Card>
@@ -69,6 +63,6 @@ export default function CategoryCard(props) {
   );
 }
 
-CategoryCard.propTypes = {
+TrendingCard.propTypes = {
   post: PropTypes.object,
 };

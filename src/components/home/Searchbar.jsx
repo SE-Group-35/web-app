@@ -23,9 +23,9 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     marginLeft: theme.spacing(1),
-    flex: 1,
-    borderWidth: "6",
-    borderColor: "PRIMARY",
+    display:"flex",
+    flex: 1, 
+     
   },
   search: {
     margin: theme.spacing(4, 12),
