@@ -20,6 +20,8 @@ import Page404 from "./screens/admin/Page404";
 import Traveller from "./screens/traveller";
 import AutomatedPlanner from "./screens/tripPanner/automated";
 import CustomizedPlanner from "./screens/tripPanner/cutomized";
+import MyTrips from "./screens/myTrips";
+import SpecificDestination from "./screens/destination";
 // import { auth } from "./firebase";
 
 export default function Router() {
@@ -41,9 +43,11 @@ export default function Router() {
     { path: "/services", element: <UserServices /> },
     { path: "/event", element: <EventTraveller /> },
     { path: "/category", element: <Category /> },
+    { path: "/destination", element: <SpecificDestination /> },
     { path: "/traveller", element: <Traveller /> },
     { path: "/traveller/automatedPlanner", element: <AutomatedPlanner /> },
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
+    { path: "/traveller/myTrips", element: <MyTrips /> },
    
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },

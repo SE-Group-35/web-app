@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 export default function InsideCard(props) {
   const classes = useStyles();
   const { post } = props;
-
+   
   return (
     <Grid item xs={12} md={4}>
       <Card >

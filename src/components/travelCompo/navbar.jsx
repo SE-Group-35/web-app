@@ -51,7 +51,7 @@ export default function Navbar(props) {
           </Link>
         </Grid>
         <Grid item xs={12} md={2}>
-          <Link href="/">
+          <Link href="./traveller/myTrips">
             <Typography className={classes.styledText}>
               My Trips
             </Typography>
@@ -84,9 +84,7 @@ export default function Navbar(props) {
         <Grid item xs={12} md={2} >
           <NotificationsIcon className={classes.notification}/>
         </Grid>
-        <Grid item xs={12} md={2} >
-          <button >Logout</button>
-        </Grid>
+        
       </Grid>
   );
 }

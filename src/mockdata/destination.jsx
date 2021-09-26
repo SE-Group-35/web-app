@@ -12,7 +12,8 @@ const destinationData = [
       image: `${image1.default}`,
       imageText: 'Continue reading ',
       imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
-      rating:'4K'
+      rating:'4K',
+      geometry:[6.3828,80.6020]
     },
     {
       title: 'Ruwanweli Maha Saya',      

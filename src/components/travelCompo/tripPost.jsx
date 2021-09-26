@@ -4,7 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import Navbar from "./navbar";
+
 
 const useStyles = makeStyles((theme) => ({
   mainFeaturedPost: {
@@ -34,20 +34,21 @@ const useStyles = makeStyles((theme) => ({
   },
   navbar: {
     position: "relative",
+    
     margin:theme.spacing(1,10)  
   },
   
 }));
 
-export default function CoverPost(props) {
+export default function TripPost(props) {
   const classes = useStyles();
   const { post } = props;
 
   return (
     <Paper
       className={classes.mainFeaturedPost}
-      style={{ backgroundImage: `url(${post.image})` }}
-      >      
+      style={{ backgroundImage: `url(${post.image})`, height:'25vw' }}
+    >      
       {
         <img
           style={{ display: "none" }}
@@ -57,7 +58,7 @@ export default function CoverPost(props) {
       }
       <div className={classes.overlay} />
       <Grid className={classes.navbar} item xs={12}>
-        <Navbar/>
+        
       </Grid>
       <Grid container>      
         <Grid item md={6}>          
@@ -80,6 +81,6 @@ export default function CoverPost(props) {
   );
 }
 
-CoverPost.propTypes = {
+TripPost.propTypes = {
   post: PropTypes.object,
 };
