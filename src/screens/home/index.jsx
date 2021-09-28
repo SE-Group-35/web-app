@@ -101,7 +101,7 @@ const newCard = [
       "The value of Sinharaja as a natural World Heritage site continues to be recognized by the discovery of several endemic species of plants and animals with a huge diversity since the declaration of this forest as a World Heritage in 1988.",
     image: `${postimage2.default}`,
     imageText: "Continue reading ",
-    imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
+    imageLink: "/destination",
   },
   {
     title: "Sigiriya",

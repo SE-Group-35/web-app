@@ -8,7 +8,9 @@ import Dropdown from "./dropDown";
 import { useState } from "react";
 import Avatar from '@material-ui/core/Avatar';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-
+import {signOut} from '../../store/auth'; 
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router';
 
 const useStyles = makeStyles((theme) => ({  
   styledText:{
@@ -37,6 +39,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Navbar(props) {
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const classes = useStyles();
   const [dropdown, setDropdown] = useState(false);
   
@@ -84,7 +88,13 @@ export default function Navbar(props) {
         <Grid item xs={12} md={2} >
           <NotificationsIcon className={classes.notification}/>
         </Grid>
-        
+        <Grid item xs={12} md={2} >
+          <button type="submit" onClick={() => {
+              dispatch(signOut());
+              navigate("/home");
+            }}>Logout</button>
+        </Grid>
       </Grid>
   );
+  
 }

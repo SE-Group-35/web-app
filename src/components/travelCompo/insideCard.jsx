@@ -8,7 +8,9 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { PRIMARY } from "../../colors";
-
+import posts from './../../_mocks_/blog';
+import Event from '../../screens/event';
+//import EventCompo from "../eventCompo/eventCompo";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -36,14 +38,19 @@ export default function InsideCard(props) {
   const classes = useStyles();
   const { post } = props;
    
+  const handleClick = (posts)=>{
+           
+    <Event post={posts} />
+  };
+
   return (
     <Grid item xs={12} md={4}>
       <Card >
-        <CardActionArea component="a" href={post.link}>
+        <CardActionArea component="a" href={`/event/${post.id}`} >
           { <CardMedia
             component="img"
             height="150"
-            image={post.image}
+            image={post.url}
           /> }
           <CardContent>
             <Typography className={classes.styledText}>

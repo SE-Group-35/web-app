@@ -39,7 +39,7 @@ export default function TextCard(props) {
               Description
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
+              {post.overview}
             </Typography>
             <Typography
               variant="subtitle1"

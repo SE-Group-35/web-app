@@ -16,8 +16,9 @@ import GreenCheckbox from "../../components/common/GreenCheckBox";
 import InputTextBox from "../../components/common/InputTextBox";
 import Spinner from "../../components/common/Spinner";
 import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from "../../colors";
-
-
+import { signIn, signOut } from "../../store/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 
 
 
@@ -91,9 +92,11 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
-
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
   const classes = useStyles();
   const [logginIn, setLogginIn] = useState(false);
+
 
   const formik = useFormik({
     initialValues: {
@@ -116,12 +119,26 @@ const Login = () => {
       console.log("email", email);
       console.log("password", password);
       try {
-        auth.signOut();
+        
         setLogginIn(true);
-        await auth.signInWithEmailAndPassword(email, password);
+        //await auth.signInWithEmailAndPassword(email, password);
+        dispatch(signOut())
+        dispatch(signIn(email,password));               
+        auth.onAuthStateChanged((user) => {
+              if (user) {                
+                navigate("/traveller");
+                
+              }
+              else {                
+                navigate("/");
+                
+              } 
+              
+            });
+        //navigate("/traveller");
         setLogginIn(false);
       } catch (error) {
-        setLogginIn(false);
+        setLogginIn(false);        
         console.log(error);
       }
     },
@@ -203,7 +220,7 @@ const Login = () => {
             </Grid>
             <button type="submit" className={classes.button}>
               {logginIn ? <Spinner /> : "Login"}
-            </button>
+            </button>            
           </form>
           <Grid
             container

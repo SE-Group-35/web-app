@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import InsideCard from "./insideCard";
-import eventList from "../../mockdata/eventList";
+//import eventList from "../../mockdata/eventList";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getEvents } from './../../store/entities/events';
@@ -30,13 +30,18 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
    
   },
+  informText:{
+    margin:theme.spacing(5,0),
+    color:"black",
+    fontSize:"1rem"
+  }
 }));
 
 export default function DashboardCard() {
   const classes = useStyles();
   useFirestoreConnect(["events"]);
   
-  //const eventList= useSelector(getEvents);
+  const eventList= useSelector(getEvents);
 
   return (
     <Grid item xs={12}>     
@@ -47,10 +52,11 @@ export default function DashboardCard() {
               Upcomming events
             </Typography>
             <div className={classes.paper}>
-              <Grid container spacing={3} className={classes.card}>
+            <Grid container spacing={3} className={classes.card}>
                 {eventList ? eventList.map(post => 
-                  <InsideCard key={post.title} post={post} />
-                ):<h1>Loading</h1>}
+                (post.published ?<InsideCard key={post.title} post={post} /> : null)
+                  
+                ):<Typography className={classes.informText}>Loading</Typography>}
               </Grid>
             </div>
           </CardContent>

@@ -21,7 +21,7 @@ const slice = createSlice({
 
         userLogInFailed(auth, action) {
             auth.authError = "Login Failed...";
-            auth.loggingIn = false;
+            auth.loggingIn = false;            
         }
     }
 });

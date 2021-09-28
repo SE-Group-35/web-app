@@ -22,18 +22,26 @@ import AutomatedPlanner from "./screens/tripPanner/automated";
 import CustomizedPlanner from "./screens/tripPanner/cutomized";
 import MyTrips from "./screens/myTrips";
 import SpecificDestination from "./screens/destination";
-// import { auth } from "./firebase";
+import { auth } from "./firebase";
 
 export default function Router() {
-  /*const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  useEffect(() => {
-    auth.onAuthStateChanged((user) => {
-      if (user) navigate("/");
-      else navigate("/login");
-    });
-<<<<<<< HEAD
-  });*/
+  // useEffect(() => {
+  //   auth.onAuthStateChanged((user) => {
+  //     if (user) {
+  //       console.log("Logged In")
+  //       navigate("/traveller");
+
+  //     }
+  //     else {
+  //       navigate("/");
+  //       console.log("Logged out")
+  //     } 
+      
+  //   });
+
+  // });
 
   return useRoutes([
     { path: "/", element: <Home /> },
@@ -41,7 +49,8 @@ export default function Router() {
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/services", element: <UserServices /> },
-    { path: "/event", element: <EventTraveller /> },
+    
+    { path: "/event/:id", element: <EventTraveller /> },
     { path: "/category", element: <Category /> },
     { path: "/destination", element: <SpecificDestination /> },
     { path: "/traveller", element: <Traveller /> },
