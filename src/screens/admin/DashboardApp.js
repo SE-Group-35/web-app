@@ -1,21 +1,12 @@
 // material
-import { Box, Grid, Container, Typography } from "@material-ui/core";
+import { Box, Container, Typography } from "@material-ui/core";
+
 // components
 import Page from "../../components/Page";
-import {
-  AppWeeklySales,
-  AppBugReports,
-  AppConversionRates,
-  AppCurrentSubject,
-  AppCurrentVisits,
-  AppItemOrders,
-  AppNewsUpdate,
-  AppNewUsers,
-  AppOrderTimeLine,
-  AppTasks,
-} from "../../components/_dashboard/app";
+
 import { DestinationList } from "../../components/_dashboard/app";
 import destination from "../../_mocks_/destination";
+import SlideShow from "../../components/SlideShow";
 
 // ----------------------------------------------------------------------
 
@@ -25,7 +16,10 @@ export default function DashboardApp() {
       <Container maxWidth="xl">
         <Box sx={{ pb: 5 }}>
           <Typography variant="h4">Explore Sri Lanka</Typography>
+          <Box m={2} />
+          <SlideShow />
         </Box>
+        <Box m={2} />
 
         <DestinationList destinations={destination} />
       </Container>

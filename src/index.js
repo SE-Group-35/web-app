@@ -1,31 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import { createFirestoreInstance } from 'redux-firestore';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-import createStore from './store/configureStore';
-import firebase, { rrfConfig } from './firebase';
-// import { saveState } from './store/localStorage';
+import React from "react";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
+import { ReactReduxFirebaseProvider } from "react-redux-firebase";
+import { createFirestoreInstance } from "redux-firestore";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import createStore from "./store/configureStore";
+import firebase, { rrfConfig } from "./firebase";
+import { saveState } from "./store/localStorage";
 
-require('./firebase');
+require("./firebase");
 
 const store = createStore();
-// store.subscribe(() => {
-//   saveState({
-//     auth: store.getState().auth
-//   })
-// });
+store.subscribe(() => {
+  saveState({
+    auth: store.getState().auth,
+    firebase: store.getState().firebase,
+    firestore: store.getState().firestore,
+    system: store.getState().system,
+  });
+});
 
 const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch,
-  createFirestoreInstance
-}
+  createFirestoreInstance,
+};
 
 ReactDOM.render(
   <React.StrictMode>
@@ -37,7 +40,7 @@ ReactDOM.render(
       </ReactReduxFirebaseProvider>
     </Provider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function

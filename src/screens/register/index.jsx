@@ -13,6 +13,7 @@ import { useFormik } from "formik";
 import InputTextBox from "../../components/common/InputTextBox";
 import { PRIMARY, WHITE } from "../../colors";
 import Spinner from "../../components/common/Spinner";
+import { auth } from "../../firebase";
 
 const logo = require("../../assets/images/logo.svg");
 
@@ -113,11 +114,18 @@ const Register = () => {
       console.log("repeatPassword", repeatPassword);
       try {
         setRegisterIn(true);
-        //   await auth.signInWithEmailAndPassword(email, password);
-        //   setLogginIn(false);
+        await auth
+          .createUserWithEmailAndPassword(email, password)
+          .then((userCredential) => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            // ...
+          });
+        setRegisterIn(false);
       } catch (error) {
         setRegisterIn(false);
-        console.log(error);
+        console.log(error.code, error.message);
       }
     },
   });
