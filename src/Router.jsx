@@ -25,8 +25,8 @@ import Destination from "./screens/admin/Destination";
 import Page404 from "./screens/admin/Page404";
 import { auth } from "./firebase";
 import Profile from "./screens/admin/Profile";
-import { getAuth } from "./store/auth";
-import { useSelector } from "react-redux";
+//import { getAuth } from "./store/auth";
+//import { useSelector } from "react-redux";
 
 export default function Router() {
   /*const navigate = useNavigate();

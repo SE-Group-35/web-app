@@ -7,12 +7,13 @@ import { getStorage } from "firebase/storage";
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 export const firebaseConfig = {
-  apiKey: "AIzaSyByYle8TpnRXjLi-cBElEfVF7I-_la5tmM",
-  authDomain: "check-d7c5b.firebaseapp.com",
-  projectId: "check-d7c5b",
-  storageBucket: "check-d7c5b.appspot.com",
-  messagingSenderId: "1072117168491",
-  appId: "1:1072117168491:web:e9af0571eb1b0dbc72b42e",
+  apiKey: "AIzaSyAmtcxwa4fcX_e05jdNGweqx7_kj4izPHk",
+  authDomain: "smart-travel-sri-lanka.firebaseapp.com",
+  projectId: "smart-travel-sri-lanka",
+  storageBucket: "smart-travel-sri-lanka.appspot.com",
+  messagingSenderId: "987318358913",
+  appId: "1:987318358913:web:503e69f607ce6fa33e0e80",
+  measurementId: "G-4S90CEYG8Y",
 };
 
 // react-redux-firebase config
