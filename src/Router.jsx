@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
+
 import {
   BrowserRouter,
   Navigate,
   useRoutes,
   useNavigate,
 } from "react-router-dom";
+
+
+import { useDispatch } from "react-redux";
+
 
 import Home from "./screens/home";
 import Login from "./screens/login";
@@ -22,11 +27,16 @@ import EditEvent from "./screens/admin/EditEvent";
 import EditDestination from "./screens/admin/EditDestination";
 
 import Destination from "./screens/admin/Destination";
+import UserServices from "./screens/userServices";
+import EventTraveller from "./screens/event";
+import Category from "./screens/category";
 import Page404 from "./screens/admin/Page404";
-import { auth } from "./firebase";
+
+
 import Profile from "./screens/admin/Profile";
-import { getAuth } from "./store/auth";
-import { useSelector } from "react-redux";
+
+ import { auth } from "./firebase";
+
 
 export default function Router() {
   /*const navigate = useNavigate();
@@ -36,6 +46,7 @@ export default function Router() {
       if (user) navigate("/");
       else navigate("/login");
     });
+
   });*/
 
   //const isAdmin = profile ? false : profile.userRole.admin;
@@ -44,6 +55,9 @@ export default function Router() {
     { path: "/home", element: <Home /> },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
+    { path: "/services", element: <UserServices /> },
+    { path: "/event", element: <EventTraveller /> },
+    { path: "/category", element: <Category /> },
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
     {
