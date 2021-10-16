@@ -1,6 +1,6 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import {
   FormControl,
   FormControlLabel,
@@ -11,15 +11,18 @@ import {
 import { makeStyles } from "@material-ui/styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { auth } from "../../firebase";
+
 import GreenCheckbox from "../../components/common/GreenCheckBox";
 import InputTextBox from "../../components/common/InputTextBox";
 import Spinner from "../../components/common/Spinner";
 import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from "../../colors";
+import { getUserLoggingInStatus, signIn, getAuth } from "../../store/auth";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase";
 
-
-
-
+import { getProfile } from "../../store/auth";
 
 const image = require("../../assets/images/login.jpg");
 const logo = require("../../assets/images/logo.svg");
@@ -91,9 +94,12 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
-
   const classes = useStyles();
-  const [logginIn, setLogginIn] = useState(false);
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const profile = useSelector(getProfile);
+  const loggingIn = useSelector(getUserLoggingInStatus);
 
   const formik = useFormik({
     initialValues: {
@@ -113,21 +119,19 @@ const Login = () => {
         .required("Required field"),
     }),
     onSubmit: async ({ email, password }) => {
-      console.log("email", email);
-      console.log("password", password);
-      try {
-        auth.signOut();
-        setLogginIn(true);
-        await auth.signInWithEmailAndPassword(email, password);
-        setLogginIn(false);
-      } catch (error) {
-        setLogginIn(false);
-        console.log(error);
-      }
+      dispatch(signIn(email, password));
+      await auth.onAuthStateChanged(function (user) {
+        if (user) {
+          navigate("/dashboard");
+        }
+
+        // User is signed in.
+        else {
+          navigate("/login");
+        }
+      });
     },
   });
-
-    
 
   return (
     <Grid container>
@@ -191,7 +195,6 @@ const Login = () => {
                 />
               </Grid>
 
-
               <Grid>
                 <Link
                   to="/forgot-password"
@@ -202,7 +205,7 @@ const Login = () => {
               </Grid>
             </Grid>
             <button type="submit" className={classes.button}>
-              {logginIn ? <Spinner /> : "Login"}
+              {loggingIn ? <Spinner /> : "Login"}
             </button>
           </form>
           <Grid
@@ -216,10 +219,6 @@ const Login = () => {
               <Link to="/register" className={classes.registerText}>
                 Register
               </Link>
-
-                    
-                         
-
             </Grid>
           </Grid>
         </Grid>

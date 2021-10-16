@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
-import { Link as RouterLink } from "react-router-dom";
+
 // material
-import { Box, Card, Link, Typography, Stack } from "@material-ui/core";
+import { Box, Card, Typography, Stack } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
 // utils
 

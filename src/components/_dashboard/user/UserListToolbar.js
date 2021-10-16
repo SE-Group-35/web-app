@@ -86,13 +86,11 @@ export default function UserListToolbar({
             <Icon icon={trash2Fill} />
           </IconButton>
         </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
+      ) : /*<Tooltip title="Filter list">
           <IconButton>
             <Icon icon={roundFilterList} />
           </IconButton>
-        </Tooltip>
-      )}
+        </Tooltip>*/ null}
     </RootStyle>
   );
 }

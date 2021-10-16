@@ -13,6 +13,10 @@ import { MHidden } from "../../components/@material-extend";
 import sidebarConfig from "./SidebarConfig";
 import account from "../../_mocks_/account";
 
+import { getProfile } from "../../store/auth";
+import { useSelector } from "react-redux";
+import { getUserRole } from "../../utils/getUserRole";
+
 // ----------------------------------------------------------------------
 
 const DRAWER_WIDTH = 280;
@@ -41,6 +45,8 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
+  const { email, firstName, userRole } = useSelector(getProfile);
+  const role = getUserRole(userRole);
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -61,7 +67,7 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
+        <Box component={RouterLink} to="#" sx={{ display: "inline-flex" }}>
           <Logo />
         </Box>
       </Box>
@@ -72,10 +78,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {account.displayName}
+                {firstName}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {account.role}
+                {role}
               </Typography>
             </Box>
           </AccountStyle>
