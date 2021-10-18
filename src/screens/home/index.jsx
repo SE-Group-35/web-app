@@ -12,7 +12,7 @@ import MainFeaturedPost from "./../../components/home/MainFeaturedPost";
 import { Box } from "@material-ui/core";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
-import { getPublishedDestinations } from './../../store/entities/destinations';
+import { getPublishedDestinations } from './../../store/entities/destination';
 
 const postimage1 = require("../../assets/images/sigiriya.jpg");
 const postimage2 = require("../../assets/images/sinharaja.jpg");

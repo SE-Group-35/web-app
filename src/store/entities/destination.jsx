@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { getFirestore } from 'redux-firestore';
-import ImageCard from './../../components/home/Card';
+import ImageCard from '../../components/home/Card';
 import randomid from "randomid";
 
 export const addReview = (rating,comment,username,id) => {

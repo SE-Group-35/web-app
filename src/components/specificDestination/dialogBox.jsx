@@ -10,7 +10,7 @@ import Box from '@material-ui/core/Box';
 import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { useParams } from 'react-router';
-import { addReview } from '../../store/entities/destinations';
+import { addReview } from '../../store/entities/destination';
 import * as Yup from "yup";
 import { useFormik } from "formik";
 

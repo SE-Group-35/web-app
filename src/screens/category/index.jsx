@@ -10,7 +10,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import Link from "@material-ui/core/Link";
 import { useParams } from 'react-router-dom';
-import { getDestinations } from "../../store/entities/destinations";
+import { getDestinations } from "../../store/entities/destination";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -83,7 +83,7 @@ const Category = (props) => {
       {category? <Grid container className={classes.image}>
         <Paper
           className={classes.mainFeaturedPost}
-          style={{ backgroundImage: `url(${category.url})` }}
+          style={{ backgroundImage: `url(${category.url})`}}
         >
         </Paper>
         <Grid className={classes.typography}>

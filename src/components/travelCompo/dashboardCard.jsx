@@ -8,7 +8,7 @@ import CardContent from "@material-ui/core/CardContent";
 import InsideCard from "./insideCard";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
-import { getEvents } from './../../store/entities/events';
+import { getEvents } from './../../store/entities/event';
 
 const useStyles = makeStyles((theme) => ({
   card: {

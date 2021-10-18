@@ -11,7 +11,7 @@ import InsideCategory from "./insideCategory";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getCategory  } from './../../store/entities/category';
-import { getDestinations } from "../../store/entities/destinations";
+import { getDestinations } from "../../store/entities/destination";
 
 const useStyles = makeStyles((theme) => ({
   card: {
