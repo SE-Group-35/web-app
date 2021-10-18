@@ -8,8 +8,10 @@ import CardContent from "@material-ui/core/CardContent";
 import { PRIMARY } from "../../colors";
 import {Map, InfoWindow, Marker, GoogleApiWrapper} from 'google-maps-react';
 import Divider from '@material-ui/core/Divider';
-import SpecificDestinationDetail from "../../mockdata/specificDestination";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
 
+import { useParams } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -50,7 +52,14 @@ const onInfoWindowClose={};
 
 function MapCard(props) {
   const classes = useStyles();
+  const {post} =props;
+  const{id} = useParams(); 
+
   
+  useFirestoreConnect([{collection:"destinations", doc:id}]);  
+  const destination = useSelector(
+    ({ firestore: { data } }) => data.destinations && data.destinations[id]);
+  //console.log(destination.coords);
   return (
     <Grid item xs={12}>     
       <Card className={classes.card} >
@@ -60,16 +69,16 @@ function MapCard(props) {
               Map Details
             </Typography>  
             <Divider />          
-            <div style={{padding:'1.5%'}}>
+            {destination ? <div style={{padding:'1.5%'}}>
             <Map google={props.google} zoom={14} initialCenter={{
-              lat: SpecificDestinationDetail.langitude,
-              lng:  SpecificDestinationDetail.longitude
+              lat: destination.coords[0],
+              lng:  destination.coords[1]
               }}>
               <Marker onClick={onMarkerClick}
                 name={'Current location'} />
               <InfoWindow onClose={onInfoWindowClose}></InfoWindow>
             </Map>
-            </div>
+            </div>:<h1>Loading</h1>}
           </CardContent>
         </div>
       </Card>
@@ -79,5 +88,5 @@ function MapCard(props) {
 
 
 export default GoogleApiWrapper({
-    apiKey: ("AIzaSyDvYA-P4MxXb1r3b4CIWj-vE6bvShnTQ8o")
+    apiKey: ("AIzaSyCTXgQBGcEdgNbJ0AQZiApNhf50kyEi57U&")
   })(MapCard)

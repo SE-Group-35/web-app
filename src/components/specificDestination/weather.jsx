@@ -9,7 +9,6 @@ import { PRIMARY } from "../../colors";
 import { useState, useEffect  } from "react";
 import Divider from '@material-ui/core/Divider';
 import DisplayWeather from "./displayWeather";
-import SpecificDestinationDetail from "../../mockdata/specificDestination";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -46,27 +45,13 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Weather(props) {
   const classes = useStyles();
+  const {post}=props;
   const [weather, setWeather] = useState([]); 
-  const lat=SpecificDestinationDetail.langitude;
-  const lon=SpecificDestinationDetail.longitude;
   const APIKEY="4279cf9cf1d8fbe7b746d7c7d1aa72c9";
 
-//   async function WeatherData(e) {
-//     e.preventDefault();
-//   const data = await fetch(
-//     `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${APIKEY}`
-//   )
- 
-//     .then((res) => res.json())
-//     .then((data) =>data);
-
-//   setWeather({ data: data });
-  
-//   }
-
-  useEffect(() => {
-    fetch(
-      `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&APPID=${APIKEY}`
+useEffect(() => {
+   fetch(
+      `https://api.openweathermap.org/data/2.5/weather?lat=${post.coords[0]}&lon=${post.coords[1]}&APPID=${APIKEY}`
     )
     .then((res) => res.json())
     .then((data) =>setWeather({ data: data }));

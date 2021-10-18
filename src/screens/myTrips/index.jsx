@@ -5,15 +5,16 @@ import Grid from "@material-ui/core/Grid";
 import image from "../../assets/images/tripcover.jpg";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TripPost from '../../components/travelCompo/tripPost';
-import DashboardCategory from "../../components/travelCompo/dashboardCategory";
-import DashboardCard from "../../components/travelCompo/dashboardCard";
 import TripCard from "../../components/travelCompo/tripCard";
 import { pastTripList, activeTripList,futureTripList } from "../../mockdata/tripList";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { getMyTrips } from "../../store/entities/userInfo";
 
 const useStyles = makeStyles((theme) => ({
     root: {
       height: "100vh",    
-      
     },
     space:{
         margin:theme.spacing(3,0)
@@ -47,26 +48,25 @@ const tripDetails =[
   
   const MyTrips = (props) => {
     const classes = useStyles();
-  
-    return (
+    const {id}=useParams();
+    useFirestoreConnect([{collection:"users", doc:id,subcollections:[{collection:"trips"}]}]);
+    const trips=useSelector(getMyTrips); 
+
+return (
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
-        
-              
         <TripPost post={mainFeaturedPost} />
-        
         <Grid item xs={12} >
-        <Grid className={classes.space}>
-        {tripDetails.map((post) => (
-            <Grid className={classes.space}>
-          <TripCard key={post.heading} post={post}  /></Grid>
-        ))}    
-        </Grid> 
-          
-          </Grid>
+          <Grid className={classes.space}>
+          {tripDetails.map((post) => (
+              <Grid className={classes.space}>
+            <TripCard key={post.heading} post={post}  /></Grid>
+          ))}    
+          </Grid> 
         </Grid>
-          );
-        };
+      </Grid>
+    );
+};
         
-        export default MyTrips;
+export default MyTrips;
         

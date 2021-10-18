@@ -19,6 +19,8 @@ import { BLACK, DARKGREY, GREY, PRIMARY, WHITE } from "../../colors";
 import { signIn, signOut } from "../../store/auth";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { getAuth } from "../../store/auth";
+import { useSelector } from "react-redux";
 
 
 
@@ -96,7 +98,7 @@ const Login = () => {
   const navigate=useNavigate();
   const classes = useStyles();
   const [logginIn, setLogginIn] = useState(false);
-
+  const{uid}=useSelector(getAuth);  
 
   const formik = useFormik({
     initialValues: {
@@ -125,17 +127,16 @@ const Login = () => {
         dispatch(signOut())
         dispatch(signIn(email,password));               
         auth.onAuthStateChanged((user) => {
-              if (user) {                
-                navigate("/traveller");
+              if (user) {    
+                const userId=user.uid ;           
+                navigate(`/traveller/${userId}`);
                 
               }
               else {                
-                navigate("/");
-                
-              } 
+             } 
               
             });
-        //navigate("/traveller");
+        
         setLogginIn(false);
       } catch (error) {
         setLogginIn(false);        
@@ -143,10 +144,7 @@ const Login = () => {
       }
     },
   });
-
-    
-
-  return (
+return (
     <Grid container>
       <Grid item xs={12} md={8} className={classes.grid}>
         <img src={image.default} className={classes.image} alt="Seegiriya" />
@@ -207,8 +205,6 @@ const Login = () => {
                   label="Remember Me"
                 />
               </Grid>
-
-
               <Grid>
                 <Link
                   to="/forgot-password"
@@ -219,7 +215,7 @@ const Login = () => {
               </Grid>
             </Grid>
             <button type="submit" className={classes.button}>
-              {logginIn ? <Spinner /> : "Login"}
+              {logginIn ? <Spinner/>: "Login"}
             </button>            
           </form>
           <Grid
@@ -233,10 +229,6 @@ const Login = () => {
               <Link to="/register" className={classes.registerText}>
                 Register
               </Link>
-
-                    
-                         
-
             </Grid>
           </Grid>
         </Grid>

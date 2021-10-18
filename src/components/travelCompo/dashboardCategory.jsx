@@ -7,10 +7,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { PRIMARY } from "../../colors";
 import InsideCard from "./insideCard";
-//import categoryList from "../../mockdata/categoryList";
+import InsideCategory from "./insideCategory";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getCategory  } from './../../store/entities/category';
+import { getDestinations } from "../../store/entities/destinations";
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -48,6 +49,7 @@ export default function DashboardCategory() {
   useFirestoreConnect(["categories"]);
   
   const categoryList= useSelector(getCategory);
+  const destinationList=useSelector(getDestinations);
 
   return (
     <Grid item xs={12}>     
@@ -60,7 +62,7 @@ export default function DashboardCategory() {
             <div className={classes.paper}>
               <Grid container spacing={3} className={classes.card}>
                 {categoryList ? categoryList.map(post =>
-                  <InsideCard key={post.title} post={post} />
+                  <InsideCategory key={post.title} post={post} />
                   ):<Typography className={classes.informText}>Loading</Typography>}
               </Grid>
             </div>

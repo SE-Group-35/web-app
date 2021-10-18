@@ -32,13 +32,13 @@ export default function CategoryCard(props) {
 
   return (
     <Grid item xs={12}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="a" href={`/destination/${post.id}`} >
         <Card className={classes.card}>
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
-              image={post.image}
-              title={post.imageTitle}
+              image={post.mainPhoto}
+              title={post.title}
             />
           </Hidden>
           <div className={classes.cardDetails}>

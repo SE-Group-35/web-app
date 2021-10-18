@@ -11,6 +11,8 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import {signOut} from '../../store/auth'; 
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { useParams } from 'react-router';
+
 
 const useStyles = makeStyles((theme) => ({  
   styledText:{
@@ -43,6 +45,7 @@ export default function Navbar(props) {
   const navigate=useNavigate();
   const classes = useStyles();
   const [dropdown, setDropdown] = useState(false);
+  const {post}=props;
   
 
   return (
@@ -55,7 +58,7 @@ export default function Navbar(props) {
           </Link>
         </Grid>
         <Grid item xs={12} md={2}>
-          <Link href="./traveller/myTrips">
+          <Link href={`/traveller/myTrips/${post.userId}`} >
             <Typography className={classes.styledText}>
               My Trips
             </Typography>

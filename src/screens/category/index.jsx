@@ -4,10 +4,14 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { PRIMARY } from "../../colors";
-import categoryData from "../../mockdata/Category";
+import { PRIMARY, WHITE } from "../../colors";
 import CategoryCard from "../../components/home/categoryCard";
-import destinationData from "../../mockdata/destination";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import Link from "@material-ui/core/Link";
+import { useParams } from 'react-router-dom';
+import { getDestinations } from "../../store/entities/destinations";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,32 +56,48 @@ const useStyles = makeStyles((theme) => ({
   space: {
     margin: theme.spacing(6, 0),
   },
+  styleText:{
+    fontStyle:'italic',
+    fontSize:'1.3rem',
+    fontWeight:'bold',
+    color:WHITE, 
+    textDecorationLine:'underline'  
+  },
 }));
 
 const Category = (props) => {
   const classes = useStyles();
+  const{id} = useParams(); 
+ 
+  
+  useFirestoreConnect([{collection:"categories", doc:id}]);  
+  const category = useSelector(
+    ({ firestore: { data } }) => data.categories && data.categories[id]);
+   
+  useFirestoreConnect(["destinations"]) ;
+  const destinationList=useSelector(getDestinations); 
 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid container className={classes.image}>
+      {category? <Grid container className={classes.image}>
         <Paper
           className={classes.mainFeaturedPost}
-          style={{ backgroundImage: `url(${categoryData.coverImage})` }}
-        ></Paper>
+          style={{ backgroundImage: `url(${category.url})` }}
+        >
+        </Paper>
         <Grid className={classes.typography}>
           <Typography className={classes.styledText}>
-            {categoryData.title}
+            {category.title}
           </Typography>
         </Grid>
-      </Grid>
-
+      </Grid>:<h1>Loading</h1>}
       <Grid item xs={12} className={classes.card}>
-        {destinationData.map((post) => (
-          <Grid className={classes.space}>
+        {destinationList? destinationList.map((post) => (
+          (post.categories.find(element=>element===category.title)?<Grid className={classes.space}>
             <CategoryCard key={post.title} post={post} />
-          </Grid>
-        ))}
+          </Grid> :null)
+        )):null}
       </Grid>
     </Grid>
   );

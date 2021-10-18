@@ -45,10 +45,11 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Overview(props) {
   const classes = useStyles();
+  const{post}=props;
   
   return (
     <Grid item xs={12}>     
-      <Card className={classes.card} >
+      {post?<Card className={classes.card} >
         <div className={classes.cardDetails}>
           <CardContent>          
             <Typography component="h2" variant="h5" className={classes.headingText}>
@@ -56,11 +57,11 @@ export default function Overview(props) {
             </Typography>
             <Divider /> 
             <Typography className={classes.styledText}>
-              {SpecificDestinationDetail.overview}
+              {post.overview}
             </Typography>  
           </CardContent>
         </div>
-      </Card>
+      </Card>:<h1>Loading</h1>}
     </Grid>
   );
 }

@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import InsideCard from "./insideCard";
-//import eventList from "../../mockdata/eventList";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getEvents } from './../../store/entities/events';

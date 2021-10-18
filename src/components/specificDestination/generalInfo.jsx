@@ -49,7 +49,7 @@ export default function GeneralInfo(props) {
   
   return (
     <Grid item xs={12}>     
-      <Card className={classes.card} >
+      {post ? <Card className={classes.card} >
         <div className={classes.cardDetails}>
           <CardContent>          
             <Typography component="h2" variant="h5" className={classes.headingText}>
@@ -65,7 +65,7 @@ export default function GeneralInfo(props) {
                 </Grid>
                 <Grid item xs={12} md={7}>
                   <Typography className={classes.styledText}>
-                      {SpecificDestinationDetail.address}
+                      {post.address}
                   </Typography>
                 </Grid>
               </Grid>
@@ -89,26 +89,26 @@ export default function GeneralInfo(props) {
                 </Grid>
                 <Grid item xs={12} md={7}>
                   <Typography className={classes.styledText}>
-                    {SpecificDestinationDetail.longitude}
+                    {post.coords[0]}
                   </Typography>
                 </Grid>
               </Grid>
               <Grid container spacing={3}item xs={12}>
                 <Grid item xs={12} md={5}>
                   <Typography className={classes.styledText}>
-                    Landitude
+                    Latitude
                   </Typography>
                 </Grid>
                 <Grid item xs={12} md={7}>
                   <Typography className={classes.styledText}>
-                    {SpecificDestinationDetail.langitude}
+                    {post.coords[1]}
                   </Typography>
                 </Grid>
               </Grid>
             </div>
           </CardContent>
         </div>
-      </Card>
+      </Card>:<h1>Loading</h1>}
     </Grid>
   );
 }

@@ -13,6 +13,10 @@ import { useFormik } from "formik";
 import InputTextBox from "../../components/common/InputTextBox";
 import { PRIMARY, WHITE } from "../../colors";
 import Spinner from "../../components/common/Spinner";
+import { signUp } from "../../store/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { getAuth } from "../../store/auth";
 
 
 const logo = require("../../assets/images/logo.svg");
@@ -71,6 +75,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Register = () => {
   const classes = useStyles();
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
   const [registerIn, setRegisterIn] = useState(false);
 
@@ -113,12 +119,14 @@ const Register = () => {
       console.log("password", password);
       console.log("repeatPassword", repeatPassword);
       try {
-        setRegisterIn(true);
-        //   await auth.signInWithEmailAndPassword(email, password);
-        //   setLogginIn(false);
+        setRegisterIn(true);        
+        const result = dispatch(signUp(email,password,firstName,lastName));
+        console.log(result);
       } catch (error) {
         setRegisterIn(false);
-        console.log(error);
+        alert("Unsuccess");
+        navigate("/");
+       
       }
     },
   });
@@ -240,9 +248,9 @@ const Register = () => {
                 />
               </Grid>
             </Grid>
-
             <button type="submit" className={classes.button}>
-              {registerIn ? <Spinner /> : "Register"}
+              {registerIn ? "Register" : "Register"}
+              
             </button>
             <Box mt={2}></Box>
             <Grid container>

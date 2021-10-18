@@ -7,4 +7,4 @@ export default withStyles({
     color: "fff",
   },
   checked: {},
-})((props) => <h1>Loading</h1>);
+})((props) => <h1></h1>);

@@ -6,13 +6,13 @@ import image from "../../assets/images/homecover4.jpg";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Searchbar from "../../components/home/Searchbar";
 import { PRIMARY } from "../../colors";
-import Button from "@material-ui/core/Button";
 import ImageCard from "./../../components/home/Card";
-import Upperbar from "./../../components/home/Upperbar";
 import { useState } from "react";
 import MainFeaturedPost from "./../../components/home/MainFeaturedPost";
-import Mockdata from "./Mockdata.json";
 import { Box } from "@material-ui/core";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { getPublishedDestinations } from './../../store/entities/destinations';
 
 const postimage1 = require("../../assets/images/sigiriya.jpg");
 const postimage2 = require("../../assets/images/sinharaja.jpg");
@@ -115,6 +115,9 @@ const newCard = [
 
 const Home = (props) => {
   const classes = useStyles();
+  useFirestoreConnect(["destinations"]);
+  const dest=useSelector(getPublishedDestinations);
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -134,7 +137,7 @@ const Home = (props) => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={7}>
-                <Searchbar data={Mockdata}></Searchbar>
+                {dest?<Searchbar data={dest}></Searchbar>:null}
               </Grid>
             </Grid>
             <Grid container spacing={4} className={classes.card}>

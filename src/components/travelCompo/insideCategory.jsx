@@ -8,7 +8,7 @@ import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import { PRIMARY } from "../../colors";
-import Event from '../../screens/event';
+
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -32,18 +32,15 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-export default function InsideCard(props) {
+export default function InsideCategory(props) {
   const classes = useStyles();
   const { post } = props;
-   
-  const handleClick = (posts)=>{
-    <Event post={posts} />
-  };
+ 
 
   return (
     <Grid item xs={12} md={4}>
       <Card >
-        <CardActionArea component="a" href={`/event/${post.id}`} >
+        <CardActionArea component="a" href={`/category/${post.id}`} >
           { <CardMedia
             component="img"
             height="150"
@@ -60,6 +57,6 @@ export default function InsideCard(props) {
   );
 }
 
-InsideCard.propTypes = {
+InsideCategory.propTypes = {
   post: PropTypes.object,
 };

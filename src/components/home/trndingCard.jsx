@@ -47,14 +47,11 @@ export default function TrendingCard(props) {
               <Typography component="h2" variant="h5" className={classes.text}>
                 {post.title}
               </Typography>
-              
               <Typography
                 variant="subtitle1"                
-                
               >
                 Rating : {post.rating}
               </Typography>
-             
             </CardContent>
           </div>
         </Card>

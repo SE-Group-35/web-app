@@ -24,11 +24,9 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "column",
   },
-
   card: {
     margin: theme.spacing(-5, 0),
   },
-
   styledText: {
     margin: theme.spacing(0, 0),
     justifyContent: "left",
@@ -64,11 +62,9 @@ export default function EventCompo (props){
           className={classes.mainFeaturedPost}
           style={{ backgroundImage: `url(${post.url})` }}
         ></Paper>
-
         <Typography className={classes.styledText}>
           {eventData.title}
         </Typography>
-
         <Grid className={classes.textCard}>
           <TextCard post={eventData} />
         </Grid>

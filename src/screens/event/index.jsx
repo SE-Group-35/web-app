@@ -61,27 +61,27 @@ export default function Event (props){
   const classes = useStyles();
   const {post}=props;
   const{id} = useParams();      
-  useFirestoreConnect(["events"]);    
-  const eventList= useSelector(getEventById(id)); 
-  console.log(eventList);
+  useFirestoreConnect([{collection:"events", doc:id}]);  
+  const event = useSelector(
+    ({ firestore: { data } }) => data.events && data.events[id])  
+  //const eventList= useSelector(getEventById(id)); 
+  
   
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid container className={classes.image}>
+      {event ? <Grid container className={classes.image}>
         <Paper
           className={classes.mainFeaturedPost}
-          style={{ backgroundImage: `url(${post.url})` }}
+          style={{ backgroundImage: `url(${event.url})` }}
         ></Paper>
-
         <Typography className={classes.styledText}>
-          {post.title}
+          {event.title}
         </Typography>
-
         <Grid className={classes.textCard}>
-          <TextCard post={post} />
+          <TextCard post={event} />
         </Grid>
-      </Grid>
+      </Grid>: <h1>Loading</h1>}
     </Grid>
   );
 };

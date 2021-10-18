@@ -51,12 +51,12 @@ export default function Router() {
     { path: "/services", element: <UserServices /> },
     
     { path: "/event/:id", element: <EventTraveller /> },
-    { path: "/category", element: <Category /> },
-    { path: "/destination", element: <SpecificDestination /> },
-    { path: "/traveller", element: <Traveller /> },
+    { path: "/category/:id", element: <Category /> },
+    { path: "/destination/:id", element: <SpecificDestination /> },
+    { path: "/traveller/:id", element: <Traveller /> },
     { path: "/traveller/automatedPlanner", element: <AutomatedPlanner /> },
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
-    { path: "/traveller/myTrips", element: <MyTrips /> },
+    { path: "/traveller/myTrips/:id", element: <MyTrips /> },
    
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
