@@ -12,6 +12,7 @@ import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
+import { NaturePeopleOutlined } from "@material-ui/icons";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -23,9 +24,9 @@ const useStyles = makeStyles((theme) => ({
   },
   input: {
     marginLeft: theme.spacing(1),
-    flex: 1,
-    borderWidth: "6",
-    borderColor: "PRIMARY",
+    display:"flex",
+    flex: 1, 
+     
   },
   search: {
     margin: theme.spacing(4, 12),
@@ -54,7 +55,9 @@ function ListItemLink(props) {
 
 export default function Searchbar({ data }) {
   const classes = useStyles();
-
+ 
+  //const destinationId=title[0].id;
+  
   const [filteredData, setFilteredData] = useState([]);
   const [wordEntered, setWordEntered] = useState("");
 
@@ -64,7 +67,7 @@ export default function Searchbar({ data }) {
     const newFilter = data.filter((value) => {
       return value.title.toLowerCase().includes(searchWord.toLowerCase());
     });
-
+   
     if (searchWord === "") {
       setFilteredData([]);
     } else {
@@ -76,7 +79,7 @@ export default function Searchbar({ data }) {
     setFilteredData([]);
     setWordEntered("");
   };
-
+ 
   return (
     <div>
       <Grid container spacing={0}>
@@ -101,9 +104,10 @@ export default function Searchbar({ data }) {
           <Grid item xs={12}>
             {filteredData.length != 0 && (
               <List className={classes.list}>
+               
                 {filteredData.map((value, key) => {
                   return (
-                    <ListItemLink href={value.link} target="_blank">
+                    <ListItemLink href={`destination/${value.id}`} target="_blank">
                       <p className={classes.text}>{value.title}</p>
                     </ListItemLink>
                   );

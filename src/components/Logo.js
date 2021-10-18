@@ -13,7 +13,9 @@ export default function Logo({ sx }) {
     <Box
       component="img"
       src="/static/logo.svg"
-      sx={{ width: 200, height: 160, ...sx }}
+
+      sx={{ width: "100%", height: 120, ...sx }}
+
     />
   );
 }

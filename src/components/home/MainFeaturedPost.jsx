@@ -30,8 +30,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       padding: theme.spacing(10),
       paddingRight: 0,
-    },
+    },    
   },
+  
 }));
 
 export default function MainFeaturedPost(props) {
@@ -42,8 +43,7 @@ export default function MainFeaturedPost(props) {
     <Paper
       className={classes.mainFeaturedPost}
       style={{ backgroundImage: `url(${post.image})` }}
-    >
-      {/* Increase the priority of the hero background image */}
+    >      
       {
         <img
           style={{ display: "none" }}
@@ -54,8 +54,8 @@ export default function MainFeaturedPost(props) {
       <div className={classes.overlay} />
       <Grid container>
         <Grid item md={6}>
-          <div className={classes.mainFeaturedPostContent}>
-            <Upperbar></Upperbar>
+          <div className={classes.mainFeaturedPostContent}>            
+            <Upperbar ></Upperbar>            
             <Typography
               component="h1"
               variant="h3"

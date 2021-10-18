@@ -1,5 +1,3 @@
-import React from "react";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -13,7 +11,11 @@ import { useFormik } from "formik";
 import InputTextBox from "../../components/common/InputTextBox";
 import { PRIMARY, WHITE } from "../../colors";
 import Spinner from "../../components/common/Spinner";
-import { auth } from "../../firebase";
+import { signUp } from "../../store/auth";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { getAuth } from "../../store/auth";
+
 
 const logo = require("../../assets/images/logo.svg");
 
@@ -71,6 +73,8 @@ const useStyles = makeStyles((theme) => ({
 
 const Register = () => {
   const classes = useStyles();
+  const dispatch=useDispatch();
+  const navigate=useNavigate();
 
   const [registerIn, setRegisterIn] = useState(false);
 
@@ -113,19 +117,14 @@ const Register = () => {
       console.log("password", password);
       console.log("repeatPassword", repeatPassword);
       try {
-        setRegisterIn(true);
-        await auth
-          .createUserWithEmailAndPassword(email, password)
-          .then((userCredential) => {
-            // Signed in
-            const user = userCredential.user;
-            console.log(user);
-            // ...
-          });
-        setRegisterIn(false);
+        setRegisterIn(true);        
+        const result = dispatch(signUp(email,password,firstName,lastName));
+        console.log(result);
       } catch (error) {
         setRegisterIn(false);
-        console.log(error.code, error.message);
+        alert("Unsuccess");
+        navigate("/");
+       
       }
     },
   });
@@ -247,9 +246,9 @@ const Register = () => {
                 />
               </Grid>
             </Grid>
-
             <button type="submit" className={classes.button}>
-              {registerIn ? <Spinner /> : "Register"}
+              {registerIn ? "Register" : "Register"}
+              
             </button>
             <Box mt={2}></Box>
             <Grid container>

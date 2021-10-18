@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flex: 1,
   },
   cardMedia: {
-    width: 400,
+    width: 300,
   },
   text: {
     color: PRIMARY,
@@ -32,13 +32,13 @@ export default function CategoryCard(props) {
 
   return (
     <Grid item xs={12}>
-      <CardActionArea component="a" href="#">
+      <CardActionArea component="a" href={`/destination/${post.id}`} >
         <Card className={classes.card}>
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
-              image={post.image}
-              title={post.imageTitle}
+              image={post.mainPhoto}
+              title={post.title}
             />
           </Hidden>
           <div className={classes.cardDetails}>
@@ -50,15 +50,13 @@ export default function CategoryCard(props) {
                 {post.description}
               </Typography>
               <Typography
-                variant="subtitle1"
-                color="primary"
+                variant="subtitle1"                
                 className={classes.text}
               >
                 Rating : {post.rating}
               </Typography>
               <Typography
-                variant="subtitle1"
-                color="primary"
+                variant="subtitle1"                
                 className={classes.text}
               >
                 Continue reading...
