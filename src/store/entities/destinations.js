@@ -5,6 +5,8 @@ import { database } from "../../firebase";
 import randomid from "randomid";
 import { processRequested, processCompleted, processFailed } from "../system";
 
+
+
 export const addDestination = (
   title,
   description,
@@ -143,3 +145,5 @@ export const deleteDestination = (id) => {
     }
   };
 };
+
+

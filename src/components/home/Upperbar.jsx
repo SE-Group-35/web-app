@@ -6,12 +6,13 @@ import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles((theme) => ({
   typology: {
-    color: "WHITE",
+    color: WHITE,
     fontStyle: "italic",
     fontSize: "1.5rem",
     fontWeight: "bold",
     margin: theme.spacing(1, 1),
     textDecorationLine: "underline",
+    textDecorationColor: WHITE
   },
   stylegrid: {
     margin: theme.spacing(0, 75),

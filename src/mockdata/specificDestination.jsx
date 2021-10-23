@@ -1,0 +1,10 @@
+const SpecificDestinationDetail={
+    title:"Sinharaja Rain Forest",
+    area: "111.9 km²",
+    address:"Sinharaja Rainforest, Deniyaya 81500",
+    langitude:6.3828,
+    longitude: 80.6020,
+    overview:"Sinharaja Forest Reserve is a forest reserve and a biodiversity hotspot in Sri Lanka. It is of international significance and has been designated a Biosphere Reserve and World Heritage Site by UNESCO. According to International Union for Conservation of Nature (IUCN), Sinharaja is the country's last viable area of primary tropical rainforest. More than 60% of the trees are endemic and many of them are considered rare. 50% of Sri Lankan's endemics species of animals (especially butterfly, amphibians, birds, snakes and fish species). It is home to 95% endemic birds.The hilly virgin rainforest, part of the Sri Lanka lowland rain forests ecoregion, was saved from the worst of commercial logging by its inaccessibility, and was designated a World Biosphere Reserve in 1978 and a World Heritage Site in 1988.Because of the dense vegetation, wildlife is not as easily seen as at dry-zone national parks such as Yala. There are about 3 elephants, and 15 or so[vague] leopards. The most common larger mammal is the endemic purple-faced langur.Birds tend to move in mixed feeding flocks, invariably led by the fearless Sri Lanka Crested Drongo and the noisy orange-billed babbler. Of Sri Lanka's 26 endemic birds, the 20 rainforest species all occur here, including the elusive red-faced malkoha, green-billed coucal and Sri Lanka blue magpie.Reptiles include the endemic green pit viper and hump-nosed vipers, and there are a large variety of amphibians, especially tree frogs. Invertebrates include the endemic common birdwing butterfly and leeches.",
+    activities:['natural spa',' wildlife & bird watching','sinharaja rainforest reserve','ayurvedic massage & treatments','the historic gatabaruwa rajamaha viharaya of kotapola','uda walawe national park','visit a tea factory']
+};
+export default SpecificDestinationDetail;

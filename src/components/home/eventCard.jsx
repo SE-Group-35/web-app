@@ -4,10 +4,7 @@ import { makeStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Hidden from "@material-ui/core/Hidden";
 import { PRIMARY } from "../../colors";
 
 const useStyles = makeStyles({
@@ -39,7 +36,7 @@ export default function TextCard(props) {
               Description
             </Typography>
             <Typography variant="subtitle1" paragraph>
-              {post.description}
+              {post.overview}
             </Typography>
             <Typography
               variant="subtitle1"

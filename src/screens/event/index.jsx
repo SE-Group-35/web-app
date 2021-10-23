@@ -6,8 +6,13 @@ import Paper from "@material-ui/core/Paper";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { PRIMARY } from "../../colors";
 import TextCard from "../../components/home/eventCard";
-
+import PropTypes from "prop-types";
 import eventData from "../../mockdata/Event";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { getEvents } from './../../store/entities/events';
+import { useParams } from 'react-router-dom';
+import { getEventById } from "./../../store/entities/events";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -52,28 +57,35 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Event = (props) => {
+export default function Event (props){
   const classes = useStyles();
-
+  const {post}=props;
+  const{id} = useParams();      
+  useFirestoreConnect([{collection:"events", doc:id}]);  
+  const event = useSelector(
+    ({ firestore: { data } }) => data.events && data.events[id])  
+  //const eventList= useSelector(getEventById(id)); 
+  
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid container className={classes.image}>
+      {event ? <Grid container className={classes.image}>
         <Paper
           className={classes.mainFeaturedPost}
-          style={{ backgroundImage: `url(${eventData.image})` }}
+          style={{ backgroundImage: `url(${event.url})` }}
         ></Paper>
-
         <Typography className={classes.styledText}>
-          {eventData.title}
+          {event.title}
         </Typography>
-
         <Grid className={classes.textCard}>
-          <TextCard post={eventData} />
+          <TextCard post={event} />
         </Grid>
-      </Grid>
+      </Grid>: <h1>Loading</h1>}
     </Grid>
   );
 };
 
-export default Event;
+Event.propTypes = {
+  post: PropTypes.object,
+};

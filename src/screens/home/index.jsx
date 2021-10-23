@@ -6,12 +6,13 @@ import image from "../../assets/images/homecover4.jpg";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Searchbar from "../../components/home/Searchbar";
 import { PRIMARY } from "../../colors";
-import Button from "@material-ui/core/Button";
 import ImageCard from "./../../components/home/Card";
-import Upperbar from "./../../components/home/Upperbar";
 import { useState } from "react";
 import MainFeaturedPost from "./../../components/home/MainFeaturedPost";
-import Mockdata from "./Mockdata.json";
+import { Box } from "@material-ui/core";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { getPublishedDestinations } from './../../store/entities/destination';
 
 const postimage1 = require("../../assets/images/sigiriya.jpg");
 const postimage2 = require("../../assets/images/sinharaja.jpg");
@@ -61,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "left",
   },
   card: {
-    margin: theme.spacing(-5, 0),
+    margin: theme.spacing(-7, 0),
   },
   justify: {
     justifyContent: "center",
@@ -79,6 +80,9 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(0, 0),
     width: "100%",
   },
+  space:{
+    margin:theme.spacing(4,0)
+  }
 }));
 
 const mainFeaturedPost = {
@@ -97,7 +101,7 @@ const newCard = [
       "The value of Sinharaja as a natural World Heritage site continues to be recognized by the discovery of several endemic species of plants and animals with a huge diversity since the declaration of this forest as a World Heritage in 1988.",
     image: `${postimage2.default}`,
     imageText: "Continue reading ",
-    imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
+    imageLink: "/destination",
   },
   {
     title: "Sigiriya",
@@ -111,6 +115,9 @@ const newCard = [
 
 const Home = (props) => {
   const classes = useStyles();
+  useFirestoreConnect(["destinations"]);
+  const dest=useSelector(getPublishedDestinations);
+  
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -130,7 +137,7 @@ const Home = (props) => {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={7}>
-                <Searchbar data={Mockdata}></Searchbar>
+                {dest?<Searchbar data={dest}></Searchbar>:null}
               </Grid>
             </Grid>
             <Grid container spacing={4} className={classes.card}>
@@ -138,9 +145,11 @@ const Home = (props) => {
                 <ImageCard key={post.title} post={post} />
               ))}
             </Grid>
-          </Grid>
+          </Grid> 
+          <Box className={classes.space}><Box/>
+            </Box>        
         </div>
-      </Grid>
+      </Grid>      
     </Grid>
   );
 };
