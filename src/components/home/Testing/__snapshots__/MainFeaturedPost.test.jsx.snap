@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EventCard /> should matches the snapshot 1`] = `
+Array [
+  <ThemeProvider
+    theme={Object {}}
+  >
+    <InnerThemeProvider>
+      <MainFeaturedPost
+        post={
+          Object {
+            "description": "Hi! Would you explore nature paradise in the world. Let's find the best trip in Sri Lanka.Join with us!.",
+            "image": "homecover4.jpg",
+            "imgText": "main image description",
+            "title": "Let's Make Your Best Trip Ever",
+          }
+        }
+      />
+    </InnerThemeProvider>
+  </ThemeProvider>,
+]
+`;

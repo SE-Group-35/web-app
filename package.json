@@ -27,6 +27,7 @@
     "apexcharts": "^3.27.3",
     "babel-eslint": "^10.1.0",
     "change-case": "^4.1.2",
+    "check-prop-types": "^1.1.2",
     "date-fns": "^2.23.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
