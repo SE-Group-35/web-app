@@ -83,6 +83,7 @@ export default function Router() {
     { path: "/category/:id", element: <Category /> },
     { path: "/destination/:id", element: <SpecificDestination /> },
     { path: "/traveller/:id", element: <Traveller /> },
+    { path: "/traveller/destination/:id", element: <SpecificDestination />},
     { path: "/traveller/automatedPlanner", element: <AutomatedPlanner /> },
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
     { path: "/traveller/myTrips/:id", element: <MyTrips /> },

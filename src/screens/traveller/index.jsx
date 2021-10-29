@@ -10,6 +10,11 @@ import CoverPost from './../../components/travelCompo/coverPost';
 import DashboardCard from "../../components/travelCompo/dashboardCard";
 import Divider from '@material-ui/core/Divider';
 import DashboardCategory from "../../components/travelCompo/dashboardCategory";
+import Searchbar from "../../components/home/Searchbar";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { getPublishedDestinations } from './../../store/entities/destination';
+import { PRIMARY } from "../../colors";
 
 const logo = require("../../assets/images/logo.svg");
 
@@ -50,6 +55,14 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
    
   },
+  stylishText: {
+    margin: theme.spacing(6, 0),
+    justifyContent: "left",
+    color: PRIMARY,
+    fontSize: "1.3rem",
+    fontStyle: "italic",
+    fontWeight: "bold",
+  },
   upperbar: {
     margin: theme.spacing(0, 20),
     width: "100%",
@@ -57,6 +70,9 @@ const useStyles = makeStyles((theme) => ({
   space:{
     margin:theme.spacing(3,0)
   },
+  searchbarSpace:{
+    margin:theme.spacing(0,5)
+  }
   
 }));
 
@@ -71,7 +87,8 @@ const mainFeaturedPost = {
 
 const Traveller = (props) => {
   const classes = useStyles();
-  
+  useFirestoreConnect(["destinations"]);
+  const dest=useSelector(getPublishedDestinations);
  
   return (
     <Grid container component="main" className={classes.root}>
@@ -92,12 +109,21 @@ const Traveller = (props) => {
         ))}
       </Grid>
           </Grid>
-          <Grid item xs={12} md={9} >
-              {/* <Searchbar/> */}
-          <Grid className={classes.space}> 
+          <Grid container item xs={12} md={9} >
+            <Grid container item xs={12} spacing={4} className={classes.searchbarSpace}>
+            <Grid item  xs={12} md={3}>
+            <Typography className={classes.stylishText}>
+                  Discover the most enchanting place...
+            </Typography>
+            </Grid>
+            <Grid item xs={12} md={9}>
+          {dest?<Searchbar data={dest}></Searchbar>:null}
+          </Grid>
+          </Grid>
+          <Grid item xs={12}className={classes.space}> 
           <DashboardCategory/>
           </Grid> 
-          <Grid >
+          <Grid item xs={12}>
           <DashboardCard />
           </Grid>
           </Grid>

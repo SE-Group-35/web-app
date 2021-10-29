@@ -126,7 +126,7 @@ const Login = () => {
         dispatch(signOut())
         dispatch(signIn(email,password));               
         auth.onAuthStateChanged((user) => {
-              if (user) {    
+              if (user) {                  
                 const userId=user.uid ;           
                 navigate(`/traveller/${userId}`);
                 

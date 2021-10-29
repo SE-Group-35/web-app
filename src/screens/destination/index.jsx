@@ -8,14 +8,18 @@ import GeneralInfo from "../../components/specificDestination/generalInfo";
 import Overview from '../../components/specificDestination/overview';
 import Weather from "../../components/specificDestination/weather";
 import ActivityCard from "../../components/specificDestination/activityCard";
+import ReviewCard from "../../components/specificDestination/reviewCard";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import FormDialog from "../../components/specificDestination/dialogBox";
+//import { getPublishedDestinations, getReviews } from "../../store/entities/destination";
+import { getActivities ,getReviews} from './../../store/entities/destination';
+import GalleryCard from "../../components/specificDestination/galleryCard";
 
 const useStyles = makeStyles((theme) => ({
     root: {
-      height: "100vh",    
+      height: "100vh",        
     },
     space:{
       margin:theme.spacing(4,0)
@@ -26,10 +30,27 @@ const useStyles = makeStyles((theme) => ({
 const SpecificDestination = (props) => {
     const classes = useStyles();
     const{id} = useParams(); 
-
+    
   
-  useFirestoreConnect([{collection:"destinations", doc:id}]);  
- // const des=useSelector(getPublishedDestinations);  
+  //useFirestoreConnect([{collection:"destinations", doc:id}]);  
+  
+   
+    useFirestoreConnect([
+      {
+        collection : "destinations",
+        doc : id,
+        subcollections : [{
+          collection : "activities"
+        }],
+        storeAs : 'activities'
+      }
+     
+    ])
+  
+    
+  
+  const activities = useSelector(getActivities);  
+  
   const destination = useSelector(
     ({ firestore: { data } }) => data.destinations && data.destinations[id]);
 
@@ -54,7 +75,13 @@ const SpecificDestination = (props) => {
            <Weather post={destination}/>
         </Grid>
         <Grid item xs={12} className={classes.space}>
-           <ActivityCard></ActivityCard>
+           <ActivityCard post={activities}></ActivityCard>
+        </Grid>
+        <Grid item xs={12} className={classes.space}>
+           <ReviewCard ></ReviewCard>
+        </Grid>
+        <Grid item xs={12} className={classes.space}>
+           <GalleryCard ></GalleryCard>
         </Grid>
         </div>:null):<h1>Loading</h1>}
       </Grid>

@@ -39,13 +39,13 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
-    margin: theme.spacing(-6, 0),
+    margin: theme.spacing(-4, 0),
     position: "relative",
   },
   text: {
     fontSize: "1rem",
     fontWeight: "bold",
-    fontStyle: "italic",
+    fontStyle: "italic",    
   },
 }));
 
@@ -102,12 +102,12 @@ export default function Searchbar({ data }) {
             </div>
           </Paper>
           <Grid item xs={12}>
-            {filteredData.length != 0 && (
+            {filteredData.length != 0 && (              
               <List className={classes.list}>
-               
+                {console.log(filteredData)}              
                 {filteredData.map((value, key) => {
                   return (
-                    <ListItemLink href={`destination/${value.id}`} target="_blank">
+                    <ListItemLink href={`destination/${value.id}`} target="_blank">                      
                       <p className={classes.text}>{value.title}</p>
                     </ListItemLink>
                   );

@@ -7,7 +7,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { PRIMARY } from "../../colors";
 import Divider from '@material-ui/core/Divider';
-
+import { getImages } from "../../store/entities/destination";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -33,34 +38,47 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ActivityCard(props) {
-  const classes = useStyles();
-  const { post } = props;
+export default function GalleryCard(props) {
+  const classes = useStyles();  
+  const{id} = useParams(); 
+    
   
-  
+  useFirestoreConnect([
+    {
+      collection : "destinations",
+      doc : id,
+      subcollections : [{
+        collection : "gallery",        
+      }],
+      storeAs : 'gallery'
+    }
+   
+  ])
+  const images = useSelector(getImages);
+  const urls= images[0].urls;
+  console.log(images[0].urls);
   return (
     <Grid item xs={12}>     
       <Card className={classes.card} >
         <div className={classes.cardDetails}>
           <CardContent>          
             <Typography component="h2" variant="h5" className={classes.headingText}>
-              Activities
+              Gallery
             </Typography>
             <Divider /> 
             <Typography className={classes.styledText}>
-              {(post.length!=0 ? post.map((check) => ( 
+            <ImageList sx={{ width: "100%", height: "100%" }} variant="woven" cols={4} rowHeight="25%">
+              {(urls.length!=0 ? urls.map((check) => ( 
                 <Grid container item xs={12}>
-                  <Grid item xs={12} md={2}>                                            
-                <Typography>{check.name}</Typography>
-                </Grid>
-                <Grid item xs={12} md={10}>                                            
-                <Typography>{check.description}</Typography>
-                </Grid>
-                </Grid>
+                   <ImageListItem key={check}>
+                        <img src={check} style={{width:"25vw",height:"25vh"}}/>
+                    </ImageListItem> 
+                 </Grid>
                 )):<Typography className={classes.styledText}>
-                      No activities mentioned
+                      No Images included
                    </Typography>
               )}
+              </ImageList>
             </Typography>
           </CardContent>
         </div>
@@ -69,7 +87,7 @@ export default function ActivityCard(props) {
   );
 }
 
-ActivityCard.propTypes = {
+GalleryCard.propTypes = {
     post: PropTypes.object,
   };
   

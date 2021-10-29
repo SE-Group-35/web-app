@@ -7,7 +7,12 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { PRIMARY } from "../../colors";
 import Divider from '@material-ui/core/Divider';
-
+import { getReviews } from "../../store/entities/destination";
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { Avatar } from "@material-ui/core";
+import Rating from '@mui/material/Rating';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -33,32 +38,51 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-export default function ActivityCard(props) {
-  const classes = useStyles();
-  const { post } = props;
+export default function ReviewCard(props) {
+  const classes = useStyles();  
+  const{id} = useParams(); 
+    
   
-  
+    useFirestoreConnect([
+      {
+        collection : "destinations",
+        doc : id,
+        subcollections : [{
+          collection : "reviews"
+        }],
+        storeAs : 'reviews'
+      }
+     
+    ])
+  const reviews = useSelector(getReviews);
   return (
     <Grid item xs={12}>     
       <Card className={classes.card} >
         <div className={classes.cardDetails}>
           <CardContent>          
             <Typography component="h2" variant="h5" className={classes.headingText}>
-              Activities
+              Reviews
             </Typography>
             <Divider /> 
             <Typography className={classes.styledText}>
-              {(post.length!=0 ? post.map((check) => ( 
+              {(reviews.length!=0 ? reviews.map((check) => ( 
                 <Grid container item xs={12}>
-                  <Grid item xs={12} md={2}>                                            
-                <Typography>{check.name}</Typography>
+                  <Grid item xs={12} md={1}>
+                <Avatar>{check.userName[0].toUpperCase()}</Avatar>
+                </Grid> 
+                <Grid item xs={12} md={2}>                                            
+                <Rating readOnly value={check.rating} style={{color:PRIMARY}}></Rating>
+                </Grid>    
+                <Grid item xs={12} md={2}>                                           
+                <Typography>{check.userName}</Typography> 
                 </Grid>
-                <Grid item xs={12} md={10}>                                            
-                <Typography>{check.description}</Typography>
+                <Grid item xs={12} md={7}>                                            
+                <Typography>{check.comment}</Typography>
                 </Grid>
+                
                 </Grid>
                 )):<Typography className={classes.styledText}>
-                      No activities mentioned
+                      No reviews mentioned
                    </Typography>
               )}
             </Typography>
@@ -69,7 +93,7 @@ export default function ActivityCard(props) {
   );
 }
 
-ActivityCard.propTypes = {
+ReviewCard.propTypes = {
     post: PropTypes.object,
   };
   

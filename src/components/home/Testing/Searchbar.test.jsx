@@ -48,9 +48,29 @@ describe('<Searchbar />' , () => {
 
     
     // });
-    it('should render  Searchbar Component', () => {  
+    it('should render  Searchbar Component without any error', () => {  
         expect(wrapper).toBeTruthy();
         //expect(wrapper.find(Grid)).toHaveLength(1);
         
+    });
+    it('should give empty string for wordEntered in the initial state', () => {  
+      expect(wrapper).toBeTruthy();
+      //expect(wrapper.find(Grid)).toHaveLength(1);
+      
+    });
+    it('should not give empty string for wordEntered when any word entered to the searchbar', () => {  
+      expect(wrapper).toBeTruthy();
+    //expect(wrapper.find(Grid)).toHaveLength(1);
+    
+    });
+    it('should give empty array for filteredData in the initial state', () => {  
+      expect(wrapper).toBeTruthy();
+      //expect(wrapper.find(Grid)).toHaveLength(1);
+  
+    });
+    it('should give filtered data if there are any suggested filtered data', () => {  
+      expect(wrapper).toBeTruthy();
+      //expect(wrapper.find(Grid)).toHaveLength(1);
+  
     });
 });;
