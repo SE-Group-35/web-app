@@ -8,7 +8,6 @@ import { PRIMARY, WHITE } from "../../colors";
 import CategoryCard from "../../components/home/categoryCard";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
-import Link from "@material-ui/core/Link";
 import { useParams } from 'react-router-dom';
 import { getDestinations } from "../../store/entities/destination";
 
@@ -63,12 +62,24 @@ const useStyles = makeStyles((theme) => ({
     color:WHITE, 
     textDecorationLine:'underline'  
   },
+  stylishText:{
+    
+    fontSize:'1.5rem',
+    fontWeight:'bold',
+    color:"black", 
+      
+  }, 
+  appbar :{
+      width : "100vw",      
+      position:"relative"
+      
+  }
 }));
 
 const Category = (props) => {
   const classes = useStyles();
   const{id} = useParams(); 
- 
+  
   
   useFirestoreConnect([{collection:"categories", doc:id}]);  
   const category = useSelector(
@@ -80,7 +91,7 @@ const Category = (props) => {
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      {category? <Grid container className={classes.image}>
+        {category? <Grid container className={classes.image}>
         <Paper
           className={classes.mainFeaturedPost}
           style={{ backgroundImage: `url(${category.url})`}}

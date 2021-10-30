@@ -54,9 +54,9 @@ export default function GalleryCard(props) {
     }
    
   ])
-  const images = useSelector(getImages);
-  const urls= images[0].urls;
-  console.log(images[0].urls);
+  const images = useSelector(getImages);  
+  //const urls= images[0].urls;
+  //console.log(images[0].urls);
   return (
     <Grid item xs={12}>     
       <Card className={classes.card} >
@@ -68,7 +68,7 @@ export default function GalleryCard(props) {
             <Divider /> 
             <Typography className={classes.styledText}>
             <ImageList sx={{ width: "100%", height: "100%" }} variant="woven" cols={4} rowHeight="25%">
-              {(urls.length!=0 ? urls.map((check) => ( 
+              {(images[0].urls.length!=0 ? images[0].urls.map((check) => ( 
                 <Grid container item xs={12}>
                    <ImageListItem key={check}>
                         <img src={check} style={{width:"25vw",height:"25vh"}}/>

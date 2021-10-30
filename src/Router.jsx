@@ -31,6 +31,7 @@ import Category from "./screens/category";
 import Page404 from "./screens/admin/Page404";
 import Profile from "./screens/admin/Profile";
 
+
 //import { getAuth } from "./store/auth";
 //import { useSelector } from "react-redux";
 
@@ -41,6 +42,8 @@ import CustomizedPlanner from "./screens/tripPanner/cutomized";
 import MyTrips from "./screens/myTrips";
 import SpecificDestination from "./screens/destination";
 import { auth } from "./firebase";
+import TravellerProfile from './components/travelCompo/profile';
+import EditProfile from './components/travelCompo/editProfile';
 
 export default function Router() {
   // const navigate = useNavigate();
@@ -87,7 +90,8 @@ export default function Router() {
     { path: "/traveller/automatedPlanner", element: <AutomatedPlanner /> },
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
     { path: "/traveller/myTrips/:id", element: <MyTrips /> },
-   
+    { path: "/traveller/profile", element: <TravellerProfile /> },
+    { path: "/traveller/editProfile/:id", element: <EditProfile /> },  
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
     {

@@ -86,7 +86,7 @@ export default function Searchbar({ data }) {
         <Grid item xs={12} sm={10}>
           <Paper component="form" className={classes.root}>
             <InputBase
-              variant="contained"
+              variant="outlined"
               className={classes.input}
               placeholder="Search Your Destination"
               type="text"
