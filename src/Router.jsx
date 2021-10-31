@@ -44,6 +44,7 @@ import SpecificDestination from "./screens/destination";
 import { auth } from "./firebase";
 import TravellerProfile from './components/travelCompo/profile';
 import EditProfile from './components/travelCompo/editProfile';
+import TravelPlan from './screens/tripSequence/index';
 
 export default function Router() {
   // const navigate = useNavigate();
@@ -91,6 +92,7 @@ export default function Router() {
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
     { path: "/traveller/myTrips/:id", element: <MyTrips /> },
     { path: "/traveller/profile", element: <TravellerProfile /> },
+    { path: "/traveller/travelPlan", element: <TravelPlan /> },
     { path: "/traveller/editProfile/:id", element: <EditProfile /> },  
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
