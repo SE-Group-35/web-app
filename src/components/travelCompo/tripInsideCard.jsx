@@ -11,6 +11,10 @@ import { PRIMARY } from "../../colors";
 import Divider from '@material-ui/core/Divider';
 import LongMenu from './menuIcon';
 
+
+
+const moment=require("moment");
+
 const useStyles = makeStyles((theme) => ({
   card: {
     display: "flex",
@@ -38,13 +42,22 @@ const useStyles = makeStyles((theme) => ({
     color:PRIMARY,  
     fontWeight:'bold',  
   },
-  
+  toText:{
+    fontStyle:'italic',
+    fontSize:'1rem',    
+    color:PRIMARY,  
+    fontWeight:'bold',  
+  },
 }));
 
 export default function TripInsideCard(props) {
   const classes = useStyles();
   const { post } = props;
-   
+  const startDate = moment(new Date(post.startDate.seconds*1000)).format("DD-MMM-YYYY");
+  const endDate = moment(new Date(post.endDate.seconds*1000)).format("DD-MMM-YYYY");
+  const duration = (post.endDate-post.startDate)/3600/24;
+  
+  
   return (
     <Grid item xs={12} md={4}>
       <Card >
@@ -52,11 +65,25 @@ export default function TripInsideCard(props) {
           <Grid container item xs={12}>
             <Grid item xs={12} md={11}>
               <Typography className={classes.text}>
-                {post.title}
+                {post.name}
               </Typography>
+              <Grid container xs={12}>
+              <Grid item xs={12} md={4}>
               <Typography className={classes.styledText}>
-                {post.date}
+                {startDate }  
               </Typography>
+              </Grid>
+              <Grid item xs={12} md={1}>
+              <Typography className={classes.toText}>
+                to  
+              </Typography>
+              </Grid>
+              <Grid item xs={12} md={4}>
+              <Typography className={classes.styledText}>
+                {endDate }
+              </Typography>
+              </Grid>
+              </Grid>
             </Grid>
             <Grid item xs={12} md={1}>
               <LongMenu/>
@@ -74,24 +101,24 @@ export default function TripInsideCard(props) {
               </Grid>
               <Grid item xs={12} md={3}>
                 <Typography className={classes.styledText}>
-                  {post.duration}
+                  {duration >1 ? duration +" days ": duration + " day "}
                 </Typography>
               </Grid>
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={12} md={9}>
                 <Typography className={classes.styledText}>
-                  Total Activities
+                  Total Destinations
                 </Typography>
               </Grid>
               <Grid item xs={12} md={3}>
                 <Typography className={classes.styledText}>
-                  {post.totalActivities}
+                  {post.destinations.length}
                 </Typography>
               </Grid>
             </Grid>
             <Grid container item xs={12}>
-                <Grid item xs={12} md={9}>
+                {/* <Grid item xs={12} md={9}>
                   <Typography className={classes.styledText}>
                     Total Cost
                   </Typography>
@@ -100,7 +127,7 @@ export default function TripInsideCard(props) {
                   <Typography className={classes.styledText}>
                     {post.cost}
                   </Typography>
-                </Grid>
+                </Grid> */}
                 <Typography className={classes.smallText}>
                   Click for more details
                 </Typography>

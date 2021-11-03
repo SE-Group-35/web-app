@@ -19,6 +19,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Map from "../../../components/travelCompo/map";
 import MapHome from "../../../components/travelCompo/mapHome";
 import { TextField } from "@material-ui/core";
+import generateTravelPlan from './../../../Algorithm/index';
 import {
 
   withGoogleMap,
@@ -28,10 +29,13 @@ import {
   InfoWindow
 } from "react-google-maps";
 
-
+const moment = require("moment");
 const logo = require("../../../assets/images/logo.svg");
 const MapWrapped = withScriptjs(withGoogleMap(Map));
 const apiKey='VAIzaSyDvYA-P4MxXb1r3b4CIWj-vE6bvShnTQ8o';
+
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     height: "100vh",
@@ -113,21 +117,44 @@ const travelMode = [
 ];
 
 const AutomatedPlanner = () => {
-  const classes = useStyles();
-  
+  const classes = useStyles(); 
+
 
   const formik = useFormik({
-    initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      repeatPassword: "",
+    initialValues: {      
+      startDate:"",        
+      endDate:"",
+      startLocation:'',
+      category : "Natural",
+      travelMode:"Driving",
     },
     validationSchema: Yup.object({
-      startDate: Yup.string().required("Required field"),
-      endDate: Yup.string().required("Required field"),
+      startDate: Yup.date()
+      .required("Start Date is required ")
+      .min(new Date(), "Start Date must be larger than today"),
+      endDate: Yup.date()
+      .required("Start Date is required ")
+      .min(
+        Yup.ref("startDate"),
+        "End date can't be before the Start date"
+      ),
+      
     }),
+    onSubmit: async ({
+      startDate,
+      endDate,
+      category,
+      travelMode,      
+    }) => {
+      
+      try {
+        
+      } catch (error) {
+       
+       
+      }
+    },
+  
 });
 
 
@@ -222,8 +249,7 @@ const AutomatedPlanner = () => {
                   fullWidth
                   name="travelMode"
                   placeholder="Select a Travel Mode"
-                  label="Select a Travel Mode"
-                  
+                  label="Select a Travel Mode"                  
                   >
                   {travelMode.map((option) => (
                     <MenuItem key={option.value} value={option.value}>
@@ -247,5 +273,6 @@ const AutomatedPlanner = () => {
     </Grid>
   );
 };
+
 
 export default AutomatedPlanner;

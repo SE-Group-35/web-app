@@ -9,6 +9,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import { PRIMARY } from "../../colors";
+import Rating from '@mui/material/Rating';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -49,12 +50,19 @@ export default function CategoryCard(props) {
               <Typography variant="subtitle1" paragraph>
                 {post.description}
               </Typography>
+              <Grid container item xs={12}>
+                <Grid item xs={12} md={1}>
               <Typography
                 variant="subtitle1"                
                 className={classes.text}
               >
-                Rating : {post.rating}
+                Rating : 
               </Typography>
+              </Grid>
+              <Grid item xs={12} md={2}>
+              <Rating readOnly value={post.rating} style={{color:PRIMARY}}></Rating>
+              </Grid>
+              </Grid>
               <Typography
                 variant="subtitle1"                
                 className={classes.text}

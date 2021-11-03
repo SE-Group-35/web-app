@@ -33,15 +33,7 @@ export const activeTripList =[
         
 ];
 export const futureTripList =[
-  {
-    title: "Jaffna Trip",
-    date:"27th Sep - 30th Sep",
-    duration: "4days",
-    link:"/",
-    totalActivities: "10",
-    cost:"LKR 5000"
-    
-    },
+  
     
         
 ];
