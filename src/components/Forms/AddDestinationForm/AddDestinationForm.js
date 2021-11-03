@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 import { makeStyles } from "@material-ui/styles";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 import { useFormik, Form, FormikProvider } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -22,35 +22,32 @@ import {
   CardContent,
   Box,
   Grid,
-  Button,
+  Paper,
 } from "@material-ui/core";
 import { IconButton } from "@material-ui/core";
 import { Icon } from "@iconify/react";
-import Image from "material-ui-image";
 
 import { LoadingButton } from "@material-ui/lab";
 import PlacesAutocomplete from "react-places-autocomplete";
-import {
-  geocodeByAddress,
-  geocodeByPlaceId,
-  getLatLng,
-} from "react-places-autocomplete";
-import { v4 as uuidv4 } from "uuid";
 import AddIcon from "@iconify/icons-eva/plus-outline";
 import RemoveIcon from "@iconify/icons-eva/minus-outline";
 
-import ImageElement from "../ImageElement";
-import ImagesDropzone from "../ImagesDropzone";
+import ImageElement from "../../ImageElement";
+import ImagesDropzone from "../../ImagesDropzone";
+
+import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+
+import { v4 as uuidv4 } from "uuid";
 
 import { useDispatch } from "react-redux";
 import {
   addDestination,
   editDestination,
-} from "../../store/entities/destinations";
+} from "../../../store/entities/destinations";
 
 // ----------------------------------------------------------------------
 
-const tag_options = ["Historical", "Religious", "Natural"];
+const tag_options = ["Historical", "Religious", "Natural"]; //options for categories
 
 const useStyles = makeStyles((theme) => ({
   formControl: {
@@ -110,8 +107,12 @@ export default function AddDestinationForm({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [address, setAddress] = useState(Address);
-  const [coords, setCoords] = useState(Coords);
+  const [coords, setCoords] = useState({
+    lat: parseFloat(Coords.at(0)),
+    lng: parseFloat(Coords.at(1)),
+  });
   const [selected, setSelected] = useState(Selected);
 
   const [switchState, setSwitchState] = useState(published);
@@ -120,12 +121,6 @@ export default function AddDestinationForm({
   ]);
 
   const [imageList, setImageList] = useState([]);
-
-  const changeImageField = (index, parameter, value) => {
-    const newArray = [...imageList];
-    newArray[index][parameter] = value;
-    setImageList(newArray);
-  };
 
   const handleChangeOrderUp = (index) => {
     // If first, ignore
@@ -159,7 +154,9 @@ export default function AddDestinationForm({
     setAddress(address);
     geocodeByAddress(address)
       .then((results) => getLatLng(results[0]))
-      .then((latLng) => setCoords(latLng))
+      .then((latLng) => {
+        setCoords(latLng);
+      })
       .catch((error) => console.error("Error", error));
   };
 
@@ -168,6 +165,7 @@ export default function AddDestinationForm({
   };
 
   const handleChangeInput = (id, event) => {
+    //activity
     const newInputFields = inputFields.map((i) => {
       if (id === i.id) {
         i[event.target.name] = event.target.value;
@@ -199,6 +197,7 @@ export default function AddDestinationForm({
     tag_options.length > 0 && selected.length === tag_options.length;
 
   const handleChange = (event) => {
+    //categories
     const value = event.target.value;
     if (value[value.length - 1] === "all") {
       setSelected(selected.length === tag_options.length ? [] : tag_options);
@@ -214,11 +213,11 @@ export default function AddDestinationForm({
       .required("Title is required"),
     description: Yup.string()
       .min(20, "Too Short!")
-      .max(50, "Too Long!")
+      .max(300, "Too Long!")
       .required("Description is required"),
     overview: Yup.string()
       .min(20, "Too Short!")
-      .max(400, "Too Long!")
+      .max(2000, "Too Long!")
       .required("Overview is required"),
   });
   const formik = useFormik({
@@ -244,7 +243,6 @@ export default function AddDestinationForm({
           )
         );
       } else if (name === "Edit") {
-        console.log(title, description, overview, coords);
         await dispatch(
           editDestination(
             id,
@@ -263,7 +261,6 @@ export default function AddDestinationForm({
   });
 
   const {
-    values,
     errors,
     touched,
     handleSubmit,
@@ -273,9 +270,7 @@ export default function AddDestinationForm({
   } = formik;
 
   const searchOptions = {
-    location: new window.google.maps.LatLng(7.2906, 80.6337),
-    radius: 500,
-    //types: ["address"],
+    componentRestrictions: { country: ["lk"] },
   };
 
   return (
@@ -286,14 +281,9 @@ export default function AddDestinationForm({
             <Stack spacing={3}>
               {name === "Edit" ? (
                 <>
-                  <Image
-                    imageStyle={{
-                      height: 250,
-                      mb: 0,
-                      pb: 0,
-                    }}
-                    src={url}
-                  />
+                  <Paper variant="outlined">
+                    <img src={url} />
+                  </Paper>
 
                   <LoadingButton fullWidth size="medium">
                     Edit Images

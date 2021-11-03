@@ -83,18 +83,10 @@ export default function BlogPostCard({ post, index }) {
   const from = fromTimestamp(date.from.seconds);
 
   const [switchState, setSwitchState] = useState(published);
-  useEffect(() => {
-    async function toggle() {
-      if (switchState != published) {
-        await dispatch(togglePublished(id, switchState));
-      }
-      toggle();
-      console.log(switchState);
-    }
-  }, [switchState]);
 
   const handleSwitchChange = (event) => {
     setSwitchState(event.target.checked);
+    dispatch(togglePublished(id));
   };
 
   const ref = useRef(null);

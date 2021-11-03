@@ -1,11 +1,4 @@
-import { createSelector } from "reselect";
-import {
-  uploadBytes,
-  getDownloadURL,
-  deleteObject,
-  ref,
-  refFromURL,
-} from "@firebase/storage";
+import { uploadBytes, getDownloadURL, ref } from "@firebase/storage";
 import { deleteDoc, doc } from "firebase/firestore";
 import { database, storage } from "../../firebase";
 import { toTimestamp } from "../../utils/toTimestamp";
@@ -26,8 +19,7 @@ export const addEvent = (
       const id = randomid(12);
 
       const storageRef = ref(storage, `/images/events/${id}/${file.name}`);
-      //const firestore = getFirestore();
-      //const firebase = getFirebase();
+
       dispatch(processRequested());
       await uploadBytes(storageRef, file)
         .then(async (snapshot) => {
@@ -65,7 +57,7 @@ export const addEvent = (
 
 export const editEvent = (
   id,
-  file,
+
   title,
   description,
   published,
@@ -77,61 +69,28 @@ export const editEvent = (
 ) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
-      if (file === "") {
-        dispatch(processRequested());
-        await database
-          .collection("events")
-          .doc(id)
-          .update({
-            title: title,
-            description: description,
+      dispatch(processRequested());
+      await database
+        .collection("events")
+        .doc(id)
+        .update({
+          title: title,
+          description: description,
 
-            url: Uri,
-            overview: overview,
+          url: Uri,
+          overview: overview,
 
-            published: published,
-            date: {
-              from: toTimestamp(startDate),
-              to: toTimestamp(endDate),
-            },
-            venue: venue,
-          })
-          .then(() => {
-            console.log("Succesfully updated without editing image");
-            dispatch(processCompleted());
-          });
-      } else {
-        dispatch(processRequested());
-        const storageRef = ref(storage, `/images/events/${id}/${file.name}`);
-        //const firestore = getFirestore();
-        //const firebase = getFirebase();
-        await uploadBytes(storageRef, file)
-          .then((snapshot) => {
-            getDownloadURL(storageRef).then(async (url) => {
-              await database
-                .collection("events")
-                .doc(id)
-                .update({
-                  title: title,
-                  description: description,
-
-                  url: url,
-
-                  published: published,
-                  date: {
-                    from: toTimestamp(startDate),
-                    to: toTimestamp(endDate),
-                  },
-                  venue: venue,
-                });
-            });
-          })
-
-          .then(() => {
-            console.log("Succesfully Updated with editing image");
-            dispatch(processCompleted());
-          });
-      }
+          published: published,
+          date: {
+            from: toTimestamp(startDate),
+            to: toTimestamp(endDate),
+          },
+          venue: venue,
+        })
+        .then(() => {
+          console.log("Succesfully updated without editing image");
+          dispatch(processCompleted());
+        });
     } catch (error) {
       dispatch(processFailed());
     }
@@ -160,15 +119,25 @@ export const deleteEvent = (id) => {
   };
 };
 
-export const togglePublished = (id, published) => {
+export const togglePublished = (id) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
       dispatch(processRequested());
       const firestore = getFirestore();
       const firebase = getFirebase();
-      return await firestore.collection("events").doc(id).update({
-        published: published,
-      });
+      if (doc.exists) {
+      }
+      await firestore
+        .collection("events")
+        .doc(id)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            return doc.ref.update({ published: !doc.data().published });
+          } else {
+            // Throw an error
+          }
+        });
 
       dispatch(processCompleted());
     } catch (error) {

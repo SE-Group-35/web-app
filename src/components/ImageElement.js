@@ -9,8 +9,7 @@ import {
 } from "@material-ui/core";
 import { Icon } from "@iconify/react";
 //import { IoIosArrowUp, IoIosArrowDown } from "react-icons/io";
-import AddIcon from "@iconify/icons-eva/plus-outline";
-import RemoveIcon from "@iconify/icons-eva/minus-outline";
+
 import up from "@iconify/icons-eva/chevron-up-fill";
 import down from "@iconify/icons-eva/chevron-down-fill";
 import trash from "@iconify/icons-eva/trash-2-outline";

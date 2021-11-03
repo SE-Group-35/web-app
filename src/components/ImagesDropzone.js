@@ -1,8 +1,7 @@
 import React from "react";
-import { storage } from "../firebase";
+
 import { useDropzone } from "react-dropzone";
 import { Grid, Typography, Button } from "@material-ui/core";
-import { ref } from "@firebase/storage";
 
 export default function ImagesDropzone({ setImageList }) {
   const onDrop = (acceptedFiles) => {

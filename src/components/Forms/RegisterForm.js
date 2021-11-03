@@ -2,7 +2,6 @@ import * as Yup from "yup";
 
 import PropTypes from "prop-types";
 import Spinner from "../common/Spinner";
-import { useEffect } from "react";
 
 import { useFormik, Form, FormikProvider } from "formik";
 
@@ -23,8 +22,6 @@ import { createUser, editUser } from "../../store/entities/users";
 import { getCreateUserStatus } from "../../store/system";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { values } from "lodash-es";
-import getUserRole from "../../utils/getUserRole";
 
 // ----------------------------------------------------------------------
 const useStyles = makeStyles({
@@ -113,8 +110,6 @@ export default function RegisterForm({
         : (userRole = { ...role, traveller: true });
       const password = "YourPassword@123";
       if (title === "Add") {
-        console.log("Add");
-
         await dispatch(
           createUser(
             email,
@@ -126,11 +121,9 @@ export default function RegisterForm({
             Enabled
           )
         );
-        navigate("/dashboard/user");
       } else if (title === "Edit") {
         await dispatch(
           editUser(
-            email,
             id,
 
             telephone,
@@ -139,8 +132,8 @@ export default function RegisterForm({
             userRole
           )
         );
-        navigate("/dashboard/user");
       }
+      navigate("/dashboard/user");
     },
   });
 
@@ -177,8 +170,8 @@ export default function RegisterForm({
                   helperText={touched.lastName && errors.lastName}
                 />
               </Stack>
-
               <TextField
+                disabled={title === "Edit" ? true : false}
                 fullWidth
                 autoComplete="username"
                 type="email"
@@ -187,6 +180,7 @@ export default function RegisterForm({
                 error={Boolean(touched.email && errors.email)}
                 helperText={touched.email && errors.email}
               />
+
               <TextField
                 fullWidth
                 label="Telephone Number"
