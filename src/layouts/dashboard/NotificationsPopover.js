@@ -37,7 +37,7 @@ import MenuPopover from "../../components/MenuPopover";
 // ----------------------------------------------------------------------
 
 const NOTIFICATIONS = [
-  {
+  /*{
     id: faker.datatype.uuid(),
     title: "Your order is placed",
     description: "waiting for shipping",
@@ -81,7 +81,7 @@ const NOTIFICATIONS = [
     type: "order_shipped",
     createdAt: sub(new Date(), { days: 3, hours: 3, minutes: 30 }),
     isUnRead: false,
-  },
+  },*/
 ];
 
 function renderContent(notification) {

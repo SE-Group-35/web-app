@@ -5,7 +5,7 @@ import { Box, Container, Typography } from "@material-ui/core";
 
 // ----------------------------------------------------------------------
 import Page from "../../components/Page";
-import AddDestinationForm from "../../components/Forms/AddDestinationForm";
+import AddDestinationForm from "../../components/Forms/AddDestinationForm/AddDestinationForm";
 import { useDispatch } from "react-redux";
 
 export default function AddDestination() {

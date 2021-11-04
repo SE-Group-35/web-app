@@ -7,11 +7,10 @@ import plusFill from "@iconify/icons-eva/plus-fill";
 import { Link as RouterLink } from "react-router-dom";
 import UserRow from "../../components/_dashboard/user/UserRow";
 import { getUsersList } from "../../store/entities/users";
-import { getProcessStatus } from "../../store/system";
+import { getProcessStatus, getFetchStatus } from "../../store/system";
 import { useSelector } from "react-redux";
 import { useFirebaseConnect, useFirestoreConnect } from "react-redux-firebase";
-
-import { isLoaded } from "react-redux-firebase";
+import { useDispatch } from "react-redux";
 
 import { database } from "../../firebase";
 
@@ -41,6 +40,12 @@ import {
   UserListHead,
   UserListToolbar,
 } from "../../components/_dashboard/user";
+
+import {
+  fetchRequested,
+  fetchCompleted,
+  fetchFailed,
+} from "../../store/system";
 
 // ----------------------------------------------------------------------
 
@@ -95,11 +100,14 @@ function applySortFilter(array, comparator, query) {
 export default function User() {
   //useFirestoreConnect({ collection: "users" });
   //const USERLIST = useSelector(getUsersList);
+  const dispatch = useDispatch();
   const processStatus = useSelector(getProcessStatus);
+  const fetchStatus = useSelector(getFetchStatus);
 
   const [USERLIST, setUSERLIST] = useState([]);
   useEffect(() => {
     async function fetchUser() {
+      dispatch(fetchRequested());
       await database
         .collection("users")
         .get()
@@ -108,27 +116,11 @@ export default function User() {
 
           setUSERLIST(USERS);
         });
+      dispatch(fetchCompleted());
     }
     fetchUser();
   }, [processStatus]);
 
-  /*carsCollection
-      .where("available", "==", true)
-      .orderBy("price")
-      .startAt(this.state.start)
-      .endBefore(this.state.end)
-      .get()
-      .then((snapshot) => {
-        const cars = firebaseLooper(snapshot);
-        this.setState({
-          cars,
-        });
-      });*/
-
-  // useFirestoreConnect([{ collecton: "users" }]);
-  //const USERLIST = useSelector(getUsersList);
-
-  //console.log(USERLIST);
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);
@@ -192,7 +184,7 @@ export default function User() {
   );
 
   const isUserNotFound = filteredUsers.length === 0;
-  if (USERLIST.length === 0 || processStatus == true) {
+  if (USERLIST.length === 0 || processStatus == true || fetchStatus == true) {
     return <CircularProgress />;
   } else {
     return (

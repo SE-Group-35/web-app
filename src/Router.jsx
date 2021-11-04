@@ -1,13 +1,6 @@
 import React, { useEffect } from "react";
 
-import {
-  BrowserRouter,
-  Navigate,
-  useRoutes,
-  useNavigate,
-} from "react-router-dom";
-
-import { useDispatch } from "react-redux";
+import { Navigate, useRoutes } from "react-router-dom";
 
 import Home from "./screens/home";
 import Login from "./screens/login";
@@ -31,54 +24,26 @@ import Category from "./screens/category";
 import Page404 from "./screens/admin/Page404";
 import Profile from "./screens/admin/Profile";
 
-//import { getAuth } from "./store/auth";
-//import { useSelector } from "react-redux";
-
-
 import Traveller from "./screens/traveller";
 import AutomatedPlanner from "./screens/tripPanner/automated";
 import CustomizedPlanner from "./screens/tripPanner/cutomized";
 import MyTrips from "./screens/myTrips";
 import SpecificDestination from "./screens/destination";
 import { auth } from "./firebase";
+import { useFirestoreConnect } from "react-redux-firebase";
+import { useSelector } from "react-redux";
+import { getCurrentRole } from "./store/auth";
 
 export default function Router() {
-  // const navigate = useNavigate();
+  const currentRole = useSelector(getCurrentRole);
 
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((user) => {
-  //     if (user) navigate("/");
-  //     else navigate("/login");
-  //   });
-
-  // });
-
-  // useEffect(() => {
-  //   auth.onAuthStateChanged((user) => {
-  //     if (user) {
-  //       console.log("Logged In")
-  //       navigate("/traveller");
-
-  //     }
-  //     else {
-  //       navigate("/");
-  //       console.log("Logged out")
-  //     } 
-      
-  //   });
-
-  // });
-
-
-  //const isAdmin = profile ? false : profile.userRole.admin;
   return useRoutes([
     { path: "/", element: <Home /> },
     { path: "/home", element: <Home /> },
     { path: "/login", element: <Login /> },
     { path: "/register", element: <Register /> },
     { path: "/services", element: <UserServices /> },
-    
+
     { path: "/event/:id", element: <EventTraveller /> },
     { path: "/category/:id", element: <Category /> },
     { path: "/destination/:id", element: <SpecificDestination /> },
@@ -86,12 +51,17 @@ export default function Router() {
     { path: "/traveller/automatedPlanner", element: <AutomatedPlanner /> },
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
     { path: "/traveller/myTrips/:id", element: <MyTrips /> },
-   
+
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
     {
       path: "/dashboard",
-      element: <DashboardLayout />,
+      element:
+        currentRole === "Admin" ? (
+          <DashboardLayout />
+        ) : (
+          <Navigate to="/login" />
+        ),
       children: [
         { path: "/", element: <Navigate to="/dashboard/app" replace /> },
         { path: "app", element: <DashboardApp /> },
@@ -110,6 +80,5 @@ export default function Router() {
         { path: "*", element: <Navigate to="/404" replace /> },
       ],
     },
-    
   ]);
 }

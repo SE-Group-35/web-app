@@ -29,11 +29,9 @@ export default function UserRow({
   const dispatch = useDispatch();
   const [switchState, setSwitchState] = useState(Enabled);
 
-  useEffect(() => {}, [switchState]);
-
   const handleChange = async (event) => {
     setSwitchState(event.target.checked);
-    dispatch(toggleEnable(id, !switchState));
+    dispatch(toggleEnable(id));
   };
   return (
     <TableRow
@@ -63,13 +61,8 @@ export default function UserRow({
       <TableCell align="left">{getUserRole(userRole)}</TableCell>
 
       <TableCell align="left">
-        <Switch
-          checked={switchState}
-          onChange={handleChange}
-          name="Enabled"
-          value={switchState}
-        />
-        {Enabled == true ? <h5>Enabled</h5> : <h5>Disabled</h5>}
+        <Switch checked={switchState} onChange={handleChange} name="Enabled" />
+        {switchState == true ? <h5>Enabled</h5> : <h5>Disabled</h5>}
       </TableCell>
 
       <TableCell align="left">{telephone}</TableCell>

@@ -20,8 +20,9 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getAuth } from "../../store/auth";
 import { useSelector } from "react-redux";
-
-
+import { database } from "../../firebase";
+import { getUserRole } from "../../utils/getUserRole";
+import { setRole } from "../../store/auth";
 
 const image = require("../../assets/images/login.jpg");
 const logo = require("../../assets/images/logo.svg");
@@ -93,11 +94,12 @@ const useStyles = makeStyles({
 });
 
 const Login = () => {
-  const dispatch=useDispatch();
-  const navigate=useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const classes = useStyles();
+
   const [logginIn, setLogginIn] = useState(false);
-  const{uid}=useSelector(getAuth);  
+  const { uid } = useSelector(getAuth);
 
   const formik = useFormik({
     initialValues: {
@@ -120,30 +122,42 @@ const Login = () => {
       console.log("email", email);
       console.log("password", password);
       try {
-        
         setLogginIn(true);
         //await auth.signInWithEmailAndPassword(email, password);
-        dispatch(signOut())
-        dispatch(signIn(email,password));               
-        auth.onAuthStateChanged((user) => {
-              if (user) {    
-                const userId=user.uid ;           
-                navigate(`/traveller/${userId}`);
-                
-              }
-              else {                
-             } 
-              
-            });
-        
+
+        dispatch(signIn(email, password));
+        auth.onAuthStateChanged(async (user) => {
+          console.log(user);
+          if (user) {
+            const userId = user.uid;
+            await database
+              .collection("users")
+              .doc(userId)
+              .get()
+              .then((snapshot) => {
+                const role = getUserRole(snapshot.data().userRole);
+                if (role === "Admin") {
+                  dispatch(setRole("Admin"));
+                  navigate("/dashboard/app");
+                } else if (role === "Traveller") {
+                  dispatch(setRole("Traveller"));
+                  navigate(`/traveller/${userId}`);
+                }
+              });
+          } else {
+            dispatch(setRole(""));
+            navigate("/login");
+          }
+        });
+
         setLogginIn(false);
       } catch (error) {
-        setLogginIn(false);        
+        setLogginIn(false);
         console.log(error);
       }
     },
   });
-return (
+  return (
     <Grid container>
       <Grid item xs={12} md={8} className={classes.grid}>
         <img src={image.default} className={classes.image} alt="Seegiriya" />
@@ -214,8 +228,8 @@ return (
               </Grid>
             </Grid>
             <button type="submit" className={classes.button}>
-              {logginIn ? <Spinner/>: "Login"}
-            </button>            
+              {logginIn ? <Spinner /> : "Login"}
+            </button>
           </form>
           <Grid
             container

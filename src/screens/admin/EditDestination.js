@@ -15,7 +15,7 @@ import { database } from "../../firebase";
 
 // ----------------------------------------------------------------------
 import Page from "../../components/Page";
-import AddDestinationForm from "../../components/Forms/AddDestinationForm";
+import AddDestinationForm from "../../components/Forms/AddDestinationForm/AddDestinationForm";
 import { useDispatch } from "react-redux";
 
 export default function EditDestination() {

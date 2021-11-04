@@ -5,8 +5,6 @@ import { database } from "../../firebase";
 import randomid from "randomid";
 import { processRequested, processCompleted, processFailed } from "../system";
 
-
-
 export const addDestination = (
   title,
   description,
@@ -56,9 +54,11 @@ export const addDestination = (
           categories: selected,
           published: switchState,
           mainPhoto: urlList.at(0),
+          rating: 0,
         })
         .then(() => {
           inputFields.forEach(async (activity) => {
+            //add data to activity subCollection
             await database
               .collection("destinations")
               .doc(id)
@@ -71,6 +71,7 @@ export const addDestination = (
           });
         })
         .then(async () => {
+          //add data to gallery subCollection
           await database
             .collection("destinations")
             .doc(id)
@@ -146,4 +147,53 @@ export const deleteDestination = (id) => {
   };
 };
 
+export const togglePublished = (id) => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
+    try {
+      dispatch(processRequested());
+      const firestore = getFirestore();
+      const firebase = getFirebase();
+      if (doc.exists) {
+      }
+      await firestore
+        .collection("destinations")
+        .doc(id)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            return doc.ref.update({ published: !doc.data().published });
+          } else {
+          }
+        });
 
+      dispatch(processCompleted());
+    } catch (error) {
+      dispatch(processFailed());
+    }
+  };
+};
+
+export const getTrendingDestinations = () => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
+    try {
+      dispatch(processRequested());
+      const firestore = getFirestore();
+
+      await firestore
+        .collection("destinations")
+        .orderBy("name", "desc")
+        .limit(5)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            return doc.ref.update({ published: !doc.data().published });
+          } else {
+          }
+        });
+
+      dispatch(processCompleted());
+    } catch (error) {
+      dispatch(processFailed());
+    }
+  };
+};

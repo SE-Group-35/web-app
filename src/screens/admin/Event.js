@@ -13,11 +13,7 @@ import {
 } from "@material-ui/core";
 // components
 import Page from "../../components/Page";
-import {
-  BlogPostCard,
-  BlogPostsSort,
-  BlogPostsSearch,
-} from "../../components/_dashboard/event";
+import { BlogPostCard } from "../../components/_dashboard/event";
 
 import { useDispatch } from "react-redux";
 import EventListToolbar from "../../components/_dashboard/event/EventListToolBar";

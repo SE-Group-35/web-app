@@ -15,8 +15,7 @@ import {
   ListItemText,
   Button,
 } from "@material-ui/core";
-import { doc, deleteDoc } from "firebase/firestore";
-import { database } from "../../../firebase";
+
 import { deleteUser, makeAdmin } from "../../../store/entities/users";
 import { useDispatch } from "react-redux";
 
@@ -49,7 +48,6 @@ export default function UserMoreMenu({ id, userRole }) {
           component={Button}
           onClick={async () => {
             await dispatch(deleteUser(id));
-            console.log("Deleted");
           }}
           sx={{ color: "text.secondary" }}
         >

@@ -45,8 +45,8 @@ DashboardSidebar.propTypes = {
 
 export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
   const { pathname } = useLocation();
-  const { email, firstName, userRole } = useSelector(getProfile);
-  const role = getUserRole(userRole);
+  //const { email, firstName, userRole } = useSelector(getProfile);
+  //const role = getUserRole(userRole);
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -78,10 +78,10 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
             <Avatar src={account.photoURL} alt="photoURL" />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {firstName}
+                {account.displayName}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {role}
+                Admin
               </Typography>
             </Box>
           </AccountStyle>

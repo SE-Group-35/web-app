@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import * as Yup from "yup";
 import PropTypes from "prop-types";
 
@@ -19,6 +19,7 @@ import {
 } from "@material-ui/core";
 import { LoadingButton } from "@material-ui/lab";
 import Image from "material-ui-image";
+
 const moment = require("moment");
 
 // ----------------------------------------------------------------------
@@ -46,9 +47,10 @@ export default function AddEventForm({
 }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  console.log(date.to.seconds * 1000);
+
   const [switchState, setSwitchState] = useState(published);
   const [Uri, setUri] = useState(url);
-  //useEffect(() => console.log(switchState), [switchState]);
 
   const handleChange = (event) => {
     setSwitchState(event.target.checked);
@@ -143,7 +145,7 @@ export default function AddEventForm({
             startDate,
             endDate,
             venue,
-            Uri,
+
             overview
           )
         );
@@ -152,7 +154,7 @@ export default function AddEventForm({
         await dispatch(
           editEvent(
             id,
-            file,
+
             title,
             description,
             published,
@@ -185,6 +187,22 @@ export default function AddEventForm({
         <FormikProvider value={formik}>
           <Form autoComplete="off" noValidate onSubmit={handleSubmit}>
             <Stack spacing={3}>
+              {name === "Edit" ? (
+                <>
+                  <Image
+                    imageStyle={{
+                      height: "100%",
+                      mb: 0,
+                      pb: 0,
+                      bottom: 0,
+                    }}
+                    src={url}
+                  />
+                  <LoadingButton fullWidth size="medium">
+                    Edit Image
+                  </LoadingButton>
+                </>
+              ) : null}
               <TextField
                 fullWidth
                 label="Title"
@@ -221,25 +239,18 @@ export default function AddEventForm({
                 error={Boolean(touched.endDate && errors.endDate)}
                 helperText={touched.endDate && errors.endDate}
               />
-
-              <Input
-                type="file"
-                onChange={(event) => {
-                  setFieldValue("file", event.target.files[0]);
-                  setUri("");
-                }}
-                error={Boolean(touched.file && errors.file)}
-                helperText={touched.file && errors.file}
-              />
-              {values.file != "" ? (
-                <Image
-                  imageStyle={{ height: 250, mb: 0, pb: 0 }}
-                  src={URL.createObjectURL(values.file)}
+              {name != "Edit" ? (
+                <Input
+                  type="file"
+                  onChange={(event) => {
+                    setFieldValue("file", event.target.files[0]);
+                    setUri("");
+                  }}
+                  error={Boolean(touched.file && errors.file)}
+                  helperText={touched.file && errors.file}
                 />
               ) : null}
-              {Uri != "" ? (
-                <Image imageStyle={{ height: 250, mb: 0, pb: 0 }} src={Uri} />
-              ) : null}
+
               <TextField
                 fullWidth
                 label="Description"

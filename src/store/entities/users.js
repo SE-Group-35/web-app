@@ -11,6 +11,8 @@ import {
   fetchCompleted,
 } from "../system";
 
+//const admin = require("firebase-admin");
+
 export const createUser = (
   email,
   password,
@@ -23,6 +25,7 @@ export const createUser = (
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
       dispatch(processRequested());
+
       const firestore = getFirestore();
       const firebase = getFirebase();
       await firebase
@@ -54,6 +57,36 @@ export const createUser = (
     }
   };
 };
+export const addUser = (
+  email,
+  password,
+  telephone,
+  firstName,
+  lastName,
+  userRole,
+  Enabled
+) => {
+  return async (dispatch, getState, { getFirebase, getFirestore }) => {
+    try {
+      dispatch(processRequested());
+
+      const firebase = getFirebase();
+      const addUser = firebase.functions().httpsCallable("addUser");
+      addUser({
+        email: email,
+        password: password,
+        telephone: telephone,
+        firstName: firstName,
+        lastName: lastName,
+        userRole: userRole,
+        Enabled: Enabled,
+      });
+      dispatch(processCompleted());
+    } catch (error) {
+      dispatch(processFailed());
+    }
+  };
+};
 
 export const deleteUser = (id) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
@@ -73,7 +106,6 @@ export const deleteUser = (id) => {
 };
 
 export const editUser = (
-  email,
   id,
 
   telephone,
@@ -86,10 +118,11 @@ export const editUser = (
       dispatch(createUserRequested());
       const firestore = getFirestore();
       const firebase = getFirebase();
+
       await firestore.collection("users").doc(id).update({
         firstName: firstName,
         lastName: lastName,
-        email: email,
+
         telephone: telephone,
         userRole: userRole,
       });
@@ -126,15 +159,25 @@ export const makeAdmin = (id) => {
   };
 };
 
-export const toggleEnable = (id, Enabled) => {
+export const toggleEnable = (id) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
       dispatch(processRequested());
       const firestore = getFirestore();
       const firebase = getFirebase();
-      await firestore.collection("users").doc(id).update({
-        Enabled: Enabled,
-      });
+      if (doc.exists) {
+      }
+      await firestore
+        .collection("users")
+        .doc(id)
+        .get()
+        .then(function (doc) {
+          if (doc.exists) {
+            return doc.ref.update({ Enabled: !doc.data().Enabled });
+          } else {
+            // Throw an error
+          }
+        });
 
       dispatch(processCompleted());
     } catch (error) {

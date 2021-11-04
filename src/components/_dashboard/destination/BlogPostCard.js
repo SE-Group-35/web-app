@@ -27,7 +27,10 @@ import editFill from "@iconify/icons-eva/edit-fill";
 import trash2Outline from "@iconify/icons-eva/trash-2-outline";
 import moreVerticalFill from "@iconify/icons-eva/more-vertical-fill";
 import { useDispatch } from "react-redux";
-import { deleteDestination } from "../../../store/entities/destinations";
+import {
+  deleteDestination,
+  togglePublished,
+} from "../../../store/entities/destinations";
 // utils
 
 //
@@ -97,6 +100,7 @@ export default function BlogPostCard({ post, index }) {
 
   const handleSwitchChange = (event) => {
     setSwitchState(event.target.checked);
+    dispatch(togglePublished(id));
   };
 
   const ref = useRef(null);
