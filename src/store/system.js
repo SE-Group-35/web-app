@@ -15,9 +15,18 @@ const slice = createSlice({
     creatingUser: false,
     process: false,
     fetchingData: false,
+    startLocation: { lat: 6.9327, lng: 79.8438 },
   },
   reducers: {
     //Events -> Event Handlers\
+
+    updateStartLocation(system, action) {
+      system.startLocation = action.payload;
+    },
+    updateStartLocationToInitial(system, action) {
+      system.startLocation = { lat: 6.9327, lng: 79.8438 };
+    },
+
     processRequested(system, action) {
       system.process = true;
     },
@@ -71,6 +80,7 @@ export const {
   fetchRequested,
   fetchCompleted,
   fetchFailed,
+  updateStartLocation,
 } = slice.actions;
 
 //Action Invokers
@@ -87,5 +97,10 @@ export const getProcessStatus = createSelector(
 
 export const getFetchStatus = createSelector(
   (state) => state.system.fetchingData,
+  (s) => s
+);
+
+export const getStartLocation = createSelector(
+  (state) => state.system.startLocation,
   (s) => s
 );
