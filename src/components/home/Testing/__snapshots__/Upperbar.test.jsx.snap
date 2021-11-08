@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Upperbar /> should matches the snapshot 1`] = `
+Array [
+  <ThemeProvider
+    theme={Object {}}
+  >
+    <InnerThemeProvider>
+      <Upperbar />
+    </InnerThemeProvider>
+  </ThemeProvider>,
+]
+`;

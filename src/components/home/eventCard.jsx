@@ -35,7 +35,7 @@ export default function TextCard(props) {
             <Typography component="h2" variant="h5" className={classes.text}>
               Description
             </Typography>
-            <Typography variant="subtitle1" paragraph>
+            <Typography variant="subtitle1" paragraph style={{width:"95vw"}}>
               {post.overview}
             </Typography>
             <Typography

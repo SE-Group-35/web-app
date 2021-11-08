@@ -9,6 +9,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Hidden from "@material-ui/core/Hidden";
 import { PRIMARY } from "../../colors";
+import Rating from '@material-ui/lab/Rating';
+
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -50,8 +52,14 @@ export default function TrendingCard(props) {
               <Typography
                 variant="subtitle1"                
               >
-                Rating : {post.rating}
+                Rating :
               </Typography>
+              <Rating                  
+                  value={post.rating}
+                  name="rating"
+                 style={{color:PRIMARY}}
+                  
+                />
             </CardContent>
           </div>
         </Card>

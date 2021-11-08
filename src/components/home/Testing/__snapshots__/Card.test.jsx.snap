@@ -1,0 +1,52 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+
+
+exports[`<ImageCard /> should matches the snapshot with correct prop types 1`] = `
+Array [
+  <ForwardRef(Grid)
+    item={true}
+    md={6}
+    xs={12}
+  >
+    <ForwardRef(Card)
+      className="makeStyles-card-1"
+    >
+      <div
+        className="makeStyles-cardDetails-2"
+      >
+        <ForwardRef(CardContent)>
+          <ForwardRef(Typography)
+            className="makeStyles-text-4"
+            component="h2"
+            variant="h5"
+          >
+            Sinharaja Rain Forest
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            paragraph={true}
+            variant="subtitle1"
+          >
+            The value of Sinharaja as a natural World Heritage site continues to be recognized by the discovery of several endemic species of plants and animals with a huge diversity since the declaration of this forest as a World Heritage in 1988.
+          </ForwardRef(Typography)>
+          <ForwardRef(Typography)
+            className="makeStyles-text-4"
+            color="primary"
+            variant="subtitle1"
+          >
+            Continue reading 
+          </ForwardRef(Typography)>
+        </ForwardRef(CardContent)>
+      </div>
+      <Hidden
+        xsDown={true}
+      >
+        <ForwardRef(CardMedia)
+          className="makeStyles-cardMedia-3"
+          image="undefined"
+        />
+      </Hidden>
+    </ForwardRef(Card)>
+  </ForwardRef(Grid)>,
+]
+`;

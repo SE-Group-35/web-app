@@ -10,6 +10,11 @@ import CardMedia from "@material-ui/core/CardMedia";
 import { PRIMARY } from "../../colors";
 import Divider from '@material-ui/core/Divider';
 import LongMenu from './menuIcon';
+//import { Link } from "@material-ui/core";
+import { getAuth } from "../../store/auth";
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+const moment=require("moment");
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -38,13 +43,24 @@ const useStyles = makeStyles((theme) => ({
     color:PRIMARY,  
     fontWeight:'bold',  
   },
-  
+  toText:{
+    fontStyle:'italic',
+    fontSize:'1rem',    
+    color:PRIMARY,  
+    fontWeight:'bold',  
+  },
 }));
 
 export default function TripInsideCard(props) {
   const classes = useStyles();
   const { post } = props;
-   
+  const {uid} =useSelector(getAuth);
+  console.log("trip",post);
+  const startDate = moment(new Date(post.startDate.seconds*1000)).format("DD-MMM-YYYY");
+  const endDate = moment(new Date(post.endDate.seconds*1000)).format("DD-MMM-YYYY");
+  const duration = (post.endDate-post.startDate)/3600;
+  
+  
   return (
     <Grid item xs={12} md={4}>
       <Card >
@@ -52,19 +68,33 @@ export default function TripInsideCard(props) {
           <Grid container item xs={12}>
             <Grid item xs={12} md={11}>
               <Typography className={classes.text}>
-                {post.title}
+                {post.name}
               </Typography>
+              <Grid container xs={12}>
+              <Grid item xs={12} md={4}>
               <Typography className={classes.styledText}>
-                {post.date}
+                {startDate }  
               </Typography>
+              </Grid>
+              <Grid item xs={12} md={1}>
+              <Typography className={classes.toText}>
+                to  
+              </Typography>
+              </Grid>
+              <Grid item xs={12} md={4}>
+              <Typography className={classes.styledText}>
+                {endDate }
+              </Typography>
+              </Grid>
+              </Grid>
             </Grid>
             <Grid item xs={12} md={1}>
-              <LongMenu/>
+              {/* <LongMenu/> */}
             </Grid>
           </Grid>
           <Divider style={{padding:'5px'}}/>
         </CardContent>
-        <CardActionArea component="a" href={post.link}>
+        
           <CardMedia style={{padding:'3%'}}>
            <Grid container item xs={12}>
               <Grid item xs={12} md={9} >
@@ -74,24 +104,24 @@ export default function TripInsideCard(props) {
               </Grid>
               <Grid item xs={12} md={3}>
                 <Typography className={classes.styledText}>
-                  {post.duration}
+                  {duration >1 ? duration +" hours ": duration + " hour "}
                 </Typography>
               </Grid>
             </Grid>
             <Grid container item xs={12}>
               <Grid item xs={12} md={9}>
                 <Typography className={classes.styledText}>
-                  Total Activities
+                  Total Destinations
                 </Typography>
               </Grid>
               <Grid item xs={12} md={3}>
                 <Typography className={classes.styledText}>
-                  {post.totalActivities}
+                  {post.destinations.length}
                 </Typography>
               </Grid>
             </Grid>
             <Grid container item xs={12}>
-                <Grid item xs={12} md={9}>
+                {/* <Grid item xs={12} md={9}>
                   <Typography className={classes.styledText}>
                     Total Cost
                   </Typography>
@@ -100,13 +130,17 @@ export default function TripInsideCard(props) {
                   <Typography className={classes.styledText}>
                     {post.cost}
                   </Typography>
-                </Grid>
-                <Typography className={classes.smallText}>
+                </Grid> */}
+                <Link 
+                  //to={`/traveller/myTrips/${uid}/${post.id}`}
+                  // state={post}
+                  to={{pathname:`/traveller/myTrips/${uid}/${post.id}`,state:{id:1}}}
+                  className={classes.smallText}>
                   Click for more details
-                </Typography>
+                </Link>
             </Grid>
           </CardMedia>
-        </CardActionArea>
+        
       </Card>
     </Grid>
   );

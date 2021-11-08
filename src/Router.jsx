@@ -24,6 +24,11 @@ import Category from "./screens/category";
 import Page404 from "./screens/admin/Page404";
 import Profile from "./screens/admin/Profile";
 
+
+//import { getAuth } from "./store/auth";
+//import { useSelector } from "react-redux";
+
+
 import Traveller from "./screens/traveller";
 import AutomatedPlanner from "./screens/tripPanner/automated";
 import CustomizedPlanner from "./screens/tripPanner/cutomized";
@@ -33,6 +38,10 @@ import { auth } from "./firebase";
 import { useFirestoreConnect } from "react-redux-firebase";
 import { useSelector } from "react-redux";
 import { getCurrentRole } from "./store/auth";
+import TravellerProfile from './components/travelCompo/profile';
+import EditProfile from './components/travelCompo/editProfile';
+import TravelPlan from './screens/tripSequence/index';
+import TripDisplay from './components/trip/displayTrip';
 
 export default function Router() {
   const currentRole = useSelector(getCurrentRole);
@@ -48,10 +57,16 @@ export default function Router() {
     { path: "/category/:id", element: <Category /> },
     { path: "/destination/:id", element: <SpecificDestination /> },
     { path: "/traveller/:id", element: <Traveller /> },
+    { path: "/traveller/destination/:id", element: <SpecificDestination />},
+    { path: "/category/destination/:id", element: <SpecificDestination />},
     { path: "/traveller/automatedPlanner", element: <AutomatedPlanner /> },
     { path: "/traveller/customizedPlanner", element: <CustomizedPlanner /> },
     { path: "/traveller/myTrips/:id", element: <MyTrips /> },
 
+    { path: "/traveller/myTrips/:id/:id", element: <TripDisplay /> },
+    { path: "/traveller/profile", element: <TravellerProfile /> },
+    { path: "/traveller/travelPlan", element: <TravelPlan /> },
+    { path: "/traveller/editProfile/:id", element: <EditProfile /> },  
     { path: "404", element: <Page404 /> },
     { path: "*", element: <Navigate to="/404" replace /> },
     {

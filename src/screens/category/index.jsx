@@ -8,10 +8,9 @@ import { PRIMARY, WHITE } from "../../colors";
 import CategoryCard from "../../components/home/categoryCard";
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
-import Link from "@material-ui/core/Link";
 import { useParams } from 'react-router-dom';
 import { getDestinations } from "../../store/entities/destination";
-
+import Searchbar from "../../components/home/Searchbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,12 +62,25 @@ const useStyles = makeStyles((theme) => ({
     color:WHITE, 
     textDecorationLine:'underline'  
   },
+  stylishText:{
+    
+    fontSize:'1.5rem',
+    fontWeight:'bold',
+    color:"black", 
+      
+  }, 
+  upperLimit :{            
+      position:"relative",
+      margin:theme.spacing(-5,0)
+      
+  }
 }));
 
 const Category = (props) => {
   const classes = useStyles();
   const{id} = useParams(); 
- 
+  const type=[];
+  
   
   useFirestoreConnect([{collection:"categories", doc:id}]);  
   const category = useSelector(
@@ -77,19 +89,31 @@ const Category = (props) => {
   useFirestoreConnect(["destinations"]) ;
   const destinationList=useSelector(getDestinations); 
 
+  destinationList.map(post =>{    
+    if(post.categories.find(element=>element===category.title)){
+      type.push(post);      
+    }
+  });
+ console.log(type)
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      {category? <Grid container className={classes.image}>
+        {category? <Grid container className={classes.image}>
         <Paper
           className={classes.mainFeaturedPost}
           style={{ backgroundImage: `url(${category.url})`}}
         >
-        </Paper>
-        <Grid className={classes.typography}>
+        </Paper> 
+        <Grid container item xs={12} className={classes.typography}>       
+        <Grid item xs={12} md={4} >
           <Typography className={classes.styledText}>
             {category.title}
           </Typography>
+        </Grid>
+        <Grid item xs={12} md={8} className={classes.upperLimit}>
+        {type?<Searchbar data={type}></Searchbar>:null}
+        </Grid> 
         </Grid>
       </Grid>:<h1>Loading</h1>}
       <Grid item xs={12} className={classes.card}>

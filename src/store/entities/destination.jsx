@@ -31,3 +31,17 @@ export const getPublishedDestinations = createSelector(
     getAllDestinations,
     destinations => destinations ? destinations.filter(d => d.published === true) : []
 );
+
+export const getActivities = createSelector(
+    state => state.firestore.ordered.activities,
+    a => a? a:[]
+);
+
+export const getReviews = createSelector(
+    state => state.firestore.ordered.reviews,
+    a => a? a:[]
+);
+export const getImages = createSelector(
+    state => state.firestore.ordered.gallery,
+    a => a? a:[]
+);

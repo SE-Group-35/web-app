@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function Upperbar() {
-  const classes = useStyles();
+  const classes = useStyles();  
 
   return (
     <Grid container spacing={3} className={classes.stylegrid}>

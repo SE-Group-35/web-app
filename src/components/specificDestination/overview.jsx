@@ -13,6 +13,7 @@ import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
   card: {
     display: "flex",
+    width:"100vw"
   },
   cardDetails: {
     flex: 1,

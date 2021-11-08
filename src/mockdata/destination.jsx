@@ -12,7 +12,7 @@ const destinationData = [
       image: `${image1.default}`,
       imageText: 'Continue reading ',
       imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
-      rating:'4K',
+      rating:4,
       geometry:[6.3828,80.6020]
     },
     {
@@ -22,7 +22,7 @@ const destinationData = [
       image: `${image2.default}`,
       imageText: 'Continue reading',
       imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
-      rating:'3.7K'
+      rating:3
     },
     {
         title: 'Nallur Kandaswamy Temple Kovil',      
@@ -31,7 +31,7 @@ const destinationData = [
         image: `${image3.default}`,
         imageText: 'Continue reading',
         imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
-        rating:'3K'
+        rating:3
       },
       {
         title: "S.T. Mary's Church",      
@@ -40,7 +40,7 @@ const destinationData = [
         image: `${image4.default}`,
         imageText: 'Continue reading',
         imageLink: "https://en.wikipedia.org/wiki/Sinharaja_Forest_Reserves",
-        rating:'2.7K'
+        rating:2
       },
   ];
   export default destinationData;

@@ -12,6 +12,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getCategory  } from './../../store/entities/category';
 import { getDestinations } from "../../store/entities/destination";
+import CircleLoading from './../sequence/loading';
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -63,7 +64,7 @@ export default function DashboardCategory() {
               <Grid container spacing={3} className={classes.card}>
                 {categoryList ? categoryList.map(post =>
                   <InsideCategory key={post.title} post={post} />
-                  ):<Typography className={classes.informText}>Loading</Typography>}
+                  ):<CircleLoading/>}
               </Grid>
             </div>
           </CardContent>

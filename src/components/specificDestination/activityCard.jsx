@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import { PRIMARY } from "../../colors";
-import SpecificDestinationDetail from './../../mockdata/specificDestination';
 import Divider from '@material-ui/core/Divider';
 
 
@@ -36,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ActivityCard(props) {
   const classes = useStyles();
+  const { post } = props;
+  
   
   return (
     <Grid item xs={12}>     
@@ -47,8 +48,15 @@ export default function ActivityCard(props) {
             </Typography>
             <Divider /> 
             <Typography className={classes.styledText}>
-              {(SpecificDestinationDetail.activities.length!=0 ? SpecificDestinationDetail.activities.map((check) => (                    
-                <Typography>{check}</Typography>
+              {(post.length!=0 ? post.map((check) => ( 
+                <Grid container item xs={12}>
+                  <Grid item xs={12} md={2}>                                            
+                <Typography>{check.name}</Typography>
+                </Grid>
+                <Grid item xs={12} md={10}>                                            
+                <Typography>{check.description}</Typography>
+                </Grid>
+                </Grid>
                 )):<Typography className={classes.styledText}>
                       No activities mentioned
                    </Typography>

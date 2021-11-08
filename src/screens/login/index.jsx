@@ -23,6 +23,8 @@ import { useSelector } from "react-redux";
 import { database } from "../../firebase";
 import { getUserRole } from "../../utils/getUserRole";
 import { setRole } from "../../store/auth";
+import CircleLoading from "../../components/sequence/loading";
+
 
 const image = require("../../assets/images/login.jpg");
 const logo = require("../../assets/images/logo.svg");
@@ -227,9 +229,10 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
-            <button type="submit" className={classes.button}>
-              {logginIn ? <Spinner /> : "Login"}
-            </button>
+            {logginIn ?<div><button type="submit" className={classes.button}>Login</button>
+            <CircleLoading/>
+            </div> :<button type="submit" className={classes.button}>Login</button>}
+            
           </form>
           <Grid
             container

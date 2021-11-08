@@ -25,8 +25,10 @@
     "@testing-library/react": "^12.1.0",
     "@testing-library/user-event": "^13.2.1",
     "apexcharts": "^3.27.3",
+    "axios": "^0.24.0",
     "babel-eslint": "^10.1.0",
     "change-case": "^4.1.2",
+    "check-prop-types": "^1.1.2",
     "date-fns": "^2.23.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.6",
@@ -68,6 +70,7 @@
     "reselect": "^4.0.0",
     "simplebar": "^5.3.5",
     "simplebar-react": "^2.3.5",
+    "styled-components": "^5.3.3",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.0",
     "yup": "^0.32.9"

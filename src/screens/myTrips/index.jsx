@@ -11,6 +11,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { getMyTrips } from "../../store/entities/userInfo";
+import { getTrips } from './../../store/entities/trip';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -30,27 +31,56 @@ const mainFeaturedPost = {
     imgText: "main image description",
   };
 
-const tripDetails =[
-    {
-        heading: "Past Trips",
-        listDetails:pastTripList
-    },
-    {
-        heading: "Active Trips",
-        listDetails:activeTripList
-    },
-    {
-        heading: "Future Trips",
-        listDetails:futureTripList
-    },
-]  
+
   
   
-  const MyTrips = (props) => {
+  export default function MyTrips(props) {
     const classes = useStyles();
     const {id}=useParams();
-    useFirestoreConnect([{collection:"users", doc:id,subcollections:[{collection:"trips"}]}]);
-    const trips=useSelector(getMyTrips); 
+    
+    useFirestoreConnect([
+      {
+        collection : "users",
+        doc : id,
+        subcollections : [{
+          collection : "trips"
+        }],
+        storeAs : 'trips'
+      }
+     
+    ])
+    const tripList = useSelector(getTrips);
+    console.log(tripList);
+    const pastTrips=[];
+    const activeTrips=[];
+    const futureTrips=[];
+    tripList.map(trip => {
+      if(new Date(trip.endDate.seconds*1000) <new Date()){
+        pastTrips.push(trip);
+      }
+      else if (new Date(trip.endDate.seconds*1000) ==new Date()){
+        activeTrips.push(trip);
+      }
+      else{
+        futureTrips.push(trip);
+      }
+    });
+    console.log(pastTrips);
+
+    const tripDetails =[
+      {
+          heading: "Past Trips",
+          listDetails:pastTrips
+      },
+      {
+          heading: "Active Trips",
+          listDetails:activeTrips
+      },
+      {
+          heading: "Future Trips",
+          listDetails:futureTrips
+      },
+  ]    
 
 return (
       <Grid container component="main" className={classes.root}>
@@ -68,5 +98,5 @@ return (
     );
 };
         
-export default MyTrips;
+
         
