@@ -74,11 +74,11 @@ const mainFeaturedPost = {
       },
       {
           heading: "Active Trips",
-          listDetails:activeTripList
+          listDetails:activeTrips
       },
       {
           heading: "Future Trips",
-          listDetails:futureTripList
+          listDetails:futureTrips
       },
   ]    
 

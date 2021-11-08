@@ -20,7 +20,7 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { getAuth } from "../../store/auth";
 import { useSelector } from "react-redux";
-
+import CircleLoading from "../../components/sequence/loading";
 
 
 const image = require("../../assets/images/login.jpg");
@@ -136,7 +136,7 @@ const Login = () => {
               
             });
         
-        setLogginIn(false);
+        //setLogginIn(false);
       } catch (error) {
         setLogginIn(false);        
         console.log(error);
@@ -213,9 +213,10 @@ return (
                 </Link>
               </Grid>
             </Grid>
-            <button type="submit" className={classes.button}>
-              {logginIn ? <Spinner/>: "Login"}
-            </button>            
+            {logginIn ?<div><button type="submit" className={classes.button}>Login</button>
+            <CircleLoading/>
+            </div> :<button type="submit" className={classes.button}>Login</button>}
+            
           </form>
           <Grid
             container

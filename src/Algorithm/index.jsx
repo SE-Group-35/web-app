@@ -46,6 +46,12 @@ const SECONDS_PER_TEN_HOURS = 36000;
 
 const generateTravelPlan = async({ startLocation, startDate, endDate, travelMode, destinations }) => {
         //Trip Return Object
+        console.log("check",destinations);
+        console.log("startLocation",startLocation);
+        console.log("startLocation",startDate);
+        console.log("startLocation",endDate);
+        console.log("startLocation",travelMode);
+        console.log("startLocation",destinations);
         const trip = {
                 startLocation: startLocation.coords,
                 tripDestinations: []
@@ -53,10 +59,12 @@ const generateTravelPlan = async({ startLocation, startDate, endDate, travelMode
         
         //Had to add 1 in my implementation
         const timeConstraint = (moment(endDate).diff(moment(startDate), "d") + 1) * SECONDS_PER_TEN_HOURS;
+        
         const response = await getDistances(startLocation.coords, destinations);
+        console.log("response",response);
         if(response.success){
                 const orderedByHomeDistance = _.orderBy(response.data, d => d.distanceMatrix.duration_in_traffic.value, "asc");
-                console.log(orderedByHomeDistance);
+                console.log("orderedByHomeDistance",orderedByHomeDistance);
                 let currentTimeCount = 0;
                 let index = 0;
                 while(true && index < orderedByHomeDistance.length){
@@ -87,7 +95,7 @@ const generateTravelPlan = async({ startLocation, startDate, endDate, travelMode
                               
                 }
         }
-
+        console.log(trip);
         if(trip.tripDestinations.length === 0)return ({success: false, error: "No Locations can be suggested"});
 
         return ({

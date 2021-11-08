@@ -80,9 +80,9 @@ const SpecificDestination = (props) => {
         <Grid item xs={12} className={classes.space}>
            <ReviewCard ></ReviewCard>
         </Grid>
-        <Grid item xs={12} className={classes.space}>
+        {/* <Grid item xs={12} className={classes.space}>
            <GalleryCard ></GalleryCard>
-        </Grid>
+        </Grid> */}
         </div>:null):<h1>Loading</h1>}
       </Grid>
 

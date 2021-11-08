@@ -1,4 +1,4 @@
-
+import CircularProgress from '@mui/material/CircularProgress';
 //import { CircularProgress } from "@material-ui/core";
 import { withStyles } from "@material-ui/styles";
 import { PRIMARY } from "../../colors";
@@ -8,5 +8,5 @@ export default withStyles({
     color: "fff",
   },
   checked: {},
-})((props) => <h1></h1>);
+})((props) => <CircularProgress/>);
 

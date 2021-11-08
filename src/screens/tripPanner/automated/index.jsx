@@ -20,6 +20,13 @@ import Map from "../../../components/travelCompo/map";
 import MapHome from "../../../components/travelCompo/mapHome";
 import { TextField } from "@material-ui/core";
 import generateTravelPlan from "./../../../Algorithm/index";
+import { useSelector } from "react-redux";
+import { getStartLocation } from "../../../store/system";
+import { getPublishedDestinations } from "../../../store/entities/destination";
+import { getDestinations } from "../../../firebase";
+import { useNavigate } from "react-router";
+import Dialog from '@material-ui/core/Dialog';
+import DirectionMap from "../../../components/sequence/direction";
 import {
   withGoogleMap,
   withScriptjs,
@@ -27,7 +34,7 @@ import {
   Marker,
   InfoWindow,
 } from "react-google-maps";
-
+import CircleLoading from "../../../components/sequence/loading";
 const moment = require("moment");
 const logo = require("../../../assets/images/logo.svg");
 const MapWrapped = withScriptjs(withGoogleMap(Map));
@@ -56,7 +63,7 @@ const useStyles = makeStyles((theme) => ({
     color: WHITE,
     fontSize: "2rem",
     border: 0,
-    margin: theme.spacing(-10, 0),
+    margin: theme.spacing(-30, 0),
   },
   text: {
     fontSize: "2rem",
@@ -113,14 +120,23 @@ const travelMode = [
 
 const AutomatedPlanner = () => {
   const classes = useStyles();
+  const [generate,setGenerate]=useState(false);
+  
+  const startLoc = useSelector(getStartLocation);
+  const startLocation= {coords:{latitude:startLoc.lat,longitude:startLoc.lng}}
+  const destinations = useSelector(getPublishedDestinations); 
+  const [checked, setChecked] = useState(true);
+  const [checked1, setChecked1] = useState(true);
+  const [category , setCategory] = useState(["Natural","Religious","Historical"]);
 
+  //console.log("destinations",destinations);  
+  const navigate=useNavigate();
   const formik = useFormik({
     initialValues: {
       startDate: "",
       endDate: "",
-      startLocation: "",
-      category: "Natural",
-      travelMode: "Driving",
+     travelMode: "Driving",  
+       
     },
     validationSchema: Yup.object({
       startDate: Yup.date()
@@ -128,19 +144,65 @@ const AutomatedPlanner = () => {
         .min(new Date(), "Start Date must be larger than today"),
       endDate: Yup.date()
         .required("Start Date is required ")
-        .min(Yup.ref("startDate"), "End date can't be before the Start date"),
+        .min(Yup.ref("startDate"), "End date can't be before the Start date"),  
+          
     }),
-    onSubmit: async ({ startDate, endDate, category, travelMode }) => {
+    onSubmit: async ({ startDate, endDate, travelMode }) => {
       try {
-      } catch (error) {}
+        setGenerate(true);
+        console.log(startDate);
+        console.log(endDate);
+        console.log(startLoc);
+        console.log(travelMode);        
+        const response = await getDestinations(category);
+        const destinations = JSON.parse( response.data);        
+        const algo = await generateTravelPlan({startLocation,startDate,endDate,travelMode,destinations});
+        
+        if(algo.success){         
+          navigate("/traveller/travelPlan",{state:{algo:algo,startDate:startDate,endDate:endDate,travelMode,travelMode}});
+        }
+        
+      } catch (error) {
+        console.log(error);
+      }
     },
   });
+  
+  console.log(category);
+  const handleCheckBox = (event) => {     
+    setChecked(!checked);
+    if(!checked){
+      if(!(category.includes(event.target.name))){
+        setCategory([...category,event.target.name]);
+      }
+    }else{
+      if(category.includes(event.target.name)){
+        const index=category.indexOf(event.target.name);
+        category.splice(index,1);
+      }
+    }
+       
+  };
 
+  const handleCheckBox1 = (event) => {     
+    setChecked1(!checked1);
+    if(!checked1){
+      if(!(category.includes(event.target.name))){
+        setCategory([...category,event.target.name]);
+      }
+    }else{
+      if(category.includes(event.target.name)){
+        const index=category.indexOf(event.target.name);
+        category.splice(index,1);
+      }
+    }   
+    
+  };
+ 
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-      <Grid item xs={false} sm={4} md={4}>
-        {/* <img src={logo.default} alt="Logo" /> */}
+      <Grid item xs={false} sm={4} md={4}>       
         <img src={image} style={{ height: "75vh" }} />
         <img src={image} style={{ height: "75vh" }} />
         <img src={image} style={{ height: "75vh" }} />
@@ -190,7 +252,7 @@ const AutomatedPlanner = () => {
                   id="endDate"
                   placeholder="Enter end date"
                   name="endDate"
-                  fullWidth
+                  fullWidth                  
                   value={formik.values.endDate}
                   onChange={formik.handleChange}
                   error={
@@ -211,13 +273,15 @@ const AutomatedPlanner = () => {
                   Prefer Categories
                 </Typography>
 
-                <FormGroup>
+                <FormGroup error={
+                    formik.touched.scategory && Boolean(formik.errors.category)
+                  }>
                   <FormControlLabel
                     control={<Checkbox defaultChecked />}
                     label="Natural"
                   />
-                  <FormControlLabel control={<Checkbox />} label="Historical" />
-                  <FormControlLabel control={<Checkbox />} label="Religious" />
+                  <FormControlLabel control={<Checkbox defaultChecked checked={checked} onChange={handleCheckBox} name="Historical" />} label="Historical" />
+                  <FormControlLabel control={<Checkbox  defaultChecked checked1={checked1} onChange={handleCheckBox1} name="Religious"/>} label="Religious" />
                 </FormGroup>
                 <Grid className={classes.travelModeMargin}>
                   <Typography className={classes.typography} gutterBottom>
@@ -226,7 +290,9 @@ const AutomatedPlanner = () => {
                   <InputTextBox
                     select
                     variant="outlined"
-                    fullWidth
+                    fullWidth 
+                    value ={formik.values.travelMode}  
+                    onChange={formik.handleChange}                 
                     name="travelMode"
                     placeholder="Select a Travel Mode"
                     label="Select a Travel Mode"
@@ -241,14 +307,17 @@ const AutomatedPlanner = () => {
               </Grid>
             </Grid>
             <Grid>
-              <button type="submit" className={classes.button}>
-                Generate Plan
-              </button>
-            </Grid>
-            <Box mt={2}></Box>
-          </form>
-        </div>
+              {generate ? 
+               <Grid>
+                 <button type="submit" className={classes.button}>Generating</button>
+                 <CircleLoading/>
+               </Grid>
+              : <button type="submit" className={classes.button}>Generate Plan</button>}
+             </Grid>
+            </form>
+          </div>
       </Grid>
+      <DirectionMap/>
     </Grid>
   );
 };

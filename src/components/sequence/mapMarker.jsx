@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {withGoogleMap, withScriptjs, GoogleMap, Marker,  InfoWindow} from "react-google-maps";
+import {withGoogleMap, withScriptjs, GoogleMap, Marker,  InfoWindow,DirectionsRenderer} from "react-google-maps";
 import image from '../../assets/images/register.PNG';
 import { makeStyles } from "@material-ui/styles";
 import { DetailedList } from "./detailedList";
@@ -20,9 +20,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));    
 
-function MapMarker() {
+function MapMarker(props) {
     const classes = useStyles();
     const [selectedPark, setSelectedPark] = useState(null);
+    const {post} = props;
+    console.log("Map",parseFloat(post[0].coords[0]));
+    console.log("Map",parseFloat(post[0].coords[1]));
 
   useEffect(() => {
     const listener = e => {
@@ -39,15 +42,15 @@ function MapMarker() {
   
     return (
       <GoogleMap
-        defaultZoom={10}
+        defaultZoom={9}
         defaultCenter={{ lat: 7.00, lng: 81.00 }}
         >
-        {DetailedList.map(park => (
+        {post.map((park,index) => (
             <Marker 
             key={park.id}
             position={{
-                lat: park.geometry[0],
-                lng: park.geometry[1]
+              lat: parseFloat(park.coords[0]),
+              lng: parseFloat(park.coords[1])
             }}
             onClick={() => {
                 setSelectedPark(park);
@@ -61,16 +64,18 @@ function MapMarker() {
                 setSelectedPark(null);
             }}
             position={{
-                lat: selectedPark.geometry[0],
-                lng: selectedPark.geometry[1]
+              lat: parseFloat(selectedPark.coords[0]),
+              lng: parseFloat(selectedPark.coords[1])
             }}
             >
             <div>
-                <h2 className={classes.text}>{selectedPark.id}</h2>
+                <h2 className={classes.text}>{selectedPark.index}</h2>
                 <p className={classes.smallText}>{selectedPark.title}</p>
             </div>
             </InfoWindow>
         )}
+        
+      
     </GoogleMap>
     );
   }

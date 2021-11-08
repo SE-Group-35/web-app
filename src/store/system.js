@@ -16,6 +16,7 @@ const slice = createSlice({
     process: false,
     fetchingData: false,
     startLocation: { lat: 6.9327, lng: 79.8438 },
+    
   },
   reducers: {
     //Events -> Event Handlers\
@@ -25,6 +26,7 @@ const slice = createSlice({
     },
     updateStartLocationToInitial(system, action) {
       system.startLocation = { lat: 6.9327, lng: 79.8438 };
+      
     },
 
     processRequested(system, action) {

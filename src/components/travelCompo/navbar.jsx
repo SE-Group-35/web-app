@@ -92,7 +92,12 @@ export default function Navbar(props) {
           </Link>
         </Grid>
         <Grid item xs={12} md={2}>
-          {MenuItems.map((item) => {
+        <Link href={`/traveller/automatedPlanner`} >
+            <Typography className={classes.styledText}>
+              Trip Planner
+            </Typography>
+          </Link>
+          {/* {MenuItems.map((item) => {
             if (item.title === "Trip Planner") {
               return (
                 <Grid
@@ -110,7 +115,7 @@ export default function Navbar(props) {
                 </Grid>
               );
             }
-          })}
+          })} */}
         </Grid>
         <Grid item xs={12}  md={2} >
           <IconButton

@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cardMedia: {
     width: 250,
+    height:200
   },
   text: {
     color: PRIMARY,
@@ -29,17 +30,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function DetailedCard(props) {
   const classes = useStyles();
-  const { post } = props;
-  
+  const { post,num } = props;
+  console.log(num);
   return (
-    <Grid item xs={12} md={6}>
-      <CardActionArea component="a" href={`/destination/${post.destinationId}`} >
+    <Grid item xs={12} md={6} >
+      <CardActionArea component="a" href={`/destination/${post.id}`} >
         <Card className={classes.card}>
           <Hidden xsDown>
           { <CardMedia
             component="img" 
             className={classes.cardMedia}          
-            image={post.url}
+            image={post.mainPhoto}
             title={post.title}
           /> }
                         
@@ -47,16 +48,16 @@ export default function DetailedCard(props) {
           <div className={classes.cardDetails}>
             <CardContent>
             <Typography component="h2" variant="h5" className={classes.text}>
-                {post.id}
+                Location Number :{num+1}
               </Typography>
               <Typography component="h2" variant="h5" className={classes.text}>
                 {post.title}
               </Typography>
               <Typography >
-                Total Activities : {post.totalActivities}
+                Distance : {post.distanceMatrix.distance.text}
               </Typography>
               <Typography >
-                Time : {post.time}
+                Duration : {post.distanceMatrix.duration.text}
               </Typography>
               <Typography
                 variant="subtitle1"                

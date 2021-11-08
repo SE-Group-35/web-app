@@ -58,8 +58,8 @@ export default function GalleryCard(props) {
   //const urls= images[0].urls;
   //console.log(images[0].urls);
   return (
-    <Grid item xs={12}>     
-      <Card className={classes.card} >
+    <Grid item xs={12}>   
+      {images ? <Card className={classes.card} >
         <div className={classes.cardDetails}>
           <CardContent>          
             <Typography component="h2" variant="h5" className={classes.headingText}>
@@ -82,7 +82,8 @@ export default function GalleryCard(props) {
             </Typography>
           </CardContent>
         </div>
-      </Card>
+      </Card>:<h1>Loading</h1>}
+      
     </Grid>
   );
 }

@@ -2,7 +2,10 @@
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/firestore";
+import "firebase/firebase-functions-compat";
 import { getStorage } from "firebase/storage";
+
+
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -30,6 +33,7 @@ firebase.firestore(); // <- needed if using firestore
 
 export const auth = firebase.auth();
 export const database = firebase.firestore();
+export const functions = firebase.functions();
 export const FieldValue = firebase.firestore.FieldValue;
 
 export const storage = getStorage(firebaseApp);
@@ -38,5 +42,5 @@ export const storage = getStorage(firebaseApp);
 export const eventRef = storageRef.child("images/events");
 export const destinationRef = storageRef.child("images/destinations");*/
 export default firebase;
-
+export const getDestinations = functions.httpsCallable('getPreferedDestinations');
 export { default as collections } from "./collections";

@@ -60,7 +60,7 @@ export default function CategoryCard(props) {
               </Typography>
               </Grid>
               <Grid item xs={12} md={2}>
-              <Rating readOnly value={post.rating} style={{color:PRIMARY}}></Rating>
+              <Rating readOnly value={3} style={{color:PRIMARY}}></Rating>
               </Grid>
               </Grid>
               <Typography
