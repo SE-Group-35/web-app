@@ -25,9 +25,9 @@ export default function Upperbar() {
   return (
     <Grid container spacing={3} className={classes.stylegrid}>
       <Grid item xs={12} sm={3}>
-        <Link href="#" className={classes.typology}>
+        {/* <Link href="#" className={classes.typology}>
           {"About Us"}
-        </Link>
+        </Link> */}
       </Grid>
       <Grid item xs={12} sm={3}>
         <Link href="/services" className={classes.typology}>

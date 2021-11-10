@@ -215,7 +215,7 @@ const Login = () => {
               justifyContent="space-between"
               className={classes.rowContainer}
             >
-              <Grid className={classes.rememberMeText}>
+              {/* <Grid className={classes.rememberMeText}>
                 <FormControlLabel
                   control={<GreenCheckbox />}
                   label="Remember Me"
@@ -228,7 +228,7 @@ const Login = () => {
                 >
                   Forgot Password?
                 </Link>
-              </Grid>
+              </Grid> */}
             </Grid>
             {/* {logginIn ?<div><button type="submit" className={classes.button}>Login</button>
             <CircleLoading/>

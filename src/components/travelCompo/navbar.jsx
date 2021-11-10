@@ -194,7 +194,7 @@ export default function Navbar(props) {
           </MenuPopover>                    
         </Grid>
         <Grid item xs={12} md={2} >
-          <NotificationsIcon className={classes.notification}/>
+          {/* <NotificationsIcon className={classes.notification}/> */}
         </Grid>
         </Grid>
   );
