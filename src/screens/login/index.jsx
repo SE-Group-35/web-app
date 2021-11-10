@@ -156,7 +156,7 @@ const Login = () => {
         //setLogginIn(false);
       } catch (error) {
         setLogginIn(false);
-        //console.log(error);
+        console.log(error);
       }
     },
   });
