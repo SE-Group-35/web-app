@@ -149,7 +149,7 @@ const Login = () => {
               });
           } else {
             dispatch(setRole(""));
-            navigate("/login");
+            navigate("/");
           }
         });
 
