@@ -9,23 +9,15 @@ import { getAuth } from "../../store/auth";
 import { useSelector } from "react-redux";
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import { MapWrapped } from "../../components/sequence/mapMarker";
-import { GoogleMapsAPI } from "../../components/travelCompo/googleMapAPI";
 import DetailedCard from "../../components/sequence/detailedCard";
 import { Box } from "@material-ui/system";
 import { useLocation } from 'react-router-dom';
-import {  Button } from "@material-ui/core";
-import Dialog from '@material-ui/core/Dialog';
-import { useState } from "react";
-import * as Yup from "yup";
-import { useFormik } from "formik";
-import InputTextBox from "../../components/common/InputTextBox";
-import Paper from "@material-ui/core/Paper";
 import image from "../../assets/images/diary.jpg";
 import DirectionMap from "../../components/sequence/direction";
-import { useDispatch } from "react-redux";
-import { addTrip } from "../../store/entities/trip";
-
+import CheckList from "./checkList";
+import ViewCheckList from './viewList';
+import { useFirestoreConnect } from 'react-redux-firebase';
+import { getCheckList } from "../../store/entities/trip";
 
 const logo = require("../../assets/images/logo.svg");
 
@@ -34,11 +26,12 @@ const useStyles = makeStyles((theme) => ({
     height: "100vh",
   },  
   logo: {
-    margin: theme.spacing(10, 0),
+    margin: theme.spacing(7, 0),
   },  
   card: {
     display: "flex",    
-    margin : theme.spacing(0,0)   
+    margin : theme.spacing(0,0) ,
+    padding:'1%'  
   }, 
   styledText:{
     fontSize:'1.5rem',
@@ -47,6 +40,7 @@ const useStyles = makeStyles((theme) => ({
   }, 
   appbar :{
       width : "100vw",
+      height:'10%',
       marginRight: "75%",
       position:"relative"
   },
@@ -59,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
     margin:theme.spacing(-5,0)
   },
   space :{
-      margin:theme.spacing(1,0)
+      margin:theme.spacing(10,0)
   },
   lastGrid:{
     margin:theme.spacing(10,10)
@@ -85,11 +79,9 @@ const useStyles = makeStyles((theme) => ({
       fontStyle:"italic",
      
       margin:theme.spacing(5,25)
-    
   },
   dialog:{
-    width:"100vw",
-    height:"100vh"
+    margin:theme.spacing(10,0)
   },
   image: {
     backgroundImage: `url("${image}")`,
@@ -122,44 +114,81 @@ const useStyles = makeStyles((theme) => ({
   
 }));
 
-const TripDisplay = (props) => {
-  const classes = useStyles();  
-  //const {state} = useLocation();
-  //console.log(state);
+const TripDisplay = () => {
+  const classes = useStyles();    
+  const {uid}=useSelector(getAuth);  
   const location=useLocation();
-  console.log(location.state);
+  const tripId=location.state.id;  
 
+  useFirestoreConnect([
+    {
+      collection : "users",
+      doc : uid,
+      subcollections : [
+        {
+        collection : "trips",
+        doc:tripId
+        },
+        {
+        collection : "checklists",
+        }
+    ],
+      storeAs : 'checklists'
+    }
+  ])
+  
+  const checkList=useSelector(getCheckList);  
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
-        <AppBar className={classes.appbar}>
+        <AppBar >
             <Toolbar >
-              {/* <Link href={`/traveller/${uid}`}>
+              <Grid container item xs={12}>
+                <Grid item xs={12} md={5}>
+              <Link href={`/traveller/${uid}`}>
                 <Typography className={classes.styledText}>
                     Home
                 </Typography>
-               </Link> */}
+               </Link>
+               </Grid>
+               <Grid item xs={12} md={6}>
+               <Typography className={classes.styledText}>
+               {location.state.name}
+                </Typography>
+                </Grid>
+                </Grid>
             </Toolbar>
         </AppBar>
-       
-        <Grid container item xs={12} className={classes.space}>
+        
+        <Grid container item xs={12} className={classes.space} >
             <Grid item xs={12} md={9} >
-                {/* <div style={{ width: "73vw", height: "60vh" }}>                 
-                 <DirectionMap post={detailedList} start={start}/>                
-                </div>     */}
+              {location.state?<div style={{ width: "73vw", height: "60vh" }}>                 
+                 <DirectionMap post={location.state.destinations} start={location.state.startLocation}/>                
+                </div>  :<h1></h1>}
+                   
             </Grid>         
             <Grid item xs={12} md={3}>
                 <img src={logo.default} alt="Logo"className={classes.logo} />
                 <Typography className={classes.stylishText}>"Do not follow where the path may lead. Go instead where there is no path and leave a trail..."</Typography>
-            </Grid>    
+                <Grid className={classes.dialog}>
+                  <Grid container item xs={12}>
+                    {checkList.length===0?<Grid item xs={12} md={6}>
+                    <CheckList post={tripId} />
+                    </Grid>:
+                    <Grid item xs={12} md={6}>
+                    <ViewCheckList lis={checkList} post={tripId} />
+                    </Grid>}
+                  </Grid>
+                </Grid>
+            </Grid>               
         </Grid>          
-    
-        {/* <Grid container spacing={3} className={classes.card}>
-          {detailedList ? detailedList.map((post,index) =>
+        <Grid container spacing={3} className={classes.card}>
+          {location.state.destinations ? location.state.destinations.map((post,index) =>
             <DetailedCard key={post.id} post={post} num={index} />
           ):<Typography className={classes.informText}>Loading</Typography>}
-        </Grid> */}
-       
+        </Grid>
+       <Box mt={2}></Box>
       </Grid>
   );
 };

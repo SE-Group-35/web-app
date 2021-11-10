@@ -15,6 +15,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getPublishedDestinations } from './../../store/entities/destination';
 import { PRIMARY } from "../../colors";
+import { getTrendingDestinations } from './../../store/entities/destinations';
 
 const logo = require("../../assets/images/logo.svg");
 
@@ -89,7 +90,8 @@ const Traveller = (props) => {
   const classes = useStyles();
   useFirestoreConnect(["destinations"]);
   const dest=useSelector(getPublishedDestinations);
- 
+  //const trendingPlaces = useSelector(getTrendingDestinations);
+  //console.log(trendingPlaces);
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />

@@ -132,10 +132,11 @@ export default function TripInsideCard(props) {
                   </Typography>
                 </Grid> */}
                 <Link 
-                  //to={`/traveller/myTrips/${uid}/${post.id}`}
-                  // state={post}
-                  to={{pathname:`/traveller/myTrips/${uid}/${post.id}`,state:{id:1}}}
-                  className={classes.smallText}>
+                  to={`/traveller/myTrips/${uid}/${post.id}`}
+                  state={post}
+                  // state={post}                  
+                  //to={{pathname:`/traveller/myTrips/${uid}/${post.id}`,state:"hh"}}
+                  className={classes.smallText}>                    
                   Click for more details
                 </Link>
             </Grid>

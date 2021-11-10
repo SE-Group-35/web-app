@@ -124,7 +124,7 @@ const Login = () => {
       console.log("email", email);
       console.log("password", password);
       try {
-        setLogginIn(true);
+        
         //await auth.signInWithEmailAndPassword(email, password);
 
         dispatch(signIn(email, password));
@@ -132,6 +132,7 @@ const Login = () => {
           console.log(user);
           if (user) {
             const userId = user.uid;
+            setLogginIn(true);
             await database
               .collection("users")
               .doc(userId)
@@ -152,7 +153,7 @@ const Login = () => {
           }
         });
 
-        setLogginIn(false);
+        //setLogginIn(false);
       } catch (error) {
         setLogginIn(false);
         console.log(error);
@@ -229,10 +230,15 @@ const Login = () => {
                 </Link>
               </Grid>
             </Grid>
-            {logginIn ?<div><button type="submit" className={classes.button}>Login</button>
+            {/* {logginIn ?<div><button type="submit" className={classes.button}>Login</button>
             <CircleLoading/>
-            </div> :<button type="submit" className={classes.button}>Login</button>}
-            
+            </div> :<button type="submit" className={classes.button}>Login</button>} */}
+            {logginIn?
+            <Grid>
+                 <button type="submit" className={classes.button}>Login...</button>
+                 <CircleLoading/>
+               </Grid>
+              : <button type="submit" className={classes.button}>Login</button>}
           </form>
           <Grid
             container

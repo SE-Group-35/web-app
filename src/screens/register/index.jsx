@@ -119,8 +119,9 @@ const Register = () => {
       console.log("password", password);
       console.log("repeatPassword", repeatPassword);
       try {
-        setRegisterIn(true);        
+                
         const result = dispatch(signUp(email,password,firstName,lastName));
+        setRegisterIn(true);
         console.log(result);
       } catch (error) {
         setRegisterIn(false);

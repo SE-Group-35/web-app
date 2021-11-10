@@ -173,7 +173,7 @@ export default function AddDestinationForm({
       return i;
     });
 
-    setInputFields(newInputFields);
+    setInputFields(newInputFields);    
   };
 
   const handleAddFields = () => {
