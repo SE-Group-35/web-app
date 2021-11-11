@@ -40,7 +40,7 @@ export default function TrendingCard(props) {
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
-              image={post.image}
+              image={post.mainPhoto}
               title={post.imageTitle}
             />
           </Hidden>

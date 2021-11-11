@@ -4,8 +4,6 @@ import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import image from "../../assets/images/homecover4.jpg";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TrendingCard from "../../components/home/trndingCard";
-import destinationData from "../../mockdata/destination";
 import CoverPost from './../../components/travelCompo/coverPost';
 import DashboardCard from "../../components/travelCompo/dashboardCard";
 import Divider from '@material-ui/core/Divider';
@@ -15,7 +13,7 @@ import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { getPublishedDestinations } from './../../store/entities/destination';
 import { PRIMARY } from "../../colors";
-import { getTrendingDestinations } from './../../store/entities/destinations';
+import TrendPlace from "../../components/travelCompo/trendPlace";
 
 const logo = require("../../assets/images/logo.svg");
 
@@ -88,10 +86,9 @@ const mainFeaturedPost = {
 
 const Traveller = (props) => {
   const classes = useStyles();
-  useFirestoreConnect(["destinations"]);
-  const dest=useSelector(getPublishedDestinations);
-  //const trendingPlaces = useSelector(getTrendingDestinations);
-  //console.log(trendingPlaces);
+  useFirestoreConnect(["destinations"]);  
+  const dest=useSelector(getPublishedDestinations); 
+  
   return (
     <Grid container component="main" className={classes.root}>
       <CssBaseline />
@@ -103,13 +100,7 @@ const Traveller = (props) => {
           </Grid>
           <Divider/>
           <Typography className={classes.styledText}>Trending Places</Typography>
-          <Grid item xs={12} className={classes.card}>
-          {destinationData.map((post) => (
-          <Grid className={classes.space}>
-            <TrendingCard key={post.title} post={post} />
-          </Grid>
-        ))}
-      </Grid>
+          <TrendPlace post={dest}/>
           </Grid>
           <Grid container item xs={12} md={9} >
             <Grid container item xs={12} spacing={4} className={classes.searchbarSpace}>
