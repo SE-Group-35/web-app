@@ -35,13 +35,13 @@ export default function TrendingCard(props) {
 
   return (
     <Grid item xs={12}>
-      <CardActionArea component="a" href="#">
+      
         <Card className={classes.card}>
           <Hidden xsDown>
             <CardMedia
               className={classes.cardMedia}
               image={post.mainPhoto}
-              title={post.imageTitle}
+              title={post.imageTitle}            
             />
           </Hidden>
           <div className={classes.cardDetails}>
@@ -63,7 +63,7 @@ export default function TrendingCard(props) {
             </CardContent>
           </div>
         </Card>
-      </CardActionArea>
+     
     </Grid>
   );
 }

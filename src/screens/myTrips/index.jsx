@@ -10,7 +10,6 @@ import { pastTripList, activeTripList,futureTripList } from "../../mockdata/trip
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { getMyTrips } from "../../store/entities/userInfo";
 import { getTrips } from './../../store/entities/trip';
 
 const useStyles = makeStyles((theme) => ({

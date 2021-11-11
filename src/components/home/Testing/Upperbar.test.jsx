@@ -1,25 +1,25 @@
-// import React from 'react';
-// import { configure, shallow } from 'enzyme';
-// import Adapter from 'enzyme-adapter-react-16';
-// import Upperbar from '../Upperbar';
-// import { ThemeProvider } from '@material-ui/core/styles';
+import React from 'react';
+import { configure, shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import Upperbar from '../Upperbar';
+import { ThemeProvider } from '@material-ui/core/styles';
 
 
-// configure({adapter: new Adapter()});
+configure({adapter: new Adapter()});
 
-// describe('<Upperbar />', () => {
+describe('<Upperbar />', () => {
 
-//     let wrapper; 
-//     const theme = {} ;
+    let wrapper; 
+    const theme = {} ;
 
-//     beforeEach(() => {        
-//         wrapper = shallow(<ThemeProvider theme={theme}><Upperbar/></ThemeProvider>);                
-//     });
+    beforeEach(() => {        
+        wrapper = shallow(<ThemeProvider theme={theme}><Upperbar/></ThemeProvider>);                
+    });
 
-//     it('should matches the snapshot',() => {
-//         expect(wrapper.getElements()).toMatchSnapshot();
-//     });
+    it('should matches the snapshot',() => {
+        expect(wrapper.getElements()).toMatchSnapshot();
+    });
           
     
     
-// });
+});

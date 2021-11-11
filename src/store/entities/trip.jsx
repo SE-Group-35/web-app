@@ -15,8 +15,7 @@ export const getCheckList = createSelector(
 
 export const addTrip = (destinations,endDate,startDate,id,name,startLocation,travelMode) => {
      return async (dispatch, getState, { getFirebase, getFirestore }) => {
-        try {
-            console.log("ll");
+        try {            
             const firebase = getFirebase();
             const firestore=getFirestore();
             const tripId = randomid(12);
