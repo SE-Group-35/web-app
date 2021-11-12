@@ -70,7 +70,7 @@ const useStyles = makeStyles((theme) => ({
 export default function ViewCheckList(props) {
   const dispatch=useDispatch();
   const {uid}=useSelector(getAuth);
-  const {post,lis}=props;
+  const {post,lis}=props;  
   console.log(lis[0].id);//tripId
   console.log("lis",lis[0].backpack);
   const [open, setOpen] = useState(false);  
