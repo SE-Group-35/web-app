@@ -17,7 +17,7 @@ export async function getDistances(startLocation, destinationLocations) {
     }
     destinationsQuery = destinationsQuery.slice(0, -1);
            
-    const url = `https://cors-anywhere.herokuapp.com/https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation.latitude},${startLocation.longitude}&destinations=${destinationsQuery}&departure_time=now&key=${API_KEY}`;
+    const url = `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${startLocation.latitude},${startLocation.longitude}&destinations=${destinationsQuery}&departure_time=now&key=${API_KEY}`;
     console.log("API Call: ", url);
     try {
         const response = await axios.get(url);        
