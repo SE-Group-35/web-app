@@ -44,6 +44,7 @@ export default function UserMoreMenu({ id, userRole }) {
         anchorOrigin={{ vertical: "top", horizontal: "right" }}
         transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
+        {/*
         <MenuItem
           component={Button}
           onClick={async () => {
@@ -58,7 +59,7 @@ export default function UserMoreMenu({ id, userRole }) {
             primary="Delete"
             primaryTypographyProps={{ variant: "body2" }}
           />
-        </MenuItem>
+        </MenuItem>*/}
 
         <MenuItem
           component={RouterLink}

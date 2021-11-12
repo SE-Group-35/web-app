@@ -22,9 +22,8 @@ import { getAuth } from "../../store/auth";
 import { useSelector } from "react-redux";
 import { database } from "../../firebase";
 import { getUserRole } from "../../utils/getUserRole";
-import { setRole } from "../../store/auth";
+import { setRole, setActiveStatus } from "../../store/auth";
 import CircleLoading from "../../components/sequence/loading";
-
 
 const image = require("../../assets/images/login.jpg");
 const logo = require("../../assets/images/logo.svg");
@@ -124,12 +123,10 @@ const Login = () => {
       console.log("email", email);
       console.log("password", password);
       try {
-        
         //await auth.signInWithEmailAndPassword(email, password);
 
-        dispatch(signIn(email, password));
+        await dispatch(signIn(email, password));
         auth.onAuthStateChanged(async (user) => {
-          console.log(user);
           if (user) {
             const userId = user.uid;
             setLogginIn(true);
@@ -139,12 +136,20 @@ const Login = () => {
               .get()
               .then((snapshot) => {
                 const role = getUserRole(snapshot.data().userRole);
-                if (role === "Admin") {
+                const activeStatus = snapshot.data().Enabled;
+                console.log(activeStatus);
+
+                if (role === "Admin" && activeStatus === true) {
                   dispatch(setRole("Admin"));
+                  dispatch(setActiveStatus(activeStatus));
                   navigate("/dashboard/app");
-                } else if (role === "Traveller") {
+                } else if (role === "Traveller" && activeStatus === true) {
                   dispatch(setRole("Traveller"));
+                  dispatch(setActiveStatus(activeStatus));
                   navigate(`/traveller/${userId}`);
+                } else if (activeStatus === false) {
+                  dispatch(setRole(""));
+                  navigate("/unauthorized");
                 }
               });
           } else {
@@ -233,12 +238,18 @@ const Login = () => {
             {/* {logginIn ?<div><button type="submit" className={classes.button}>Login</button>
             <CircleLoading/>
             </div> :<button type="submit" className={classes.button}>Login</button>} */}
-            {logginIn?
-            <Grid>
-                 <button type="submit" className={classes.button}>Login...</button>
-                 <CircleLoading/>
-               </Grid>
-              : <button type="submit" className={classes.button}>Login</button>}
+            {logginIn ? (
+              <Grid>
+                <button type="submit" className={classes.button}>
+                  Login...
+                </button>
+                <CircleLoading />
+              </Grid>
+            ) : (
+              <button type="submit" className={classes.button}>
+                Login
+              </button>
+            )}
           </form>
           <Grid
             container
