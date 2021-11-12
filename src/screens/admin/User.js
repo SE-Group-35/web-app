@@ -113,6 +113,7 @@ export default function User() {
         .get()
         .then((snapshot) => {
           const USERS = firebaseLooper(snapshot);
+          console.log(snapshot, USERS);
 
           setUSERLIST(USERS);
         });
