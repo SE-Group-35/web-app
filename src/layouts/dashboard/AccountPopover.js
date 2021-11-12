@@ -52,7 +52,7 @@ export default function AccountPopover() {
   const dispatch = useDispatch();
   const anchorRef = useRef(null);
   const [open, setOpen] = useState(false);
-  // const { email, firstName } = useSelector(getProfile);
+  const { email, firstName } = useSelector(getProfile);
 
   const handleOpen = () => {
     setOpen(true);
@@ -94,10 +94,10 @@ export default function AccountPopover() {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {firstName}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {account.email}
+            {email}
           </Typography>
         </Box>
 

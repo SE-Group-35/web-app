@@ -9,6 +9,7 @@ const slice = createSlice({
     authError: null,
     loggingIn: false,
     role: "",
+    active: false,
   },
   reducers: {
     //Events -> Event Handlers
@@ -42,6 +43,9 @@ const slice = createSlice({
       auth.registerIn = false;
       auth.existAccount = true;
     },
+    setActiveStatus(auth, action) {
+      auth.active = action.payload;
+    },
     setRole(auth, action) {
       auth.role = action.payload;
     },
@@ -61,6 +65,7 @@ export const {
   userSuccessfullyRegistered,
   userRegisterFailed,
   setRole,
+  setActiveStatus,
 } = slice.actions;
 
 /* 
@@ -111,6 +116,11 @@ export const getUserLoggingInStatus = createSelector(
 
 export const getCurrentRole = createSelector(
   (state) => state.auth.role,
+  (s) => s
+);
+
+export const getActiveStatus = createSelector(
+  (state) => state.auth.active,
   (s) => s
 );
 

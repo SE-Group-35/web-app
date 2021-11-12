@@ -259,6 +259,7 @@ export default function BlogPostCard({ post, index }) {
                 anchorOrigin={{ vertical: "top", horizontal: "right" }}
                 transformOrigin={{ vertical: "top", horizontal: "right" }}
               >
+                {/*
                 <MenuItem
                   component={Button}
                   onClick={async () => {
@@ -273,7 +274,7 @@ export default function BlogPostCard({ post, index }) {
                     primary="Delete"
                     primaryTypographyProps={{ variant: "body2" }}
                   />
-                </MenuItem>
+                </MenuItem>*/}
 
                 <MenuItem
                   component={RouterLink}
