@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Category = (props) => {
   const classes = useStyles();
-  const{id} = useParams(); 
+  const{id} = useParams(); //get the category id
   const type=[];
   
   
@@ -94,7 +94,7 @@ const Category = (props) => {
       type.push(post);      
     }
   });
- console.log(type)
+ //console.log(type)
   
   return (
     <Grid container component="main" className={classes.root}>

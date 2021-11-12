@@ -18,8 +18,23 @@ import CheckList from "./checkList";
 import ViewCheckList from './viewList';
 import { useFirestoreConnect } from 'react-redux-firebase';
 import { getCheckList } from "../../store/entities/trip";
+import JournalView from "./viewJournal";
+import Journal from './journal';
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import {Container} from "react-bootstrap";
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
+import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
+import Paper from "@material-ui/core/Paper";
+import { useState } from "react";
+import {useEffect} from 'react';
+import { useDispatch } from 'react-redux';
+import { updateJournal } from '../../store/entities/trip';
 
 const logo = require("../../assets/images/logo.svg");
+const moment=require("moment");
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -111,14 +126,75 @@ const useStyles = makeStyles((theme) => ({
   logoforForm: {
     margin: theme.spacing(0, -4),
   },
+  journalcard: {    
+    display:'flex',
+    margin:theme.spacing(5,20)
+  },
+  cardDetails: {
+    flex: 1,
+  },
+  cardMedia: {
+    width: 250,
+    height:200
+  },
+  text: {
+    color: PRIMARY,
+    padding: "1%",
+    fontSize:"1rem"
+  },
+  journalText:{
+    fontSize:"1.7rem",
+    color:"black",
+    margin:theme.spacing(0,30),
+    padding:"2%",
+    
+  },
+  logospace:{
+    margin:theme.spacing(0,15)
+  }
   
 }));
 
 const TripDisplay = () => {
   const classes = useStyles();    
-  const {uid}=useSelector(getAuth);  
+  const {uid}=useSelector(getAuth);
+  const dispatch=useDispatch(); 
+  const [open, setOpen] = useState(false);   
   const location=useLocation();
   const tripId=location.state.id;  
+  console.log(typeof(location.state.journal));
+  const [show, setShow] = useState('');
+  const [journal,setJournal]=useState(true);
+  
+  //console.log(uid);
+  const startDate = moment(new Date(location.state.startDate.seconds*1000)).format("DD-MMM-YYYY");
+  const endDate = moment(new Date(location.state.endDate.seconds*1000)).format("DD-MMM-YYYY");
+    
+  useEffect(() => {
+    if(location.state.journal===""){
+      setJournal(true);
+    }else{
+      setJournal(false);
+    }  
+   
+   },[]);
+  
+  const handleClick=()=>{
+    setJournal(false);
+        dispatch(updateJournal(tripId,location.state.destinations,endDate,startDate,uid,location.state.name,location.state.startLocation,location.state.travelMode,show));
+        setOpen(false); 
+             
+  };
+ 
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };  
+
+  //console.log(location.state); details of corresponding trip
 
   useFirestoreConnect([
     {
@@ -166,7 +242,6 @@ const TripDisplay = () => {
               {location.state?<div style={{ width: "73vw", height: "60vh" }}>                 
                  <DirectionMap post={location.state.destinations} start={location.state.startLocation}/>                
                 </div>  :<h1></h1>}
-                   
             </Grid>         
             <Grid item xs={12} md={3}>
                 <img src={logo.default} alt="Logo"className={classes.logo} />
@@ -188,8 +263,92 @@ const TripDisplay = () => {
             <DetailedCard key={post.id} post={post} num={index} />
           ):<Typography className={classes.informText}>Loading</Typography>}
         </Grid>
-       <Box mt={2}></Box>
+        <Grid item xs={12}  >     
+        <Card className={classes.journalcard}>          
+          <div className={classes.cardDetails}>
+            <CardContent>
+              <Typography className={classes.journalText}>...Let's Make My Journal...</Typography>
+              <Typography component="h2" variant="h5" className={classes.text}>
+                 “Travel is fatal to prejudice, bigotry, and narrow-mindedness, and many of our people need it sorely on these accounts. Broad, wholesome, charitable views of men and things cannot be acquired by vegetating in one little corner of the earth all one's lifetime.”
+              </Typography>
+              <Grid  >                
+                {location.state? 
+                  <Grid >                                      
+                    {journal?
+                    <div>
+                    <Button variant="outlined" onClick={handleClickOpen}>
+                    Add Journal
+                    </Button>
+                    <Dialog open={open} onClose={handleClose} >
+                    <Grid container component="main" className={classes.root}>
+                    <CssBaseline />
+                    <Grid item xs={12}  component={Paper} elevation={6} square>
+                      <div className={classes.paper}>
+                        <Grid  item md={7} className={classes.logospace}>
+                          <img src={logo.default} alt="Logo" />
+                        </Grid>          
+                      <div>
+                      <Grid>
+                        <Container>
+                          <ReactQuill className="shadow-sm"
+                            theme="snow"
+                            style={{
+                            height: 350,
+                            marginTop: '1rem',
+                            display: 'flex',
+                            flexDirection: 'column'
+                            }}
+              
+                             value={show}
+              
+                            modules={{
+                              toolbar: [
+                                [{ 'header': '1'}, {'header': '2'}, { 'font': [] }], [{size: []}],
+                                ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+                                [{'align': []}],
+                                [{ 'color': [] }, { 'background': [] }],
+                                [{ 'list': 'ordered' }, { 'list': 'bullet' }, { 'indent': '-1' }, { 'indent': '+1' }],
+                                ['link', "video","image", "code-block"],
+                                ['clean']
+                              ],
+                             }}
+                            formats={[
+                                'header', 'font', 'size',
+                                'bold', 'italic', 'underline', 'strike', 'blockquote', 'color', 'background',
+                                'list', 'bullet', 'indent', 'link', 'video', 'image', "code-block", "align"
+                            ]}
+                            onChange={(val) => {
+                            setShow(val)
+                            }}
+                          />
+                             {/* <div dangerouslySetInnerHTML={{__html: show}}>
+                              
+                              </div> */}
+                        </Container>
+                      </Grid>
+                     </div>
+                   </div>
+                    <Grid>
+                    <button type="submit" className={classes.button} onClick={handleClick}>
+                      Save
+                    </button>
+                  </Grid>
+                 </Grid>
+                 </Grid>
+                </Dialog>
+                </div>
+                    // <Journal post={location.state} tripId={tripId}/>
+                    :<JournalView post={location.state} tripId={tripId}/>}
+                  </Grid>
+                :<h1></h1>}
+              </Grid>             
+            </CardContent>
+          </div>
+        </Card>
       </Grid>
+      <Box mt={2}></Box>
+      <Box mt={2}></Box>
+    </Grid>
   );
 };
 
