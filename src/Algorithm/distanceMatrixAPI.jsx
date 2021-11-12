@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 //My API Key --> include yours if you want
-const API_KEY = process.env.API_KEY;
+const API_KEY = 'AIzaSyB2ncyvKA7X0gTVM1_s0AOG0zzOvNkJ4LY';
 
 
 /*
