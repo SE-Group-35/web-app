@@ -106,7 +106,7 @@ export const deleteUser = (id) => {
 };
 
 export const editUser = (
-  email,
+ 
   id,
   telephone,
   firstName,
