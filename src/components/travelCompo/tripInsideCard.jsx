@@ -60,7 +60,6 @@ export default function TripInsideCard(props) {
   const endDate = moment(new Date(post.endDate.seconds*1000)).format("DD-MMM-YYYY");
   const duration = (post.endDate-post.startDate)/3600;
   
-  
   return (
     <Grid item xs={12} md={4}>
       <Card >

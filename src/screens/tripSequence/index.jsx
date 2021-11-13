@@ -131,7 +131,7 @@ const TravelPlan = () => {
   const[save,setToSave] = useState(false);
   const detailedList = algo.trip.tripDestinations;
   const start =algo.trip.startLocation;
-  
+  console.log("travelMode",travelMode);
 
   const formik = useFormik({
     initialValues: {
@@ -186,7 +186,7 @@ const TravelPlan = () => {
         <Grid container item xs={12} className={classes.space}>
             <Grid item xs={12} md={9} >
                 <div style={{ width: "73vw", height: "60vh" }}>                 
-                 <DirectionMap post={detailedList} start={start}/>                  
+                 <DirectionMap post={detailedList} start={start} travelMode={travelMode}/>                  
                     {/* <MapWrapped
                         googleMapURL={`https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=${
                         GoogleMapsAPI

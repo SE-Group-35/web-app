@@ -109,13 +109,10 @@ const travelMode = [
     label: "Driving",
   },
   {
-    value: "Walking",
-    label: "Walking",
+    value: "Transit",
+    label: "Transit",
   },
-  {
-    value: "Bycycling",
-    label: "Bycycling",
-  },
+  
 ];
 
 const AutomatedPlanner = () => {
@@ -159,7 +156,7 @@ const AutomatedPlanner = () => {
         const algo = await generateTravelPlan({startLocation,startDate,endDate,travelMode,destinations});
         
         if(algo.success){         
-          navigate("/traveller/travelPlan",{state:{algo:algo,startDate:startDate,endDate:endDate,travelMode,travelMode}});
+          navigate("/traveller/travelPlan",{state:{algo:algo,startDate:startDate,endDate:endDate,travelMode:travelMode}});
         }
         
       } catch (error) {

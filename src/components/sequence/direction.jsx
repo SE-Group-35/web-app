@@ -12,7 +12,7 @@ class DirectionMap extends Component {
       }
 
 
-     renderDirection(origin,destination){
+     renderDirection(origin,destination,travelModee){
       const directionsService = new window.google.maps.DirectionsService();
       directionsService.route(
         {
@@ -40,7 +40,9 @@ class DirectionMap extends Component {
     if(this.props.post){ 
       const dList=this.props.post;
       const start=this.props.start; 
-      console.log("post",this.props.post)   
+      console.log("post",this.props.post);
+      const travelMode=this.props.travelMode;
+         
     const newarr = [];
     {dList.length >0 ? dList.map((d,i) =>{
       if((i===0)) {
@@ -58,7 +60,7 @@ class DirectionMap extends Component {
   })  :<></>                }
         
        for(let route of newarr){
-        this.renderDirection(route.origin,route.destination);
+        this.renderDirection(route.origin,route.destination,travelMode);
        }     
               
 
