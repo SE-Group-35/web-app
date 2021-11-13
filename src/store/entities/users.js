@@ -19,8 +19,7 @@ export const createUser = (
   telephone,
   firstName,
   lastName,
-  userRole,
-  Enabled
+  userRole
 ) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
@@ -38,8 +37,7 @@ export const createUser = (
             email: email,
             telephone: telephone,
             userRole: userRole,
-
-            Enabled: Enabled,
+            Enabled: true,
           });
         })
         .then(() => {
