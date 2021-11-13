@@ -114,6 +114,7 @@ export default function AddDestinationForm({
     lng: parseFloat(Coords.at(1)),
   });
   const [selected, setSelected] = useState(Selected);
+  const review = Math.floor(Math.random() * 5 + 1);
 
   const [switchState, setSwitchState] = useState(published);
   const [inputFields, setInputFields] = useState([
@@ -173,7 +174,7 @@ export default function AddDestinationForm({
       return i;
     });
 
-    setInputFields(newInputFields);    
+    setInputFields(newInputFields);
   };
 
   const handleAddFields = () => {
@@ -239,7 +240,8 @@ export default function AddDestinationForm({
             selected,
             coords,
             imageList,
-            switchState
+            switchState,
+            review
           )
         );
       } else if (name === "Edit") {

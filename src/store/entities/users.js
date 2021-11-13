@@ -63,8 +63,7 @@ export const addUser = (
   telephone,
   firstName,
   lastName,
-  userRole,
-  Enabled
+  userRole
 ) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
@@ -79,7 +78,7 @@ export const addUser = (
         firstName: firstName,
         lastName: lastName,
         userRole: userRole,
-        Enabled: Enabled,
+        Enabled: true,
       });
       dispatch(processCompleted());
     } catch (error) {
@@ -105,14 +104,7 @@ export const deleteUser = (id) => {
   };
 };
 
-export const editUser = (
-  email,
-  id,
-  telephone,
-  firstName,
-  lastName,
-  userRole
-) => {
+export const editUser = (id, telephone, firstName, lastName, userRole) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
       dispatch(createUserRequested());

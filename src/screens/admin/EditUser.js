@@ -74,7 +74,6 @@ export default function AddUser() {
                   email={email}
                   telephone={telephone}
                   userRole={userRole}
-                  Enabled={Enabled}
                   title="Edit"
                   id={id}
                 />

@@ -56,7 +56,6 @@ export default function RegisterForm({
   telephone,
   userRole,
   title,
-  Enabled,
 }) {
   const creatingUser = useSelector(getCreateUserStatus);
 
@@ -94,32 +93,16 @@ export default function RegisterForm({
       email,
       telephone,
       admin: userRole.admin,
-      Enabled,
     },
     validationSchema: RegisterSchema,
-    onSubmit: async ({
-      firstName,
-      lastName,
-      email,
-      telephone,
-      admin,
-      Enabled,
-    }) => {
+    onSubmit: async ({ firstName, lastName, email, telephone, admin }) => {
       admin == true
         ? (userRole = { ...role, admin: true })
         : (userRole = { ...role, traveller: true });
       const password = "YourPassword@123";
       if (title === "Add") {
         await dispatch(
-          createUser(
-            email,
-            password,
-            telephone,
-            firstName,
-            lastName,
-            userRole,
-            Enabled
-          )
+          createUser(email, password, telephone, firstName, lastName, userRole)
         );
       } else if (title === "Edit") {
         await dispatch(

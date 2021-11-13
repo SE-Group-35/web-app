@@ -14,7 +14,8 @@ export const addDestination = (
   selected,
   coords,
   imageList,
-  switchState
+  switchState,
+  review
 ) => {
   return async (dispatch, getState, { getFirebase, getFirestore }) => {
     try {
@@ -54,7 +55,7 @@ export const addDestination = (
           categories: selected,
           published: switchState,
           mainPhoto: urlList.at(0),
-          rating: 0,
+          rating: review,
         })
         .then(() => {
           inputFields.forEach(async (activity) => {

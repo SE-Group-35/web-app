@@ -46,7 +46,6 @@ export default function AddUser() {
                 email=""
                 telephone=""
                 userRole={{ admin: false, traveller: true }}
-                Enabled={true}
                 title="Add"
               />
             </Container>
