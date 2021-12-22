@@ -3,12 +3,11 @@ import PropTypes from "prop-types";
 // material
 import { Box, Card, Typography, Stack } from "@material-ui/core";
 import { styled } from "@material-ui/core/styles";
-// utils
 
 // ----------------------------------------------------------------------
 
 const DestinationImgStyle = styled("img")({
-  top: 0,
+  top: 1,
   width: "100%",
   height: "100%",
   objectFit: "cover",
