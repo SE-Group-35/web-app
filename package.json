@@ -23,7 +23,7 @@
     "@reduxjs/toolkit": "^1.6.1",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^12.1.0",
-    "@testing-library/user-event": "^13.2.1",
+    "@testing-library/user-event": "^13.5.0",
     "apexcharts": "^3.27.3",
     "babel-eslint": "^10.1.0",
     "change-case": "^4.1.2",
