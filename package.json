@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@date-io/date-fns": "^2.11.0",
-    "@emotion/react": "^11.4.1",
+    "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.3.0",
     "@firebase/testing": "^0.20.11",
     "@iconify/icons-ant-design": "^1.1.0",
