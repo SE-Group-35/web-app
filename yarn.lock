@@ -12383,10 +12383,10 @@ react-markdown@^7.0.1:
     unist-util-visit "^4.0.0"
     vfile "^5.0.0"
 
-react-material-ui-carousel@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/react-material-ui-carousel/-/react-material-ui-carousel-2.3.1.tgz#73b516f831d45df70bb9219f56fee14a2788e332"
-  integrity sha512-QV3z+x10x19rSAPSHMmkHtdx/PSiwqo6FeAaY8Y04LtuKM0ZxHsgeMslNdcI8M1G2B48391YqN+ouWFPYqAbTA==
+react-material-ui-carousel@^2.3.8:
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/react-material-ui-carousel/-/react-material-ui-carousel-2.3.8.tgz#6d6c088be22301fa91863383f35795d4e917a2a5"
+  integrity sha512-0qAWiKBQI4GCjuCWZANdDuHPW8k8N3qZo3tCn9OxpVNO+M9lq7Xzak63AyPwmRDRw93l97LYhbwQIMohvpaMeg==
   dependencies:
     auto-bind "^2.1.1"
     react-swipeable "^6.1.0"
