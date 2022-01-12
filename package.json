@@ -9,7 +9,7 @@
     "@firebase/testing": "^0.20.11",
     "@iconify/icons-ant-design": "^1.1.0",
     "@iconify/icons-eva": "^1.1.0",
-    "@iconify/icons-ic": "^1.1.9",
+    "@iconify/icons-ic": "^1.1.17",
     "@iconify/react": "^3.0.1",
     "@material-ui/core": "^5.0.0-beta.4",
     "@material-ui/icons": "^4.11.2",
